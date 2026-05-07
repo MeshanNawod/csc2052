@@ -1,0 +1,16 @@
+{
+    "10.185.246.68": {
+        "type": "esp32",
+        "name": "UoP_Scanner_1",
+        "last_seen": 1777827612,
+        "method": "plaintext",
+        "blocked": false
+    },
+    "10.149.146.68": {
+        "type": "esp32",
+        "name": "UoP_Scanner_1",
+        "last_seen": 1777904396,
+        "method": "plaintext",
+        "blocked": false
+    }
+}
