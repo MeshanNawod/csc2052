@@ -95,8 +95,8 @@ $avatarSrc = $profilePhoto
                 <p class="small text-muted">Set a new password to secure your account.</p>
                 <div id="pw-msg" class="small mb-2"></div>
                 <input type="hidden" id="pw-cur" value="<?php echo htmlspecialchars($studentNo); ?>">
-                <div class="mb-2"><label class="form-label small fw-bold">New Password</label><input type="password" id="pw-new" class="form-control form-control-sm" minlength="6"></div>
-                <div class="mb-2"><label class="form-label small fw-bold">Confirm</label><input type="password" id="pw-conf" class="form-control form-control-sm" minlength="6"></div>
+                <div class="mb-2"><label for="pw-new" class="form-label small fw-bold">New Password <span class="text-danger">*</span></label><input type="password" id="pw-new" class="form-control form-control-sm" minlength="6" required></div>
+                <div class="mb-2"><label for="pw-conf" class="form-label small fw-bold">Confirm <span class="text-danger">*</span></label><input type="password" id="pw-conf" class="form-control form-control-sm" minlength="6" required></div>
                 <button class="btn btn-warning btn-sm w-100 fw-bold" onclick="changePassword()"><i class="bi bi-key me-1"></i>Set Password</button>
             </div>
         </div>
@@ -231,10 +231,10 @@ $avatarSrc = $profilePhoto
                     <input type="file" id="edit-photo-upload" class="d-none" accept="image/*" onchange="previewEditPhoto(this)">
                     <div class="small text-muted mt-1">Click to change photo</div>
                 </div>
-                <div class="mb-2"><label class="form-label small fw-bold">Full Name</label><input type="text" id="edit-name" class="form-control form-control-sm" value="<?php echo htmlspecialchars($studentName); ?>"></div>
+                <div class="mb-2"><label for="edit-name" class="form-label small fw-bold">Full Name <span class="text-danger">*</span></label><input type="text" id="edit-name" class="form-control form-control-sm" value="<?php echo htmlspecialchars($studentName); ?>" required></div>
                 <hr>
-                <div class="mb-2"><label class="form-label small fw-bold">Current Password</label><input type="password" id="edit-cur" class="form-control form-control-sm" placeholder="Required to change password"></div>
-                <div class="mb-2"><label class="form-label small fw-bold">New Password</label><input type="password" id="edit-new" class="form-control form-control-sm" placeholder="Leave blank to keep"></div>
+                <div class="mb-2"><label for="edit-cur" class="form-label small fw-bold">Current Password</label><input type="password" id="edit-cur" class="form-control form-control-sm" placeholder="Required to change password"></div>
+                <div class="mb-2"><label for="edit-new" class="form-label small fw-bold">New Password</label><input type="password" id="edit-new" class="form-control form-control-sm" placeholder="Leave blank to keep"></div>
                 <div id="edit-msg" class="small"></div>
             </div>
             <div class="modal-footer py-2">

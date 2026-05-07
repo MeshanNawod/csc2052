@@ -377,12 +377,12 @@ $editAvatarHtml = $profilePhoto
                     <input type="file" id="edit-photo-upload" class="d-none" accept="image/*" onchange="previewEditPhoto(this)">
                     <div class="small text-muted mt-1">Click avatar to change photo</div>
                 </div>
-                <div class="mb-2"><label class="form-label small fw-bold">Full Name</label><input type="text" id="edit-name" class="form-control form-control-sm" value="<?php echo htmlspecialchars($teacherName); ?>"></div>
-                <div class="mb-2"><label class="form-label small fw-bold">Email (Login ID)</label><input type="email" id="edit-email" class="form-control form-control-sm" value="<?php echo htmlspecialchars($teacherEmail); ?>"></div>
-                <div class="mb-2"><label class="form-label small fw-bold">Phone</label><input type="text" id="edit-phone" class="form-control form-control-sm" value="<?php echo htmlspecialchars($phone); ?>"></div>
+                <div class="mb-2"><label for="edit-name" class="form-label small fw-bold">Full Name <span class="text-danger">*</span></label><input type="text" id="edit-name" class="form-control form-control-sm" value="<?php echo htmlspecialchars($teacherName); ?>" required></div>
+                <div class="mb-2"><label for="edit-email" class="form-label small fw-bold">Email (Login ID) <span class="text-danger">*</span></label><input type="email" id="edit-email" class="form-control form-control-sm" value="<?php echo htmlspecialchars($teacherEmail); ?>" required></div>
+                <div class="mb-2"><label for="edit-phone" class="form-label small fw-bold">Phone</label><input type="text" id="edit-phone" class="form-control form-control-sm" value="<?php echo htmlspecialchars($phone); ?>"></div>
                 <hr>
-                <div class="mb-2"><label class="form-label small fw-bold">Current Password</label><input type="password" id="edit-cur-pw" class="form-control form-control-sm" placeholder="Required to change password"></div>
-                <div class="mb-2"><label class="form-label small fw-bold">New Password</label><input type="password" id="edit-new-pw" class="form-control form-control-sm" placeholder="Leave blank to keep"></div>
+                <div class="mb-2"><label for="edit-cur-pw" class="form-label small fw-bold">Current Password</label><input type="password" id="edit-cur-pw" class="form-control form-control-sm" placeholder="Required to change password"></div>
+                <div class="mb-2"><label for="edit-new-pw" class="form-label small fw-bold">New Password</label><input type="password" id="edit-new-pw" class="form-control form-control-sm" placeholder="Leave blank to keep"></div>
                 <div id="edit-msg" class="small"></div>
             </div>
             <div class="modal-footer py-2">
