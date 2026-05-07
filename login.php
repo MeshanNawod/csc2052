@@ -393,7 +393,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$is_locked_out) {
     <?php if ($error): ?>
     <div class="alert alert-danger alert-dismissible fade show small py-2 rounded-3" style="background:rgba(220,53,69,0.15);border:1px solid rgba(220,53,69,0.3);color:#fca5a5;">
         <i class="bi bi-exclamation-triangle me-1"></i><?php echo htmlspecialchars($error); ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" style="filter:invert(1);"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="filter:invert(1);"></button>
     </div>
     <?php endif; ?>
 
@@ -410,21 +410,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$is_locked_out) {
     <form method="POST" id="login-form">
         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
         <div class="mb-3">
-            <label class="form-label fw-semibold">Username</label>
+            <label for="username" class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
             <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-person"></i></span>
-                <input type="text" name="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+                <span class="input-group-text"><i class="bi bi-person" aria-hidden="true"></i></span>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label fw-semibold">Password</label>
+            <label for="password" class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
             <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                <input type="password" name="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                <span class="input-group-text"><i class="bi bi-lock" aria-hidden="true"></i></span>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-login w-100 fw-bold" <?php echo $is_locked_out ? 'disabled' : ''; ?>>
-            <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+            <i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>Sign In
         </button>
     </form>
 
