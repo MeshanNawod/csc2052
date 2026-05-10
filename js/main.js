@@ -133,8 +133,8 @@ function renderDeviceManageTable() {
             <td>${badge}${block}</td>
             <td class="d-flex gap-1">
                 ${blockBtn}
-                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})'><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})'><i class="bi bi-trash"></i></button>
+                <button class="btn btn-xs btn-outline-secondary py-0 px-1" aria-label="Rename device" onclick='renameDevice(${ipArg}, ${nameArg})'><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-xs btn-outline-dark py-0 px-1" aria-label="Forget device" onclick='deviceAction("forget", ${ipArg})'><i class="bi bi-trash"></i></button>
             </td>
         </tr>`;
     });
@@ -547,7 +547,7 @@ function renderActiveLectures() {
             <span class="fw-bold text-truncate" style="max-width:120px;">${isDash ? 'Web Dashboard' : escapeHtml(lec.deviceName || ip)}</span>
             <span class="badge bg-success mx-1">${escapeHtml(lec.course)}</span>
             <span class="text-muted small">${duration}</span>
-            <button class="btn btn-xs btn-outline-danger py-0 px-1 ms-1" onclick="endLectureByDevice('${ip}')"><i class="bi bi-x"></i></button>
+            <button class="btn btn-xs btn-outline-danger py-0 px-1 ms-1" aria-label="End lecture" onclick="endLectureByDevice('${ip}')"><i class="bi bi-x"></i></button>
         </div>`;
     });
     container.innerHTML = html;
