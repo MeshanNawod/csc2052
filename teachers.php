@@ -214,7 +214,7 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
                                         <option value="<?php echo htmlspecialchars($c['course_code']); ?>"><?php echo htmlspecialchars($c['course_code']); ?> - <?php echo htmlspecialchars($c['course_name']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <button type="submit" name="assign_teacher" class="btn btn-sm btn-success"><i class="bi bi-plus-lg"></i></button>
+                                <button type="submit" name="assign_teacher" class="btn btn-sm btn-success" aria-label="Assign teacher" title="Assign teacher"><i class="bi bi-plus-lg"></i></button>
                             </form>
 
                             <!-- Remove from course -->
