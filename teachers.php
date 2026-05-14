@@ -149,7 +149,7 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
     <?php if ($msg): ?>
         <div class="alert alert-<?php echo $msgType; ?> alert-dismissible fade show">
             <?php echo htmlspecialchars($msg); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
 
@@ -214,7 +214,7 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
                                         <option value="<?php echo htmlspecialchars($c['course_code']); ?>"><?php echo htmlspecialchars($c['course_code']); ?> - <?php echo htmlspecialchars($c['course_name']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <button type="submit" name="assign_teacher" class="btn btn-sm btn-success"><i class="bi bi-plus-lg"></i></button>
+                                <button type="submit" name="assign_teacher" class="btn btn-sm btn-success" aria-label="Assign Teacher"><i class="bi bi-plus-lg"></i></button>
                             </form>
 
                             <!-- Remove from course -->
@@ -249,7 +249,7 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
                             <input type="hidden" name="teacher_id" value="<?php echo $t['id']; ?>">
                             <div class="modal-header py-2">
                                 <h6 class="modal-title">Reset Password</h6>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
                                 <input type="password" name="new_password" class="form-control" placeholder="New password" minlength="6" required>
@@ -272,7 +272,7 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
             <div class="modal-header">
                 <h5 class="modal-title"><i class="bi bi-person-plus me-2"></i>Add Teacher</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
