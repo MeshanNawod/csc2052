@@ -217,7 +217,7 @@ $editAvatarHtml = $profilePhoto
             </div>
             <div class="col-sm-3 d-flex align-items-end gap-1">
                 <button class="btn btn-success fw-bold w-100 py-2" id="btn-start" onclick="startLecture()"><i class="bi bi-play-fill me-1"></i>Start</button>
-                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" style="display:none;"><i class="bi bi-stop-fill"></i></button>
+                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" style="display:none;" aria-label="End Lecture"><i class="bi bi-stop-fill"></i></button>
             </div>
         </div>
         <div class="form-check form-switch mt-2 justify-content-center d-flex">
@@ -366,7 +366,7 @@ $editAvatarHtml = $profilePhoto
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h6 class="modal-title"><i class="bi bi-pencil me-2"></i>Edit Profile</h6>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="text-center mb-3">

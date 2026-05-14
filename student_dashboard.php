@@ -213,7 +213,7 @@ $avatarSrc = $profilePhoto
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h6 class="modal-title"><i class="bi bi-pencil me-2"></i>Edit Profile</h6>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="text-center mb-3">
