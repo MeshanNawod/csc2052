@@ -24,7 +24,7 @@ try {
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
                 <strong><i class="bi bi-envelope-paper me-2"></i>Email Sender Configuration</strong>
-                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody"><i class="bi bi-chevron-down"></i></button>
+                <button aria-label="Toggle Email Config" class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody"><i class="bi bi-chevron-down"></i></button>
             </div>
             <div class="collapse show" id="emailConfigBody">
                 <div class="card-body py-2 bg-light">
@@ -37,7 +37,7 @@ try {
                             <label class="form-label small fw-bold text-muted mb-1">App Password</label>
                             <div class="input-group input-group-sm">
                                 <input type="password" id="user-sender-password" class="form-control form-control-sm" placeholder="16-char app password">
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()"><i class="bi bi-eye" id="pwd-eye-icon"></i></button>
+                                <button aria-label="Toggle Password Visibility" class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()"><i class="bi bi-eye" id="pwd-eye-icon"></i></button>
                             </div>
                         </div>
                         <div class="col-md-2">
