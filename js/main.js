@@ -133,8 +133,8 @@ function renderDeviceManageTable() {
             <td>${badge}${block}</td>
             <td class="d-flex gap-1">
                 ${blockBtn}
-                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})'><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})'><i class="bi bi-trash"></i></button>
+                <button aria-label="Rename Device" class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})'><i class="bi bi-pencil"></i></button>
+                <button aria-label="Forget Device" class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})'><i class="bi bi-trash"></i></button>
             </td>
         </tr>`;
     });
@@ -547,7 +547,7 @@ function renderActiveLectures() {
             <span class="fw-bold text-truncate" style="max-width:120px;">${isDash ? 'Web Dashboard' : escapeHtml(lec.deviceName || ip)}</span>
             <span class="badge bg-success mx-1">${escapeHtml(lec.course)}</span>
             <span class="text-muted small">${duration}</span>
-            <button class="btn btn-xs btn-outline-danger py-0 px-1 ms-1" onclick="endLectureByDevice('${ip}')"><i class="bi bi-x"></i></button>
+            <button aria-label="End Lecture on Device" class="btn btn-xs btn-outline-danger py-0 px-1 ms-1" onclick="endLectureByDevice('${ip}')"><i class="bi bi-x"></i></button>
         </div>`;
     });
     container.innerHTML = html;
@@ -1555,7 +1555,7 @@ async function fetchLogs() {
                         <i class="bi bi-collection-fill text-primary me-2"></i> <strong class="text-dark" title="${escapeHtml(courseName)}">${escapeHtml(displayCourseName)}</strong>
                         <span class="badge bg-primary rounded-pill shadow-sm ms-3">${totalEntries} Entries</span>
                     </button>
-                    <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','','')" title="Download CSV"><i class="bi bi-download"></i></button>
+                    <button aria-label="Download Group CSV" class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','','')" title="Download CSV"><i class="bi bi-download"></i></button>
                 </h2>
                 <div id="${cId}" class="accordion-collapse collapse ${courseIdx === 0 ? 'show' : ''}" data-bs-parent="#logsAccordion">
                     <div class="accordion-body p-2">
@@ -1577,7 +1577,7 @@ async function fetchLogs() {
                             <i class="bi bi-calendar3 text-secondary me-2"></i> <strong class="text-dark fs-6">${formattedDate}</strong>
                             <span class="badge bg-secondary rounded-pill ms-3">${dateEntryCount}</span>
                         </button>
-                        <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','')" title="Download CSV"><i class="bi bi-download"></i></button>
+                        <button aria-label="Download Group CSV for Date" class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','')" title="Download CSV"><i class="bi bi-download"></i></button>
                     </h5>
                     <div id="${dId}" class="accordion-collapse collapse ${dateIdx === 0 ? 'show' : ''}" data-bs-parent="#dateAcc${courseIdx}">
                         <div class="accordion-body p-1 ps-3">
@@ -1597,7 +1597,7 @@ async function fetchLogs() {
                                 <i class="bi bi-clock text-muted me-2"></i> <strong class="fs-6">${escapeHtml(tb)}</strong>
                                 <span class="badge bg-info rounded-pill ms-3 text-dark">${tbEntries.length}</span>
                             </button>
-                            <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','${encodeURIComponent(tb)}')" title="Download CSV"><i class="bi bi-download"></i></button>
+                            <button aria-label="Download Group CSV for Timeblock" class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','${encodeURIComponent(tb)}')" title="Download CSV"><i class="bi bi-download"></i></button>
                         </h6>
                         <div id="${tbId}" class="accordion-collapse collapse ${tbIdx === 0 ? 'show' : ''}" data-bs-parent="#timeAcc${courseIdx}_${dateIdx}">
                             <div class="accordion-body p-0">

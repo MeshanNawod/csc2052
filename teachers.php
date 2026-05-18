@@ -179,7 +179,7 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
                                     <form method="POST" class="d-inline" onsubmit="return confirm('Delete this teacher?');">
                                         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
                                         <input type="hidden" name="teacher_id" value="<?php echo $t['id']; ?>">
-                                        <button type="submit" name="delete_teacher" class="btn btn-sm btn-outline-danger" title="Delete">
+                                        <button aria-label="Delete Teacher" type="submit" name="delete_teacher" class="btn btn-sm btn-outline-danger" title="Delete">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -214,7 +214,7 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
                                         <option value="<?php echo htmlspecialchars($c['course_code']); ?>"><?php echo htmlspecialchars($c['course_code']); ?> - <?php echo htmlspecialchars($c['course_name']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <button type="submit" name="assign_teacher" class="btn btn-sm btn-success"><i class="bi bi-plus-lg"></i></button>
+                                <button aria-label="Assign Teacher" type="submit" name="assign_teacher" class="btn btn-sm btn-success"><i class="bi bi-plus-lg"></i></button>
                             </form>
 
                             <!-- Remove from course -->

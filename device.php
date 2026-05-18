@@ -78,7 +78,7 @@ try {
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button aria-label="Refresh Device List" class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
                             </div>
                         </div>
 
@@ -258,7 +258,7 @@ try {
                         <i class="bi bi-play-fill me-1"></i>Connect
                     </button>
                     <span id="sse-status-dot" class="badge bg-secondary" style="font-size:0.65rem;">Idle</span>
-                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear"><i class="bi bi-trash"></i></button>
+                    <button aria-label="Clear Serial Monitor" class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -378,8 +378,8 @@ try {
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-hdd-network text-muted"></i></span>
                             <input type="text" id="espnow-mac-input" class="form-control font-monospace" placeholder="AA:BB:CC:DD:EE:FF">
-                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-plus-lg"></i></button>
-                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-dash-lg"></i></button>
+                            <button aria-label="Add ESP-NOW Peer" class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-plus-lg"></i></button>
+                            <button aria-label="Remove ESP-NOW Peer" class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-dash-lg"></i></button>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="espnow-broadcast-mode" checked onchange="sendEspOta('ESPNOW_BROADCAST:'+(this.checked?'1':'0'))">
@@ -398,7 +398,7 @@ try {
                         <h6 class="fw-bold text-muted small mb-1 mt-2"><i class="bi bi-pencil me-1"></i>Custom Command</h6>
                         <div class="input-group input-group-sm">
                             <input type="text" id="mesh-cmd-input" class="form-control font-monospace" placeholder="Custom command..." onkeydown="if(event.key==='Enter')sendMeshCmd()">
-                            <button class="btn btn-sm btn-outline-primary" onclick="sendMeshCmd()"><i class="bi bi-send"></i></button>
+                            <button aria-label="Send Mesh Command" class="btn btn-sm btn-outline-primary" onclick="sendMeshCmd()"><i class="bi bi-send"></i></button>
                         </div>
                     </div>
                 </div>
@@ -415,7 +415,7 @@ try {
                 <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger"></i>Raspberry Pi 3B Control Center</strong>
                 <div class="d-flex align-items-center gap-2">
                     <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1"></i>Offline</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button aria-label="Refresh Pi Status" class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -454,7 +454,7 @@ try {
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-white"><i class="bi bi-person-x text-danger"></i></span>
                             <input type="text" id="rpi-delete-id" class="form-control" placeholder="Student No to delete">
-                            <button class="btn btn-sm btn-outline-danger" onclick="sendRpiCommand('DELETE_FACE:'+document.getElementById('rpi-delete-id').value)"><i class="bi bi-trash"></i></button>
+                            <button aria-label="Delete Pi Face ID" class="btn btn-sm btn-outline-danger" onclick="sendRpiCommand('DELETE_FACE:'+document.getElementById('rpi-delete-id').value)"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -522,7 +522,7 @@ try {
                         </div>
                         <div class="input-group input-group-sm">
                             <input type="text" id="rpi-cmd-input" class="form-control font-monospace" placeholder="Enter command...">
-                            <button class="btn btn-sm btn-dark" onclick="sendRpiCmdFromInput()"><i class="bi bi-send"></i></button>
+                            <button aria-label="Send Pi Command" class="btn btn-sm btn-dark" onclick="sendRpiCmdFromInput()"><i class="bi bi-send"></i></button>
                         </div>
                     </div>
                 </div>
@@ -612,7 +612,7 @@ try {
                                 <tr>
                                     <td class="fw-bold small"><?php echo htmlspecialchars($dev); ?></td>
                                     <td class="small"><?php foreach ($crs as $c): ?><span class="badge bg-info text-dark me-1 mb-1"><?php echo htmlspecialchars($c); ?></span><?php endforeach; ?></td>
-                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')"><i class="bi bi-x"></i></button><?php endforeach; ?></td>
+                                    <td class="text-end"><?php foreach ($crs as $c): ?><button aria-label="Remove Device Course" class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')"><i class="bi bi-x"></i></button><?php endforeach; ?></td>
                                 </tr><?php endforeach; ?>
                             </tbody>
                         </table>
