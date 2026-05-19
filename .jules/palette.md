@@ -1,3 +1,3 @@
-## 2024-05-24 - Icon-only buttons lacking aria-labels
-**Learning:** Found multiple icon-only buttons in `index.php` without `aria-label` attributes, affecting screen reader accessibility.
-**Action:** Add `aria-label` attributes to these icon-only buttons for better accessibility.
+## 2024-05-24 - Missing ARIA Labels on Icon-only Bootstrap Buttons
+**Learning:** The application heavily relies on Bootstrap's icon-only buttons (like `.btn-close` for modals and `bi-*` icons for table actions) across various dashboards. These consistently lacked `aria-label` attributes, making them inaccessible to screen readers. Additionally, running local PHP development servers (`php -S`) generates session files in `sessions/` which can inadvertently be committed if not ignored.
+**Action:** When adding or modifying interactive UI components, especially Bootstrap utility buttons or icon-only actions, ALWAYS verify and include descriptive `aria-label`s. Ensure local testing artifacts (like `sessions/`) are added to `.gitignore` to avoid repository pollution.
