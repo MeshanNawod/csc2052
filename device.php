@@ -78,7 +78,7 @@ try {
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-primary" aria-label="Refresh device list" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
                             </div>
                         </div>
 
@@ -258,7 +258,7 @@ try {
                         <i class="bi bi-play-fill me-1"></i>Connect
                     </button>
                     <span id="sse-status-dot" class="badge bg-secondary" style="font-size:0.65rem;">Idle</span>
-                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-sm btn-link text-secondary p-0" aria-label="Clear serial monitor" onclick="clearSerialMonitor()" title="Clear"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -378,8 +378,8 @@ try {
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-hdd-network text-muted"></i></span>
                             <input type="text" id="espnow-mac-input" class="form-control font-monospace" placeholder="AA:BB:CC:DD:EE:FF">
-                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-plus-lg"></i></button>
-                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-dash-lg"></i></button>
+                            <button class="btn btn-outline-primary" aria-label="Add ESP-NOW peer" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-plus-lg"></i></button>
+                            <button class="btn btn-outline-danger" aria-label="Remove ESP-NOW peer" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-dash-lg"></i></button>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="espnow-broadcast-mode" checked onchange="sendEspOta('ESPNOW_BROADCAST:'+(this.checked?'1':'0'))">
@@ -398,7 +398,7 @@ try {
                         <h6 class="fw-bold text-muted small mb-1 mt-2"><i class="bi bi-pencil me-1"></i>Custom Command</h6>
                         <div class="input-group input-group-sm">
                             <input type="text" id="mesh-cmd-input" class="form-control font-monospace" placeholder="Custom command..." onkeydown="if(event.key==='Enter')sendMeshCmd()">
-                            <button class="btn btn-sm btn-outline-primary" onclick="sendMeshCmd()"><i class="bi bi-send"></i></button>
+                            <button class="btn btn-sm btn-outline-primary" aria-label="Send mesh command" onclick="sendMeshCmd()"><i class="bi bi-send"></i></button>
                         </div>
                     </div>
                 </div>
@@ -415,7 +415,7 @@ try {
                 <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger"></i>Raspberry Pi 3B Control Center</strong>
                 <div class="d-flex align-items-center gap-2">
                     <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1"></i>Offline</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-xs btn-outline-secondary" aria-label="Refresh Raspberry Pi status" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -1180,7 +1180,7 @@ window.refreshDeviceList = async function() {
                     const icon = dev.type === 'rpi' ? '<i class="bi bi-server text-danger me-1"></i>' : '<i class="bi bi-cpu text-primary me-1"></i>';
                     const badge = dev.online ? '<span class="badge bg-success">Online</span>' : '<span class="badge bg-secondary">Offline</span>';
                     const blockBtn = dev.blocked ? `<button class="btn btn-xs btn-outline-success py-0 px-1" onclick="deviceAction('unblock','${dev.ip}')">Unblock</button>` : `<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deviceAction('block','${dev.ip}')">Block</button>`;
-                    h += `<tr><td>${icon}<strong>${dev.name}</strong></td><td><code>${dev.ip}</code></td><td>${badge}</td><td class="d-flex gap-1">${blockBtn} <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick="renameDevice('${dev.ip}','${dev.name.replace(/'/g, "\\'")}')"><i class="bi bi-pencil"></i></button> <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick="deviceAction('forget','${dev.ip}')"><i class="bi bi-trash"></i></button></td></tr>`;
+                    h += `<tr><td>${icon}<strong>${dev.name}</strong></td><td><code>${dev.ip}</code></td><td>${badge}</td><td class="d-flex gap-1">${blockBtn} <button class="btn btn-xs btn-outline-secondary py-0 px-1" aria-label="Rename device" onclick="renameDevice('${dev.ip}','${dev.name.replace(/'/g, "\\'")}')"><i class="bi bi-pencil"></i></button> <button class="btn btn-xs btn-outline-dark py-0 px-1" aria-label="Forget device" onclick="deviceAction('forget','${dev.ip}')"><i class="bi bi-trash"></i></button></td></tr>`;
                 });
                 h += '</tbody></table>';
                 table.innerHTML = h;
