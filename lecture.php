@@ -24,7 +24,7 @@ try {
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
                 <strong><i class="bi bi-envelope-paper me-2"></i>Email Sender Configuration</strong>
-                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody"><i class="bi bi-chevron-down"></i></button>
+                <button class="btn btn-sm btn-outline-light" aria-label="Toggle email sender configuration" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody"><i class="bi bi-chevron-down"></i></button>
             </div>
             <div class="collapse show" id="emailConfigBody">
                 <div class="card-body py-2 bg-light">
