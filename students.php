@@ -176,7 +176,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-credit-card text-info"></i></span>
                             <input type="text" id="enroll-rfid" class="form-control" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
                             <button class="btn btn-info text-white fw-semibold" onclick="triggerEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
@@ -184,7 +184,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-person-bounding-box text-warning"></i></span>
                             <input type="text" id="enroll-face" class="form-control" placeholder="Face Profile ID">
-                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
                             <button class="btn btn-warning text-white fw-semibold" onclick="triggerEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -412,10 +412,10 @@ try {
                                     </td>
                                     <td class="text-end pe-3">
                                         <div class="btn-group shadow-sm">
-                                            <button onclick="editStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['student_name'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['fingerprint_id'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['rfid_uid'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['face_id'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-info" title="Edit Student Details"><i class="bi bi-pencil-square"></i></button>
-                                            <button onclick="pushTemplateToDevice('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>',<?php echo ($st['fingerprint_id'] ? (int)$st['fingerprint_id'] : 0); ?>)" class="btn btn-sm btn-light border text-primary" title="Push Finger to ESP" <?php echo empty($st['fingerprint_id']) ? 'disabled' : ''; ?>><i class="bi bi-cloud-arrow-up"></i></button>
-                                            <a href="download_template.php?student_no=<?php echo urlencode($st['student_no']); ?>" class="btn btn-sm btn-light border text-success" title="Download Fingerprint" <?php echo empty($st['fingerprint_id']) ? 'style="pointer-events: none; opacity: 0.5;"' : ''; ?>><i class="bi bi-download"></i></a>
-                                            <button onclick="deleteStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-danger" title="Delete Match"><i class="bi bi-trash"></i></button>
+                                            <button onclick="editStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['student_name'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['fingerprint_id'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['rfid_uid'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['face_id'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-info" title="Edit Student Details" aria-label="Edit Student Details"><i class="bi bi-pencil-square"></i></button>
+                                            <button onclick="pushTemplateToDevice('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>',<?php echo ($st['fingerprint_id'] ? (int)$st['fingerprint_id'] : 0); ?>)" class="btn btn-sm btn-light border text-primary" title="Push Finger to ESP" aria-label="Push Finger to ESP" <?php echo empty($st['fingerprint_id']) ? 'disabled' : ''; ?>><i class="bi bi-cloud-arrow-up"></i></button>
+                                            <a href="download_template.php?student_no=<?php echo urlencode($st['student_no']); ?>" class="btn btn-sm btn-light border text-success" title="Download Fingerprint" aria-label="Download Fingerprint" <?php echo empty($st['fingerprint_id']) ? 'style="pointer-events: none; opacity: 0.5;"' : ''; ?>><i class="bi bi-download"></i></a>
+                                            <button onclick="deleteStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-danger" title="Delete Match" aria-label="Delete Match"><i class="bi bi-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -456,7 +456,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-credit-card text-danger"></i></span>
                             <input type="text" id="enroll-admin-rfid" class="form-control border-danger-subtle" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
@@ -464,7 +464,7 @@ try {
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-person-bounding-box text-danger"></i></span>
                             <input type="text" id="enroll-admin-face" class="form-control border-danger-subtle" placeholder="Raspberry Pi Face ID (e.g. face_101)">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -695,7 +695,7 @@ function loadSchedules() {
                             '<div class="fw-bold small">' + escapeHtml(courseName) + '</div>' +
                             venue + deviceBadge + ' ' + autoBadge +
                             '<div class="mt-1">' +
-                            '<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteSchedule(' + s.id + ')" title="Delete"><i class="bi bi-x"></i></button>' +
+                            '<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteSchedule(' + s.id + ')" title="Delete" aria-label="Delete"><i class="bi bi-x"></i></button>' +
                             '</div>' +
                             '</td>';
                     } else {
@@ -1018,7 +1018,7 @@ function renderCourseManager() {
             course.teachers.forEach(t => {
                 html += `<span class="badge bg-info d-flex align-items-center gap-1">
                     ${escapeHtml(t.teacher_name)}
-                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove">&times;</button>
+                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove" aria-label="Remove">&times;</button>
                 </span>`;
             });
         } else {
@@ -1084,7 +1084,7 @@ function renderCourseManager() {
                 <td>${escapeHtml(slot.venue || '—')}</td>
                 <td><span class="badge bg-light text-dark">${escapeHtml(slot.device_id || 'Web')}</span></td>
                 <td>
-                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot">
+                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot" aria-label="Delete slot">
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
