@@ -173,14 +173,14 @@ $csrf_token = $_SESSION['csrf_token'] ?? '';
                                     <div class="small text-muted"><?php echo htmlspecialchars($t['email']); ?></div>
                                 </div>
                                 <div class="d-flex gap-1">
-                                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#pwModal<?php echo $t['id']; ?>" title="Reset Password">
-                                        <i class="bi bi-key"></i>
+                                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#pwModal<?php echo $t['id']; ?>" title="Reset Password" aria-label="Reset Password">
+                                        <i class="bi bi-key" aria-hidden="true"></i>
                                     </button>
                                     <form method="POST" class="d-inline" onsubmit="return confirm('Delete this teacher?');">
                                         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
                                         <input type="hidden" name="teacher_id" value="<?php echo $t['id']; ?>">
-                                        <button type="submit" name="delete_teacher" class="btn btn-sm btn-outline-danger" title="Delete">
-                                            <i class="bi bi-trash"></i>
+                                        <button type="submit" name="delete_teacher" class="btn btn-sm btn-outline-danger" title="Delete" aria-label="Delete">
+                                            <i class="bi bi-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </div>
