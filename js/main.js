@@ -133,8 +133,8 @@ function renderDeviceManageTable() {
             <td>${badge}${block}</td>
             <td class="d-flex gap-1">
                 ${blockBtn}
-                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})'><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})'><i class="bi bi-trash"></i></button>
+                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})' aria-label="Rename device" title="Rename device"><i class="bi bi-pencil" aria-hidden="true"></i></button>
+                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})' aria-label="Forget device" title="Forget device"><i class="bi bi-trash" aria-hidden="true"></i></button>
             </td>
         </tr>`;
     });
