@@ -26,8 +26,8 @@ $page = basename($_SERVER['PHP_SELF']);
                 <i class="bi bi-person-workspace me-2 text-gradient-premium"></i>
                 <span class="fw-bolder text-dark fs-4">Teacher Portal</span>
             </a>
-            <button class="navbar-toggler border-0 shadow-none px-2" type="button" data-bs-toggle="collapse" data-bs-target="#navBar">
-                <i class="bi bi-list fs-2 text-dark opacity-75"></i>
+            <button class="navbar-toggler border-0 shadow-none px-2" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list fs-2 text-dark opacity-75" aria-hidden="true"></i>
             </button>
             <div class="collapse navbar-collapse" id="navBar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
