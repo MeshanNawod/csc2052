@@ -410,14 +410,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$is_locked_out) {
     <form method="POST" id="login-form">
         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
         <div class="mb-3">
-            <label for="username" class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
+            <label for="username" class="form-label fw-semibold">Username <span class="text-danger" aria-hidden="true">*</span></label>
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-person" aria-hidden="true"></i></span>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
             </div>
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
+            <label for="password" class="form-label fw-semibold">Password <span class="text-danger" aria-hidden="true">*</span></label>
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-lock" aria-hidden="true"></i></span>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">

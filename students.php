@@ -612,7 +612,7 @@ try {
 <script>
 // Populate schedule course dropdown
 function populateSchedCourseDropdown() {
-    fetch('/csc2052/api/student.php?action=get_all_courses')
+    fetch('/api/student.php?action=get_all_courses')
         .then(r => r.json())
         .then(data => {
             if (!data.courses) return;
@@ -630,7 +630,7 @@ function populateSchedCourseDropdown() {
 }
 
 function populateSchedDeviceDropdown() {
-    fetch('/csc2052/api/devices.php?action=list')
+    fetch('/api/devices.php?action=list')
         .then(r => r.json())
         .then(data => {
             const sel = document.getElementById('sched-device');
@@ -652,7 +652,7 @@ function loadSchedules() {
     const tbody = document.getElementById('timetable-body');
     if (!tbody) return;
     
-    fetch('/csc2052/api/schedule.php?action=list')
+    fetch('/api/schedule.php?action=list')
         .then(r => r.json())
         .then(data => {
             if (!data.schedules) return;
@@ -739,7 +739,7 @@ function saveSchedule() {
     fd.append('venue', venue);
     fd.append('device_id', deviceId);
     
-    fetch('/csc2052/api/schedule.php', { method: 'POST', body: fd })
+    fetch('/api/schedule.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -768,7 +768,7 @@ function deleteSchedule(id) {
     fd.append('action', 'delete');
     fd.append('id', id);
     
-    fetch('/csc2052/api/schedule.php', { method: 'POST', body: fd })
+    fetch('/api/schedule.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') loadSchedules();
@@ -783,7 +783,7 @@ function escapeHtml(text) {
 
 // ─── COURSE ENROLLMENT ────────────────────────────────────────────────────
 function populateEnrollCourseSelect() {
-    fetch('/csc2052/api/student.php?action=get_all_courses')
+    fetch('/api/student.php?action=get_all_courses')
         .then(r => r.json())
         .then(data => {
             if (!data.courses) return;
@@ -809,7 +809,7 @@ function addCourse() {
     fd.append('action', 'add_course');
     fd.append('course_code', code);
     if (name) fd.append('course_name', name);
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('/api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -832,7 +832,7 @@ function deleteCourse(code) {
     const fd = new FormData();
     fd.append('action', 'delete_course');
     fd.append('course_code', code);
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('/api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -853,7 +853,7 @@ function enrollStudentCourse() {
     fd.append('action', 'enroll_student_course');
     fd.append('student_no', stuNo);
     fd.append('course_code', course);
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('/api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -876,7 +876,7 @@ function bulkEnrollCourseCSV() {
     fd.append('action', 'bulk_enroll_course_csv');
     fd.append('csv_file', file);
     log.innerHTML = '<span class="text-primary">Processing...</span>';
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('/api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -898,7 +898,7 @@ function lookupStudentCourses() {
     const stuNo = document.getElementById('lookup-stu-course').value.trim();
     const result = document.getElementById('lookup-courses-result');
     if (!stuNo) { result.innerHTML = '<span class="text-muted">Enter a Student No.</span>'; return; }
-    fetch('/csc2052/api/student.php?action=get_student_courses&student_no=' + encodeURIComponent(stuNo))
+    fetch('/api/student.php?action=get_student_courses&student_no=' + encodeURIComponent(stuNo))
         .then(r => r.json())
         .then(data => {
             if (data.courses && data.courses.length > 0) {
@@ -923,8 +923,8 @@ function loadCourseManager() {
     
     // Load schedules and teachers in parallel
     Promise.all([
-        fetch('/csc2052/api/schedule.php?action=list').then(r => r.json()),
-        fetch('/csc2052/api/teacher.php?action=list').then(r => r.json()).catch(() => ({status:'error', teachers:[]}))
+        fetch('/api/schedule.php?action=list').then(r => r.json()),
+        fetch('/api/teacher.php?action=list').then(r => r.json()).catch(() => ({status:'error', teachers:[]}))
     ]).then(([data, tData]) => {
         if (!data.schedules) return;
         
@@ -1124,7 +1124,7 @@ function updateCourseSetting(courseCode, setting, value) {
     fd.append('course_code', courseCode);
     fd.append(setting, value);
     
-    fetch('/csc2052/api/schedule.php', { method: 'POST', body: fd })
+    fetch('/api/schedule.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -1144,7 +1144,7 @@ function assignTeacherToCourse(courseCode) {
     fd.append('teacher_id', teacherId);
     fd.append('course_code', courseCode);
     
-    fetch('/csc2052/api/teacher.php', { method: 'POST', body: fd })
+    fetch('/api/teacher.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -1164,7 +1164,7 @@ function removeTeacherFromCourse(tcId, courseCode) {
     fd.append('tc_id', tcId);
     fd.append('course_code', courseCode);
     
-    fetch('/csc2052/api/teacher.php', { method: 'POST', body: fd })
+    fetch('/api/teacher.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {

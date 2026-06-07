@@ -19,11 +19,14 @@ $method      = $_GET['method'] ?? 'plaintext';
 $hw_key     = $_SERVER['HTTP_X_HARDWARE_KEY'] ?? ($_GET['hardware_key'] ?? '');
 $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
+require_once __DIR__ . '/../includes/helpers.php';
+
 $valid_token  = !empty($token)  && hash_equals(HEARTBEAT_SECRET, $token);
 $valid_hwkey  = !empty($hw_key) && hash_equals(HARDWARE_API_KEY, $hw_key);
+$valid_sig    = verifyHardwareSignature();
 $legacy_esp   = empty($token)   && empty($hw_key) && strpos($user_agent, 'ESP32HTTPClient') !== false;
 
-if (!$valid_token && !$valid_hwkey && !$legacy_esp) {
+if (!$valid_token && !$valid_hwkey && !$valid_sig && !$legacy_esp) {
     http_response_code(401);
     echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid or missing token.']);
     exit;

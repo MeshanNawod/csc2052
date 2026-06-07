@@ -140,13 +140,13 @@ body { background: #f8fafc; }
     <div class="col-lg-8">
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center">
-                <strong class="small"><i class="bi bi-clock-history me-1"></i>Live Attendance Logs</strong>
+                <strong class="small"><i class="bi bi-clock-history me-1"></i>Live Attendance Logs <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill ms-2" style="font-size: 0.65rem;"><i class="bi bi-shield-check me-1"></i>HMAC Secured</span></strong>
                 <div class="d-flex align-items-center gap-3">
                     <div class="form-check form-switch mb-0">
                         <input class="form-check-input" type="checkbox" id="global-voice-mute">
-                        <label class="form-check-label small text-muted fw-bold" for="global-voice-mute"><i class="bi bi-volume-mute me-1"></i>Mute</label>
+                        <label class="form-check-label small text-muted fw-bold" for="global-voice-mute"><i class="bi bi-volume-mute me-1" aria-hidden="true"></i>Mute</label>
                     </div>
-                    <button class="btn btn-sm btn-outline-primary rounded-pill py-0 fw-semibold" onclick="exportLogsCsv()"><i class="bi bi-download me-1"></i>Export CSV</button>
+                    <button class="btn btn-sm btn-outline-primary rounded-pill py-0 fw-semibold" onclick="exportLogsCsv()"><i class="bi bi-download me-1" aria-hidden="true"></i>Export CSV</button>
                 </div>
             </div>
             <div class="card-body py-2 bg-light border-bottom">
@@ -193,8 +193,8 @@ body { background: #f8fafc; }
                     <div class="d-flex justify-content-between align-items-center mb-1">
                         <label class="form-label small text-muted fw-bold mb-0"><i class="bi bi-bullseye text-primary me-1"></i>Target Device</label>
                         <div class="d-flex gap-1">
-                            <button class="btn btn-xs btn-outline-secondary py-0 px-1 small rounded-pill" aria-label="Scan devices" onclick="refreshDeviceList(); refreshDeviceDropdown();" title="Scan"><i class="bi bi-arrow-clockwise"></i></button>
-                            <button class="btn btn-xs btn-outline-primary py-0 px-1 small rounded-pill" aria-label="Manage devices" onclick="toggleManageDevices()" title="Manage"><i class="bi bi-gear"></i></button>
+                            <button class="btn btn-xs btn-outline-secondary py-0 px-1 small rounded-pill" aria-label="Scan devices" onclick="refreshDeviceList(); refreshDeviceDropdown();" title="Scan"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
+                            <button class="btn btn-xs btn-outline-primary py-0 px-1 small rounded-pill" aria-label="Manage devices" onclick="toggleManageDevices()" title="Manage"><i class="bi bi-gear" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div class="searchable-select-wrapper position-relative">
@@ -223,8 +223,8 @@ body { background: #f8fafc; }
                         <option value="custom">Custom</option>
                     </select>
                     <input type="number" id="lecture-timer-custom" class="form-control form-control-sm border-secondary" style="width:65px;display:none;" placeholder="Min" min="1" max="480">
-                    <button class="btn btn-primary fw-semibold rounded-pill" aria-label="Start lecture" id="btn-start-course" onclick="startCourseToDevice()"><i class="bi bi-play-fill"></i></button>
-                    <button class="btn btn-outline-danger fw-semibold px-2 rounded-pill" aria-label="End lecture" id="btn-end-course" onclick="endCourseToDevice()" disabled><i class="bi bi-stop-fill"></i></button>
+                    <button class="btn btn-primary fw-semibold rounded-pill" aria-label="Start lecture" id="btn-start-course" onclick="startCourseToDevice()"><i class="bi bi-play-fill" aria-hidden="true"></i></button>
+                    <button class="btn btn-outline-danger fw-semibold px-2 rounded-pill" aria-label="End lecture" id="btn-end-course" onclick="endCourseToDevice()" disabled><i class="bi bi-stop-fill" aria-hidden="true"></i></button>
                 </div>
                 <div id="lecture-timer-display" class="d-none mb-2">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -240,13 +240,13 @@ body { background: #f8fafc; }
                         <input type="text" id="sync-courses-input" class="form-control border-secondary" placeholder="Search & add courses..." autocomplete="off" oninput="filterDropdown(this, 'sync-course-dropdown', null)" onfocus="showDropdown('sync-course-dropdown')" onkeydown="filterDropdown(this, 'sync-course-dropdown', null)">
                         <div id="sync-course-dropdown" class="searchable-dropdown d-none"></div>
                     </div>
-                    <button class="btn btn-secondary fw-semibold rounded-pill" aria-label="Sync courses to SD card" onclick="syncCoursesToScanner()"><i class="bi bi-sd-card"></i></button>
+                    <button class="btn btn-secondary fw-semibold rounded-pill" aria-label="Sync courses to SD card" onclick="syncCoursesToScanner()"><i class="bi bi-sd-card" aria-hidden="true"></i></button>
                 </div>
 
                 <h6 class="text-muted fw-bold mb-1 small">Hardware Mode</h6>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-sm btn-outline-success w-100 fw-semibold rounded-pill" onclick="sendOtaCommand('ATTENDANCE_MODE')"><i class="bi bi-person-check me-1"></i>Attendance</button>
-                    <button class="btn btn-sm btn-outline-warning w-100 fw-semibold rounded-pill" onclick="sendOtaCommand('ENROLL_MODE')"><i class="bi bi-fingerprint me-1"></i>Enroll</button>
+                    <button class="btn btn-sm btn-outline-success w-100 fw-semibold rounded-pill" onclick="sendOtaCommand('ATTENDANCE_MODE')"><i class="bi bi-person-check me-1" aria-hidden="true"></i>Attendance</button>
+                    <button class="btn btn-sm btn-outline-warning w-100 fw-semibold rounded-pill" onclick="sendOtaCommand('ENROLL_MODE')"><i class="bi bi-fingerprint me-1" aria-hidden="true"></i>Enroll</button>
                 </div>
             </div>
         </div>
@@ -341,10 +341,10 @@ body { background: #f8fafc; }
             <div class="card-body py-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div class="d-flex align-items-center gap-2">
-                        <span id="rpi-status-dot" class="badge bg-secondary badge-pill"><i class="bi bi-circle me-1"></i>Offline</span>
+                        <span id="rpi-status-dot" class="badge bg-secondary badge-pill"><i class="bi bi-circle me-1" aria-hidden="true"></i>Offline</span>
                         <small id="rpi-ip-display" class="text-muted">Not connected</small>
                     </div>
-                    <button class="btn btn-sm btn-outline-light rounded-pill" aria-label="Check Pi status" onclick="refreshRpiStatus()" title="Check Pi"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-sm btn-outline-light rounded-pill" aria-label="Check Pi status" onclick="refreshRpiStatus()" title="Check Pi"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
                 <div id="rpi-face-container" class="border rounded p-2 bg-light text-center shadow-sm">
                     <div class="position-relative w-100 rounded bg-dark mb-2" style="line-height:0;overflow:hidden;aspect-ratio:4/3;">
@@ -377,8 +377,8 @@ body { background: #f8fafc; }
                         <input type="text" id="rpi-node-ip" class="form-control" placeholder="Pi IP (e.g. 192.168.1.100)">
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-outline-secondary btn-sm w-100 fw-semibold rounded-pill" onclick="saveRpiConfig()"><i class="bi bi-save me-1"></i>Save</button>
-                        <button class="btn btn-outline-dark btn-sm w-100 fw-semibold rounded-pill" onclick="triggerRpiOta()"><i class="bi bi-cloud-arrow-down me-1"></i>Pull Queue</button>
+                        <button class="btn btn-outline-secondary btn-sm w-100 fw-semibold rounded-pill" onclick="saveRpiConfig()"><i class="bi bi-save me-1" aria-hidden="true"></i>Save</button>
+                        <button class="btn btn-outline-dark btn-sm w-100 fw-semibold rounded-pill" onclick="triggerRpiOta()"><i class="bi bi-cloud-arrow-down me-1" aria-hidden="true"></i>Pull Queue</button>
                     </div>
                 </div>
             </div>

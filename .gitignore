@@ -1,0 +1,34 @@
+# Application specific
+includes/config.php
+sessions/*
+!sessions/.gitkeep
+logs/*
+!logs/.gitkeep
+uploads/*
+!uploads/.gitkeep
+devices_registry.json
+sys_status_esp32.txt
+
+# Development artifacts
+*.log
+*.sqlite
+*.db
+.DS_Store
+node_modules/
+dist/
+build/
+test-results/
+.Jules/
+screenshots/
+*.png
+*.jpg
+*.jpeg
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
