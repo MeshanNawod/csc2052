@@ -7,3 +7,6 @@
 ## 2024-05-28 - Missing ARIA Labels on Icon-only Buttons
 **Learning:** Found an app-wide pattern where icon-only action buttons (like Delete, Edit, Download) rely exclusively on the `title` attribute. While `title` gives a tooltip, it doesn't consistently announce to screen readers.
 **Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
+## 2026-06-07 - Accessibility improvements for Icon-Only Buttons in JS Template Strings
+**Learning:** Icon-only buttons rendered dynamically via JavaScript template strings (e.g., in `device.php`) often lack descriptive text for screen readers. In this application, several buttons used Bootstrap icons without accompanying text or labels.
+**Action:** When adding or reviewing dynamically rendered icon-only buttons, always ensure an `aria-label` is present to improve accessibility for visually impaired users, and add `aria-hidden="true"` to the icon element itself.
