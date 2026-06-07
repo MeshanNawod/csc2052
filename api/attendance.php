@@ -11,28 +11,27 @@ require_once __DIR__ . '/../includes/config.php';
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
 
-$method  = $_POST['method']  ?? $_GET['method'] ?? 'plaintext';
 $token   = $_POST['token']   ?? $_GET['token']  ?? '';
 
 // ─── Authentication ───────────────────────────────────────────────
+require_once __DIR__ . '/../includes/helpers.php';
 $hw_key = $_SERVER['HTTP_X_HARDWARE_KEY'] ?? ($_POST['hardware_key'] ?? '');
+$valid_sig = verifyHardwareSignature();
 
-if ($method !== 'plaintext') {
-    if ($token === '' && $hw_key === '') {
-        http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: token required for ' . $method . ' mode.']);
-        exit;
-    }
-    if ($token !== '' && !hash_equals(HEARTBEAT_SECRET, $token)) {
-        http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid token.']);
-        exit;
-    }
-    if ($hw_key !== '' && !hash_equals(HARDWARE_API_KEY, $hw_key)) {
-        http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid hardware key.']);
-        exit;
-    }
+if ($token === '' && $hw_key === '' && !$valid_sig) {
+    http_response_code(401);
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized: authentication required.']);
+    exit;
+}
+if ($token !== '' && !hash_equals(HEARTBEAT_SECRET, $token)) {
+    http_response_code(401);
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid token.']);
+    exit;
+}
+if ($hw_key !== '' && !hash_equals(HARDWARE_API_KEY, $hw_key)) {
+    http_response_code(401);
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid hardware key.']);
+    exit;
 }
 
 // ─── Parameters ───────────────────────────────────────────────────

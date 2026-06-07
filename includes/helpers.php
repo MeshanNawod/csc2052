@@ -127,6 +127,34 @@ if (!function_exists('apiResponse')) {
 }
 
 /**
+ * Verify HMAC-SHA256 signature for hardware requests.
+ */
+if (!function_exists('verifyHardwareSignature')) {
+    function verifyHardwareSignature(): bool {
+        $signature = $_SERVER['HTTP_X_SIGNATURE'] ?? '';
+        $timestamp = $_SERVER['HTTP_X_TIMESTAMP'] ?? '';
+
+        if (!$signature || !$timestamp) return false;
+
+        // Prevent replay attacks (allow 5 minute window)
+        if (abs(time() - (int)$timestamp) > 300) return false;
+
+        $method = $_SERVER['REQUEST_METHOD'];
+        $path = $_SERVER['REQUEST_URI'];
+
+        $body = '';
+        if ($method === 'POST') {
+            $body = file_get_contents('php://input');
+        }
+
+        $dataToSign = $method . $path . $timestamp . $body;
+        $expectedSignature = hash_hmac('sha256', $dataToSign, HARDWARE_API_KEY);
+
+        return hash_equals($expectedSignature, $signature);
+    }
+}
+
+/**
  * Standardized API error response.
  */
 if (!function_exists('apiError')) {
