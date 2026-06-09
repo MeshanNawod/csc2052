@@ -6,6 +6,7 @@
  * Usage: GET /api/heartbeat.php?device=esp32&name=DEVICE_NAME&token=SECRET&method=plaintext|hmac|aes
  */
 require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/helpers.php';
 
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
@@ -19,14 +20,24 @@ $method      = $_GET['method'] ?? 'plaintext';
 $hw_key     = $_SERVER['HTTP_X_HARDWARE_KEY'] ?? ($_GET['hardware_key'] ?? '');
 $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
-$valid_token  = !empty($token)  && hash_equals(HEARTBEAT_SECRET, $token);
-$valid_hwkey  = !empty($hw_key) && hash_equals(HARDWARE_API_KEY, $hw_key);
-$legacy_esp   = empty($token)   && empty($hw_key) && strpos($user_agent, 'ESP32HTTPClient') !== false;
+$valid_token = !empty($token)  && hash_equals(HEARTBEAT_SECRET, $token);
+$valid_hwkey = !empty($hw_key) && hash_equals(HARDWARE_API_KEY, $hw_key);
+$valid_sig   = verifyHardwareSignature();
+$legacy_esp  = empty($token)   && empty($hw_key) && strpos($user_agent, 'ESP32HTTPClient') !== false;
 
-if (!$valid_token && !$valid_hwkey && !$legacy_esp) {
-    http_response_code(401);
-    echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid or missing token.']);
-    exit;
+if ($method === 'hmac' || $method === 'aes') {
+    if (!$valid_sig && !$legacy_esp) {
+        http_response_code(401);
+        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid hardware signature.']);
+        exit;
+    }
+} else {
+    // For plaintext, require at least valid token or hw_key
+    if (!$valid_token && !$valid_hwkey && !$legacy_esp) {
+        http_response_code(401);
+        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: authentication failed.']);
+        exit;
+    }
 }
 
 // ─── Register Device ──────────────────────────────────────────────

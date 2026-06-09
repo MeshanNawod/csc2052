@@ -227,7 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
     restoreLectureTimer();
     // Only start polling logs if we are on a page that displays them (like index.php)
     if (document.getElementById('logs-accordion-container')) {
-        console.log('[Init] Starting logs polling...');
         fetchLogs();
         if (typeof fetchTodayAttendance === 'function') fetchTodayAttendance();
         setInterval(() => {
@@ -426,7 +425,6 @@ function logToTerminal(text) {
         terminal.textContent += text + "\n";
         terminal.scrollTop = terminal.scrollHeight;
     } else {
-        console.log(text);
     }
 }
 
