@@ -127,6 +127,28 @@ if (!function_exists('apiResponse')) {
 }
 
 /**
+ * Verify HMAC-SHA256 signature from hardware nodes.
+ * Uses HARDWARE_API_KEY as the secret.
+ */
+if (!function_exists('verifyHardwareSignature')) {
+    function verifyHardwareSignature(): bool {
+        $signature = $_SERVER['HTTP_X_SIGNATURE'] ?? '';
+        if (empty($signature)) {
+            return false;
+        }
+
+        // Use raw input for POST/PUT, fallback to query string for GET
+        $payload = file_get_contents('php://input');
+        if (empty($payload)) {
+            $payload = $_SERVER['QUERY_STRING'] ?? '';
+        }
+
+        $expected = hash_hmac('sha256', $payload, HARDWARE_API_KEY);
+        return hash_equals($expected, $signature);
+    }
+}
+
+/**
  * Standardized API error response.
  */
 if (!function_exists('apiError')) {

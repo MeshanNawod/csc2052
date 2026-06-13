@@ -1126,10 +1126,10 @@ void setup() {
   loadDeviceConfig();
 
   // --- 4. Build URLs ---
-  serverURL    = "http://" + String(SERVER_IP) + "/csc2052/attendance.php";
-  heartbeatURL = "http://" + String(SERVER_IP) + "/csc2052/heartbeat.php";
-  enrollApiURL = "http://" + String(SERVER_IP) + "/csc2052/api/student.php?action=get_next_slot&hardware_override=1";
-  studentApiURL= "http://" + String(SERVER_IP) + "/csc2052/api/student.php";
+  serverURL    = "http://" + String(SERVER_IP) + "/attendance.php";
+  heartbeatURL = "http://" + String(SERVER_IP) + "/heartbeat.php";
+  enrollApiURL = "http://" + String(SERVER_IP) + "/api/student.php?action=get_next_slot&hardware_override=1";
+  studentApiURL= "http://" + String(SERVER_IP) + "/api/student.php";
 
   // --- 5. WiFi ---
   isOnline = tryConnectWifi();

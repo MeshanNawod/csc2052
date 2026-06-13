@@ -28,7 +28,7 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_SESSION['role_locked']) && isset($_SESSION['user_role']) && $_SESSION['user_role'] !== $_SESSION['role_locked']) {
     session_unset();
     session_destroy();
-    header('Location: /csc2052/login.php?reason=hijack');
+    header('Location: /login.php?reason=hijack');
     exit;
 }
 
@@ -114,7 +114,7 @@ if (!$is_legacy_admin && !$is_multi_role) {
     session_unset();
     session_destroy();
     $redirect = urlencode($_SERVER['REQUEST_URI'] ?? '');
-    header('Location: /csc2052/login.php' . ($redirect ? '?redirect=' . $redirect : ''));
+    header('Location: /login.php' . ($redirect ? '?redirect=' . $redirect : ''));
     exit;
 }
 
@@ -136,7 +136,7 @@ if (isset($_SESSION['user_role']) && !isset($_SESSION['role_locked'])) {
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > SESSION_LIFETIME) {
     session_unset();
     session_destroy();
-    header('Location: /csc2052/login.php?reason=timeout');
+    header('Location: /login.php?reason=timeout');
     exit;
 }
 $_SESSION['last_activity'] = time();

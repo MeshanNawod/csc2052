@@ -10,7 +10,7 @@ require_once __DIR__ . '/db.php';
 // ─── ROLE LOCK: Prevent teacher session from being hijacked ──────────
 if (isset($_SESSION['role_locked']) && $_SESSION['role_locked'] === 'teacher' && !isTeacher()) {
     session_unset(); session_destroy();
-    header('Location: /csc2052/login.php?reason=hijack'); exit;
+    header('Location: /login.php?reason=hijack'); exit;
 }
 if (isTeacher() && !isset($_SESSION['role_locked'])) {
     $_SESSION['role_locked'] = 'teacher';

@@ -27,12 +27,12 @@ async function loadFaceModels() {
     if (isModelsLoaded) return;
     // Try local first
     try {
-        console.log("Loading Face API models from local path:", LOCAL_MODEL_URL);
+
         await faceapi.nets.ssdMobilenetv1.loadFromUri(LOCAL_MODEL_URL);
         await faceapi.nets.faceLandmark68Net.loadFromUri(LOCAL_MODEL_URL);
         await faceapi.nets.faceRecognitionNet.loadFromUri(LOCAL_MODEL_URL);
         isModelsLoaded = true;
-        console.log("Face API models loaded successfully (local).");
+
         return;
     } catch (e) {
         console.warn("Local models failed, trying CDN fallback...", e);
@@ -40,12 +40,12 @@ async function loadFaceModels() {
 
     // Then try CDN
     try {
-        console.log("Loading Face API models from CDN...", CDN_MODEL_URL);
+
         await faceapi.nets.ssdMobilenetv1.loadFromUri(CDN_MODEL_URL);
         await faceapi.nets.faceLandmark68Net.loadFromUri(CDN_MODEL_URL);
         await faceapi.nets.faceRecognitionNet.loadFromUri(CDN_MODEL_URL);
         isModelsLoaded = true;
-        console.log("Face API models loaded successfully (CDN).");
+
         return;
     } catch (e) {
         console.error("Failed to load Face API models from CDN:", e);
@@ -314,7 +314,7 @@ window.bulkEnrollFromImages = async function (fileInput) {
 
     function log(msg) {
         if (logEl) { logEl.textContent += msg + '\n'; logEl.scrollTop = logEl.scrollHeight; }
-        console.log('[BULK]', msg);
+
     }
 
     await loadFaceModels();

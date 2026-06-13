@@ -60,7 +60,7 @@ try {
                                             <?php foreach ($courses as $c): ?>
                                             <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                                 <span><strong><?php echo htmlspecialchars($c['course_code']); ?></strong><?php if (!empty($c['course_name'])): ?> - <span class="text-muted"><?php echo htmlspecialchars($c['course_name']); ?></span><?php endif; ?></span>
-                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg"></i></button>
+                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                             </li>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -82,7 +82,7 @@ try {
                                         </select>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg"></i></button>
+                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div id="course-enroll-msg" class="small mb-2 min-h-xs"></div>
@@ -174,17 +174,17 @@ try {
                             </button>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-credit-card text-info"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-credit-card text-info" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-rfid" class="form-control" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-info text-white fw-semibold" onclick="triggerEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-person-bounding-box text-warning"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-person-bounding-box text-warning" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-face" class="form-control" placeholder="Face Profile ID">
-                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-warning text-white fw-semibold" onclick="triggerEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -454,17 +454,17 @@ try {
                             </button>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-credit-card text-danger"></i></span>
+                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-credit-card text-danger" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-admin-rfid" class="form-control border-danger-subtle" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-person-bounding-box text-danger"></i></span>
+                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-person-bounding-box text-danger" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-admin-face" class="form-control border-danger-subtle" placeholder="Raspberry Pi Face ID (e.g. face_101)">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -612,7 +612,7 @@ try {
 <script>
 // Populate schedule course dropdown
 function populateSchedCourseDropdown() {
-    fetch('/csc2052/api/student.php?action=get_all_courses')
+    fetch('api/student.php?action=get_all_courses')
         .then(r => r.json())
         .then(data => {
             if (!data.courses) return;
@@ -630,7 +630,7 @@ function populateSchedCourseDropdown() {
 }
 
 function populateSchedDeviceDropdown() {
-    fetch('/csc2052/api/devices.php?action=list')
+    fetch('api/devices.php?action=list')
         .then(r => r.json())
         .then(data => {
             const sel = document.getElementById('sched-device');
@@ -652,7 +652,7 @@ function loadSchedules() {
     const tbody = document.getElementById('timetable-body');
     if (!tbody) return;
     
-    fetch('/csc2052/api/schedule.php?action=list')
+    fetch('api/schedule.php?action=list')
         .then(r => r.json())
         .then(data => {
             if (!data.schedules) return;
@@ -739,7 +739,7 @@ function saveSchedule() {
     fd.append('venue', venue);
     fd.append('device_id', deviceId);
     
-    fetch('/csc2052/api/schedule.php', { method: 'POST', body: fd })
+    fetch('api/schedule.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -768,7 +768,7 @@ function deleteSchedule(id) {
     fd.append('action', 'delete');
     fd.append('id', id);
     
-    fetch('/csc2052/api/schedule.php', { method: 'POST', body: fd })
+    fetch('api/schedule.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') loadSchedules();
@@ -783,7 +783,7 @@ function escapeHtml(text) {
 
 // ─── COURSE ENROLLMENT ────────────────────────────────────────────────────
 function populateEnrollCourseSelect() {
-    fetch('/csc2052/api/student.php?action=get_all_courses')
+    fetch('api/student.php?action=get_all_courses')
         .then(r => r.json())
         .then(data => {
             if (!data.courses) return;
@@ -809,7 +809,7 @@ function addCourse() {
     fd.append('action', 'add_course');
     fd.append('course_code', code);
     if (name) fd.append('course_name', name);
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -832,7 +832,7 @@ function deleteCourse(code) {
     const fd = new FormData();
     fd.append('action', 'delete_course');
     fd.append('course_code', code);
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -853,7 +853,7 @@ function enrollStudentCourse() {
     fd.append('action', 'enroll_student_course');
     fd.append('student_no', stuNo);
     fd.append('course_code', course);
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -876,7 +876,7 @@ function bulkEnrollCourseCSV() {
     fd.append('action', 'bulk_enroll_course_csv');
     fd.append('csv_file', file);
     log.innerHTML = '<span class="text-primary">Processing...</span>';
-    fetch('/csc2052/api/student.php', { method: 'POST', body: fd })
+    fetch('api/student.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -898,7 +898,7 @@ function lookupStudentCourses() {
     const stuNo = document.getElementById('lookup-stu-course').value.trim();
     const result = document.getElementById('lookup-courses-result');
     if (!stuNo) { result.innerHTML = '<span class="text-muted">Enter a Student No.</span>'; return; }
-    fetch('/csc2052/api/student.php?action=get_student_courses&student_no=' + encodeURIComponent(stuNo))
+    fetch('api/student.php?action=get_student_courses&student_no=' + encodeURIComponent(stuNo))
         .then(r => r.json())
         .then(data => {
             if (data.courses && data.courses.length > 0) {
@@ -923,8 +923,8 @@ function loadCourseManager() {
     
     // Load schedules and teachers in parallel
     Promise.all([
-        fetch('/csc2052/api/schedule.php?action=list').then(r => r.json()),
-        fetch('/csc2052/api/teacher.php?action=list').then(r => r.json()).catch(() => ({status:'error', teachers:[]}))
+        fetch('api/schedule.php?action=list').then(r => r.json()),
+        fetch('api/teacher.php?action=list').then(r => r.json()).catch(() => ({status:'error', teachers:[]}))
     ]).then(([data, tData]) => {
         if (!data.schedules) return;
         
@@ -1124,7 +1124,7 @@ function updateCourseSetting(courseCode, setting, value) {
     fd.append('course_code', courseCode);
     fd.append(setting, value);
     
-    fetch('/csc2052/api/schedule.php', { method: 'POST', body: fd })
+    fetch('api/schedule.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -1144,7 +1144,7 @@ function assignTeacherToCourse(courseCode) {
     fd.append('teacher_id', teacherId);
     fd.append('course_code', courseCode);
     
-    fetch('/csc2052/api/teacher.php', { method: 'POST', body: fd })
+    fetch('api/teacher.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {
@@ -1164,7 +1164,7 @@ function removeTeacherFromCourse(tcId, courseCode) {
     fd.append('tc_id', tcId);
     fd.append('course_code', courseCode);
     
-    fetch('/csc2052/api/teacher.php', { method: 'POST', body: fd })
+    fetch('api/teacher.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(data => {
             if (data.status === 'success') {

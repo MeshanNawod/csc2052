@@ -417,7 +417,7 @@ function refreshStats(){
     var tc = document.getElementById('filter-today-course').value;
 
     if (sc) {
-        fetch('/csc2052/api/teacher.php?action=get_course_students&course_code='+encodeURIComponent(sc))
+        fetch('api/teacher.php?action=get_course_students&course_code='+encodeURIComponent(sc))
             .then(function(r){return r.json();})
             .then(function(d){
                 document.getElementById('stat-students').textContent = (d.students ? d.students.length : 0);
@@ -430,14 +430,14 @@ function refreshStats(){
     }
 
     if (tc) {
-        fetch('/csc2052/api/teacher.php?action=get_today_attendance&course_code='+encodeURIComponent(tc))
+        fetch('api/teacher.php?action=get_today_attendance&course_code='+encodeURIComponent(tc))
             .then(function(r){return r.json();})
             .then(function(d){
                 document.getElementById('stat-today').textContent = (d.present ? d.present.length : 0);
             })
             .catch(function(){ document.getElementById('stat-today').textContent = '—'; });
     } else {
-        fetch('/csc2052/api/teacher.php?action=today_count')
+        fetch('api/teacher.php?action=today_count')
             .then(function(r){return r.json();})
             .then(function(d){
                 document.getElementById('stat-today').textContent = (d.count || 0);
@@ -456,19 +456,19 @@ function fetchLogs(){
     var search = document.getElementById('log-search').value;
     var course = document.getElementById('log-course').value;
     var date = document.getElementById('log-date').value;
-    var url = '/csc2052/api/teacher.php?action=teacher_logs';
+    var url = 'api/teacher.php?action=teacher_logs';
     if (course) url += '&course=' + encodeURIComponent(course);
     // Only add date filter if explicitly set
     if (date) url += '&date=' + encodeURIComponent(date);
     if (search) url += '&search=' + encodeURIComponent(search);
-    console.log('Fetching logs from:', url);
+
     fetch(url)
         .then(function(r){ 
-            console.log('Response status:', r.status);
+
             return r.json(); 
         })
         .then(function(data) {
-            console.log('Response data:', data);
+
             var el = document.getElementById('log-container');
             if (!data.logs || data.logs.length === 0){
                 el.innerHTML = '<div class="text-center text-muted py-5">';
@@ -509,7 +509,7 @@ function checkAbsent(){
     var course = document.getElementById('absent-course').value;
     var date = document.getElementById('absent-date').value;
     if (!course) return;
-    fetch('/csc2052/api/teacher.php?action=absent_students&course_code='+encodeURIComponent(course)+'&date='+encodeURIComponent(date))
+    fetch('api/teacher.php?action=absent_students&course_code='+encodeURIComponent(course)+'&date='+encodeURIComponent(date))
         .then(function(r){return r.json();})
         .then(function(data){
             var el = document.getElementById('absent-container');
@@ -533,7 +533,7 @@ function emailAbsent(){
     if (!course) return;
     if (!confirm('Send email to all absent students for '+course+'?')) return;
     var fd = new FormData(); fd.append('action','send_absent_email'); fd.append('course_code',course); fd.append('date',date);
-    fetch('/csc2052/api/teacher.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
+    fetch('api/teacher.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
         if (data.status==='success'){ alert('Sent to '+data.sent+' students.'); checkAbsent(); }
         else alert('Failed: '+(data.message||''));
     });
@@ -557,7 +557,7 @@ function startLecture(){
     if(timer) fd.append('timer_minutes',timer);
     if(autoStart) fd.append('auto_start','1');
 
-    fetch('/csc2052/api/teacher.php',{method:'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd })
+    fetch('api/teacher.php',{method:'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd })
         .then(function(r){return r.json();})
         .then(function(data){
             if(data.status==='success'){
@@ -578,7 +578,7 @@ function endLecture(){
     var msg = document.getElementById('start-msg');
     msg.innerHTML = '<span class="text-primary"><i class="bi bi-arrow-clockwise spin me-1"></i>Ending...</span>';
     var fd = new FormData(); fd.append('action','end_course_session'); fd.append('course_code',course);
-    fetch('/csc2052/api/teacher.php',{method:'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd })
+    fetch('api/teacher.php',{method:'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd })
         .then(function(r){return r.json();})
         .then(function(data){
             if(data.status==='success'){
@@ -598,7 +598,7 @@ function endLecture(){
     msg.innerHTML = '<span class="text-primary"><i class="bi bi-arrow-clockwise spin me-1"></i>Ending...</span>';
 
     var fd = new FormData(); fd.append('action','end_course_session'); fd.append('course_code',course);
-    fetch('/csc2052/api/teacher.php',{method:'POST',body:fd})
+    fetch('api/teacher.php',{method:'POST',body:fd})
         .then(function(r){return r.json();})
         .then(function(data){
             if(data.status==='success'){
@@ -614,7 +614,7 @@ function loadCourses(){
     var el = document.getElementById('courses-container');
     var dayNames = ['','Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     var formatTime = function(t){ if(!t) return ''; t = String(t); if(t.length>=5) return t.substring(0,5); return t; };
-    fetch('/csc2052/api/teacher.php?action=get_my_courses')
+    fetch('api/teacher.php?action=get_my_courses')
         .then(function(r){return r.json();})
         .then(function(data){
             if(!data.courses||data.courses.length===0){
@@ -654,7 +654,7 @@ function loadUpcoming(){
     var dayNumMap = {'Sun':0,'Mon':1,'Tue':2,'Wed':3,'Thu':4,'Fri':5,'Sat':6};
     var targetDay = dayNumMap[todayName];
 
-    fetch('/csc2052/api/teacher.php?action=get_my_courses')
+    fetch('api/teacher.php?action=get_my_courses')
         .then(function(r){return r.json();})
         .then(function(data){
             if(!data.courses||data.courses.length===0){
@@ -719,7 +719,7 @@ function searchEnrollStudents(){
     var container = document.getElementById('enroll-search-results');
     container.innerHTML = '<div class="text-center py-2"><i class="bi bi-arrow-clockwise spin"></i></div>';
 
-    var url = '/csc2052/api/student.php?action=get_all_students&course_code='+encodeURIComponent(course);
+    var url = 'api/student.php?action=get_all_students&course_code='+encodeURIComponent(course);
     if(query) url += '&search='+encodeURIComponent(query);
 
     fetch(url)
@@ -745,7 +745,7 @@ function searchEnrollStudents(){
 function enrollStudent(studentNo, course){
     if(!confirm('Enroll '+studentNo+' in '+course+'?')) return;
     var fd = new FormData(); fd.append('action','enroll_student_course'); fd.append('student_no',studentNo); fd.append('course_code',course);
-    fetch('/csc2052/api/student.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
+    fetch('api/student.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
         if(data.status==='success'){ alert('Enrolled successfully.'); searchEnrollStudents(); }
         else alert('Failed: '+(data.message||''));
     });
@@ -757,7 +757,7 @@ function loadEnrolledList(course){
     var container = document.getElementById('enrolled-list');
     container.innerHTML = '<div class="text-center py-2"><i class="bi bi-arrow-clockwise spin"></i></div>';
 
-    fetch('/csc2052/api/teacher.php?action=get_course_students&course_code='+encodeURIComponent(course))
+    fetch('api/teacher.php?action=get_course_students&course_code='+encodeURIComponent(course))
         .then(function(r){return r.json();})
         .then(function(data){
             var students = data.students || [];
@@ -779,7 +779,7 @@ function loadEnrolledList(course){
 function unEnrollStudent(studentNo, course){
     if(!confirm('Remove '+studentNo+' from '+course+'?')) return;
     var fd = new FormData(); fd.append('action','unenroll_student_course'); fd.append('student_no',studentNo); fd.append('course_code',course);
-    fetch('/csc2052/api/student.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
+    fetch('api/student.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
         if(data.status==='success'){ loadEnrolledList(course); }
         else alert('Failed: '+(data.message||''));
     });
@@ -798,7 +798,7 @@ function loadAttendancePct(){
     el.innerHTML = html;
 
     var promises = MY_COURSES.map(function(c){
-        return fetch('/csc2052/api/teacher.php?action=get_course_students&course_code='+encodeURIComponent(c.course_code))
+        return fetch('api/teacher.php?action=get_course_students&course_code='+encodeURIComponent(c.course_code))
             .then(function(r){return r.json();})
             .then(function(d){ return {code: c.course_code, students: d.students || []}; });
     });
@@ -845,7 +845,7 @@ function loadAttendancePct(){
 function uploadPhoto(input){
     if(!input.files.length) return;
     var fd = new FormData(); fd.append('action','upload_photo'); fd.append('photo',input.files[0]);
-    fetch('/csc2052/api/teacher.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
+    fetch('api/teacher.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
         if(data.status==='success') setAvatar(data.photo_url+'?t='+Date.now());
         else alert('Upload failed: '+(data.message||''));
     }).catch(function(){ alert('Upload failed.'); });
@@ -879,7 +879,7 @@ function saveProfile(){
     var newPw = document.getElementById('edit-new-pw').value;
     if(curPw) fd.append('current_password',curPw);
     if(newPw) fd.append('new_password',newPw);
-    fetch('/csc2052/api/teacher.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
+    fetch('api/teacher.php',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(data){
         if(data.status==='success'){
             msg.innerHTML = '<span class="text-success"><i class="bi bi-check-circle me-1"></i>Saved! Reloading...</span>';
             setTimeout(function(){location.reload();},800);
