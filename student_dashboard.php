@@ -226,7 +226,7 @@ $avatarSrc = $profilePhoto
                         <div class="cam-overlay"><i class="bi bi-camera-fill"></i></div>
             <div class="modal-footer">
                 <button class="btn btn-warning btn-sm w-100 fw-bold" onclick="changePassword()"><i class="bi bi-key me-1"></i>Set Password</button>
-                <button class="btn btn-link text-decoration-underline text-reset ps-0" onclick="window.location.href='/csc2052/logout.php'">Cancel and Logout</button>
+                <button class="btn btn-link text-decoration-underline text-reset ps-0" onclick="window.location.href='logout.php'">Cancel and Logout</button>
             </div>
                     <input type="file" id="edit-photo-upload" class="d-none" accept="image/*" onchange="previewEditPhoto(this)">
                     <div class="small text-muted mt-1">Click to change photo</div>
@@ -288,13 +288,13 @@ function refreshStats() {
 }
 
 function loadCourses() {
-    fetch('/csc2052/api/student.php?action=get_my_courses')
+    fetch('api/student.php?action=get_my_courses')
         .then(r => r.json())
         .then(data => {
             const el = document.getElementById('courses-container');
             if (!data.courses || data.courses.length === 0) {
                 // Check if there are attendance logs but no enrollments
-                fetch('/csc2052/api/student.php?action=get_my_attendance&limit=5')
+                fetch('api/student.php?action=get_my_attendance&limit=5')
                     .then(r => r.json())
                     .then(attData => {
                         if (attData.logs && attData.logs.length > 0) {
@@ -368,7 +368,7 @@ function populateCourseSelect(courses) {
 function loadHistory() {
     const el = document.getElementById('hist-container');
     el.innerHTML = '<div class="text-center py-4"><i class="bi bi-arrow-clockwise spin fs-4"></i></div>';
-    let url = '/csc2052/api/student.php?action=get_my_attendance&limit=' + document.getElementById('h-limit').value;
+    let url = 'api/student.php?action=get_my_attendance&limit=' + document.getElementById('h-limit').value;
     if (document.getElementById('h-course').value) url += '&course_code=' + encodeURIComponent(document.getElementById('h-course').value);
     if (document.getElementById('h-from').value) url += '&date_from=' + encodeURIComponent(document.getElementById('h-from').value);
     if (document.getElementById('h-to').value) url += '&date_to=' + encodeURIComponent(document.getElementById('h-to').value);
@@ -399,7 +399,7 @@ function getCsrf() {
 function uploadPhoto(input) {
     if (!input.files.length) return;
     const fd = new FormData(); fd.append('action', 'upload_my_photo'); fd.append('photo', input.files[0]);
-    fetch('/csc2052/api/student.php', { method: 'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd }).then(r => r.json()).then(data => {
+    fetch('api/student.php', { method: 'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd }).then(r => r.json()).then(data => {
         if (data.status === 'success') setAvatar(data.photo_url + '?t=' + Date.now());
         else alert('Upload failed: ' + (data.message || ''));
     }).catch(() => alert('Upload failed.'));
@@ -429,7 +429,7 @@ function saveProfile() {
     const nw = document.getElementById('edit-new').value;
     if (cur) fd.append('current_password', cur);
     if (nw) fd.append('new_password', nw);
-    fetch('/csc2052/api/student.php', { method: 'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd }).then(r => r.json()).then(data => {
+    fetch('api/student.php', { method: 'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd }).then(r => r.json()).then(data => {
         if (data.status === 'success') { msg.innerHTML = '<span class="text-success"><i class="bi bi-check-circle me-1"></i>Saved! Reloading...</span>'; setTimeout(() => location.reload(), 800); }
         else msg.innerHTML = '<span class="text-danger">' + esc(data.message || 'Failed') + '</span>';
     }).catch(() => { msg.innerHTML = '<span class="text-danger">Network error.</span>'; });
@@ -451,7 +451,7 @@ function changePassword() {
         fd.append('current_password', cur);
     }
     fd.append('new_password', nw);
-    fetch('/csc2052/api/student.php', { method: 'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd }).then(r => r.json()).then(data => {
+    fetch('api/student.php', { method: 'POST', headers: {'X-CSRF-TOKEN': getCsrf()}, body: fd }).then(r => r.json()).then(data => {
         if (data.status === 'success') { msg.innerHTML = '<span class="text-success"><i class="bi bi-check-circle me-1"></i>Updated! Reloading...</span>'; setTimeout(() => location.reload(), 800); }
         else msg.innerHTML = '<span class="text-danger">' + esc(data.message || 'Failed') + '</span>';
     });

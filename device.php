@@ -78,11 +78,11 @@ try {
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Refresh device list"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                             </div>
                         </div>
 
-                        <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-speedometer2 me-1"></i>Live Telemetry</h6>
+                        <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-speedometer2 me-1" aria-hidden="true"></i>Live Telemetry</h6>
                         <div id="esp-telemetry" class="border rounded p-2 bg-light small mb-2">
                             <div class="d-flex justify-content-between border-bottom pb-1 mb-1"><span class="text-muted">WiFi RSSI</span><span id="esp-rssi" class="fw-bold">—</span></div>
                             <div class="d-flex justify-content-between border-bottom pb-1 mb-1"><span class="text-muted">Free Heap</span><span id="esp-heap" class="fw-bold">—</span></div>
@@ -125,7 +125,7 @@ try {
                         </div>
                         <div class="mb-2">
                             <label class="form-label small fw-bold mb-0">Server URL</label>
-                            <input type="text" id="sd-server-url" class="form-control form-control-sm" placeholder="http://10.0.0.5/csc2052">
+                            <input type="text" id="sd-server-url" class="form-control form-control-sm" placeholder="http://10.0.0.5">
                         </div>
                         <div class="mb-2">
                             <label class="form-label small fw-bold mb-0">Encryption Method</label>
@@ -254,11 +254,11 @@ try {
                         <option value="\r\n">Both NL & CR</option>
                         <option value="\r">Carriage return</option>
                     </select>
-                    <button id="btn-sse-connect" class="btn btn-sm btn-success" onclick="toggleSseStream()" title="Live Stream">
-                        <i class="bi bi-play-fill me-1"></i>Connect
+                    <button id="btn-sse-connect" class="btn btn-sm btn-success" onclick="toggleSseStream()" title="Live Stream" aria-label="Connect to serial stream">
+                        <i class="bi bi-play-fill me-1" aria-hidden="true"></i>Connect
                     </button>
                     <span id="sse-status-dot" class="badge bg-secondary" style="font-size:0.65rem;">Idle</span>
-                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear" aria-label="Clear serial monitor"><i class="bi bi-trash" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -414,8 +414,8 @@ try {
             <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center">
                 <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger"></i>Raspberry Pi 3B Control Center</strong>
                 <div class="d-flex align-items-center gap-2">
-                    <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1"></i>Offline</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1" aria-hidden="true"></i>Offline</span>
+                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()" aria-label="Refresh Pi status"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -612,7 +612,7 @@ try {
                                 <tr>
                                     <td class="fw-bold small"><?php echo htmlspecialchars($dev); ?></td>
                                     <td class="small"><?php foreach ($crs as $c): ?><span class="badge bg-info text-dark me-1 mb-1"><?php echo htmlspecialchars($c); ?></span><?php endforeach; ?></td>
-                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')"><i class="bi bi-x"></i></button><?php endforeach; ?></td>
+                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')" aria-label="Remove course <?php echo htmlspecialchars($c); ?> from device"><i class="bi bi-x" aria-hidden="true"></i></button><?php endforeach; ?></td>
                                 </tr><?php endforeach; ?>
                             </tbody>
                         </table>
@@ -754,7 +754,7 @@ function sendEspOta(cmd, targetIp) {
 function parseTelemetry(raw) {
     const el = (id) => document.getElementById(id);
     const d = {};
-    console.log('[Telemetry] Raw:', raw.substring(0, 200));
+
 
     const rawTrimmed = raw.trim();
     if (rawTrimmed.startsWith('{')) {
@@ -787,7 +787,7 @@ function parseTelemetry(raw) {
         console.warn('[Telemetry] No keys parsed. Raw:', raw);
         appendSerial('[WARN] Telemetry response not recognized. Check console for raw data.', 'text-warning');
     } else {
-        console.log('[Telemetry] Parsed keys:', Object.keys(d));
+
     }
 
     const status = d.STATUS || '';

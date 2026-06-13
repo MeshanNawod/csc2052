@@ -64,7 +64,7 @@ async function refreshDeviceList() {
     if (refreshBtn) refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise spin"></i>';
 
     try {
-        const res = await fetch('/csc2052/api/devices.php?action=list');
+        const res = await fetch('api/devices.php?action=list');
         const data = await res.json();
         _discoveredDevices = data.devices || [];
         populateDeviceSelector();
@@ -186,7 +186,7 @@ window.renameDevice = async function(ip, currentName) {
     fd.append('ip', ip);
     fd.append('name', name.trim());
     try {
-        const res = await fetch('/csc2052/api/devices.php?action=rename', { method: 'POST', body: fd });
+        const res = await fetch('api/devices.php?action=rename', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'ok') await refreshDeviceList();
         else alert('Error: ' + data.message);
@@ -198,7 +198,7 @@ window.toggleActionTargetIp = function() {};
 
 // ─── INITIALIZATION ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    const cachedIp = localStorage.getItem('esp_ip_cache');
+    // Relative path correction for session checks if needed
     const ipInput = document.getElementById('esp-ip');
     if (ipInput) {
         if (cachedIp) ipInput.value = cachedIp;
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     restoreLectureTimer();
     // Only start polling logs if we are on a page that displays them (like index.php)
     if (document.getElementById('logs-accordion-container')) {
-        console.log('[Init] Starting logs polling...');
+
         fetchLogs();
         if (typeof fetchTodayAttendance === 'function') fetchTodayAttendance();
         setInterval(() => {
@@ -426,7 +426,7 @@ function logToTerminal(text) {
         terminal.textContent += text + "\n";
         terminal.scrollTop = terminal.scrollHeight;
     } else {
-        console.log(text);
+
     }
 }
 
@@ -481,7 +481,7 @@ async function sendOtaCommand(command) {
             fd.append('device', deviceName);
             fd.append('command', command);
             fd.append('key', OTA_API_KEY);
-            const response = await fetch('/csc2052/api/ota.php', { method: 'POST', body: fd });
+            const response = await fetch('api/ota.php', { method: 'POST', body: fd });
             const data = await response.json();
             logToTerminal("[RX] " + (data.message || data.command || 'Queued'));
         } catch (error) {
@@ -691,7 +691,7 @@ window.restoreLectureTimer = function() {
 // ─── SCHEDULE AUTO-START ────────────────────────────────────────────────
 window.checkScheduleAutoStart = async function() {
     try {
-        const res = await fetch('/csc2052/api/schedule.php?action=auto_start_check');
+        const res = await fetch('api/schedule.php?action=auto_start_check');
         const data = await res.json();
         if (data.status === 'success' && data.schedules && data.schedules.length > 0) {
             const started = JSON.parse(localStorage.getItem('auto_started_schedules') || '{}');
@@ -857,7 +857,7 @@ window.endLectureByDevice = function(deviceIp) {
 // ─── AUTO EMAIL ON COURSE END ────────────────────────────────────────────
 window.triggerEndOfCourseEmail = async function(courseCode) {
     try {
-        const res = await fetch(`/csc2052/api/schedule.php?action=list`);
+        const res = await fetch(`api/schedule.php?action=list`);
         const data = await res.json();
         if (!data.schedules) return;
         
@@ -878,7 +878,7 @@ window.triggerEndOfCourseEmail = async function(courseCode) {
                 emailData.append('date', todayDate);
                 emailData.append('recipient', recipient);
                 
-                const emailRes = await fetch('/csc2052/api/student.php', {
+                const emailRes = await fetch('api/student.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: emailData.toString()
@@ -900,7 +900,7 @@ window.triggerEndOfCourseEmail = async function(courseCode) {
 // ─── AUTO EMAIL FOR LOW ATTENDANCE (< threshold) ─────────────────────────
 window.checkLowAttendanceEmail = async function() {
     try {
-        const res = await fetch(`/csc2052/api/schedule.php?action=list`);
+        const res = await fetch(`api/schedule.php?action=list`);
         const data = await res.json();
         if (!data.schedules) return;
         
@@ -912,7 +912,7 @@ window.checkLowAttendanceEmail = async function() {
             if (sent[key]) continue;
             if (s.auto_start != 1 || s.email_threshold < 1) continue;
             
-            const statsRes = await fetch(`/csc2052/api/analytics.php?action=course_stats&course_code=${encodeURIComponent(s.course_code)}`);
+            const statsRes = await fetch(`/api/analytics.php?action=course_stats&course_code=${encodeURIComponent(s.course_code)}`);
             const stats = await statsRes.json();
             if (!stats.students) continue;
             
@@ -1086,7 +1086,7 @@ window.scanBluetooth = async function() {
 
 async function fetchDeviceSettings() {
     try {
-        const res = await fetch('/csc2052/api/settings.php?device_id=DEFAULT');
+        const res = await fetch('api/settings.php?device_id=DEFAULT');
         const data = await res.json();
         if (data && !data.error) {
             document.getElementById('set_fp_power').checked = (data.fp_power == 1);
@@ -1128,7 +1128,7 @@ window.saveDeviceSettings = async function() {
 
     try {
         logToTerminal('\n> TX: Saving Device Settings to DB...');
-        const res = await fetch('/csc2052/api/settings.php', { method: 'POST', body: fd });
+        const res = await fetch('api/settings.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success' || data.status === 'warning') {
             logToTerminal('[DB] ' + (data.status === 'success' ? 'Settings saved.' : 'Warning: ' + data.message));
@@ -1228,7 +1228,7 @@ window.markManualAttendance = async function() {
     }
     
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const result = await res.json();
         if (result.status === 'success') {
             document.getElementById('manual-student-no').value = '';
@@ -1276,7 +1276,7 @@ window.searchStudentName = debounce(function(val) {
 // ─── LOGS AND ANALYTICS ────────────────────────────────────────────
 async function loadCourseDatalist() {
     try {
-        const res = await fetch('/csc2052/api/logs.php?action=get_courses');
+        const res = await fetch('api/logs.php?action=get_courses');
         const courses = await res.json();
         if (courses && courses.length > 0) {
             let html = '<datalist id="course-datalist">';
@@ -1295,7 +1295,7 @@ async function loadCourseDatalist() {
 
 async function refreshAllCourseDropdowns() {
     try {
-        const res = await fetch('/csc2052/api/student.php?action=get_all_courses');
+        const res = await fetch('api/student.php?action=get_all_courses');
         if (!res.ok) { console.warn('[Courses] API returned', res.status); return; }
         const ct = res.headers.get('content-type') || '';
         if (!ct.includes('application/json')) { console.warn('[Courses] Non-JSON response'); return; }
@@ -1374,7 +1374,7 @@ async function refreshAllCourseDropdowns() {
 
 async function refreshDeviceDropdown() {
     try {
-        const res = await fetch('/csc2052/api/devices.php?action=list');
+        const res = await fetch('api/devices.php?action=list');
         const data = await res.json();
         if (!data || !data.devices) return;
 
@@ -1423,7 +1423,7 @@ async function fetchLogs() {
     const device = document.getElementById('filter-device')?.value || '';
     
     try {
-        const url = `/csc2052/api/logs.php?action=fetch_logs&student_no=${encodeURIComponent(studentNo)}&course_code=${encodeURIComponent(course)}&date_from=${encodeURIComponent(dateFrom)}&date_to=${encodeURIComponent(dateTo)}&device=${encodeURIComponent(device)}`;
+        const url = `/api/logs.php?action=fetch_logs&student_no=${encodeURIComponent(studentNo)}&course_code=${encodeURIComponent(course)}&date_from=${encodeURIComponent(dateFrom)}&date_to=${encodeURIComponent(dateTo)}&device=${encodeURIComponent(device)}`;
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 10000);
         const response = await fetch(url, { credentials: 'same-origin', cache: 'no-store', signal: controller.signal });
@@ -1432,7 +1432,7 @@ async function fetchLogs() {
         if (!response.ok) {
             console.error('[Logs] HTTP ' + response.status);
             if (response.status === 401 || response.status === 403 || response.status === 302) {
-                container.innerHTML = '<div class="text-center text-danger py-4"><em>Session expired. Please <a href="/csc2052/login.php">login again</a>.</em></div>';
+                container.innerHTML = '<div class="text-center text-danger py-4"><em>Session expired. Please <a href="login.php">login again</a>.</em></div>';
             } else if (response.status === 500) {
                 const errText = await response.text().catch(() => '');
                 console.error('[Logs] Server error:', errText);
@@ -1447,7 +1447,7 @@ async function fetchLogs() {
             const body = await response.text().catch(() => '');
             console.error('[Logs] Non-JSON response (', response.status, '):', body.substring(0, 300));
             if (body.toLowerCase().includes('login') || body.toLowerCase().includes('session') || response.redirected) {
-                container.innerHTML = '<div class="text-center text-danger py-4"><em>Session expired. Please <a href="/csc2052/login.php">login again</a>.</em></div>';
+                container.innerHTML = '<div class="text-center text-danger py-4"><em>Session expired. Please <a href="login.php">login again</a>.</em></div>';
             } else {
                 container.innerHTML = '<div class="text-center text-danger py-4"><em>Invalid server response. Press F12 and check Console for errors.</em></div>';
             }
@@ -1679,7 +1679,7 @@ window.downloadGroupCSV = async function(course, date, timeBlock) {
     }
     
     try {
-        const url = `/csc2052/api/logs.php?action=fetch_logs&student_no=&course_code=${encodeURIComponent(course)}&date_from=${encodeURIComponent(dateFrom)}&date_to=${encodeURIComponent(dateTo)}&device=`;
+        const url = `/api/logs.php?action=fetch_logs&student_no=&course_code=${encodeURIComponent(course)}&date_from=${encodeURIComponent(dateFrom)}&date_to=${encodeURIComponent(dateTo)}&device=`;
         const response = await fetch(url);
         if (!response.ok) return;
         let logs = await response.json();
@@ -1764,7 +1764,7 @@ window.calculateCourseAnalytics = async function() {
     container.classList.remove('d-none');
     
     try {
-        const res = await fetch(`/csc2052/api/analytics.php?action=course_stats&course_code=${encodeURIComponent(course)}`);
+        const res = await fetch(`/api/analytics.php?action=course_stats&course_code=${encodeURIComponent(course)}`);
         const data = await res.json();
         
         countSpan.textContent = data.total;
@@ -1833,7 +1833,7 @@ window.getAbsentStudents = async function() {
     results.classList.remove('d-none');
     
     try {
-        const res = await fetch(`/csc2052/api/student.php?action=get_absent_students&course_code=${encodeURIComponent(course)}&date=${encodeURIComponent(date)}`);
+        const res = await fetch(`/api/student.php?action=get_absent_students&course_code=${encodeURIComponent(course)}&date=${encodeURIComponent(date)}`);
         const data = await res.json();
         
         if (data.status === 'success') {
@@ -1901,7 +1901,7 @@ window.updateSelectedCount = function(section) {
 
 window.loadEmailConfig = async function() {
     try {
-        const res = await fetch('/csc2052/api/student.php?action=get_email_config');
+        const res = await fetch('api/student.php?action=get_email_config');
         const data = await res.json();
         if (data.status === 'success') {
             const emailInput = document.getElementById('user-sender-email');
@@ -1968,7 +1968,7 @@ window.saveEmailConfig = async function() {
         fd.append('smtp_host', smtpHost);
         fd.append('recipient', recipient || '');
         
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: fd.toString() });
+        const res = await fetch('api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: fd.toString() });
         const data = await res.json();
         
         if (data.status === 'success') {
@@ -2015,7 +2015,7 @@ window.sendAbsentEmailReport = async function() {
         if (senderPassword) formData.append('sender_password', senderPassword);
         if (smtpHost) formData.append('smtp_host', smtpHost);
         
-        const res = await fetch('/csc2052/api/student.php', {
+        const res = await fetch('api/student.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: formData.toString()
@@ -2064,7 +2064,7 @@ window.sendSingleAbsentEmail = async function(stuNo, stuName, course) {
     if (smtpHost) formData.append('smtp_host', smtpHost);
     
     try {
-        const res = await fetch('/csc2052/api/student.php', {
+        const res = await fetch('api/student.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: formData.toString()
@@ -2109,7 +2109,7 @@ window.sendSingleAnalyticsEmail = async function(stuNo, stuName, pct, course) {
     if (smtpHost) formData.append('smtp_host', smtpHost);
     
     try {
-        const res = await fetch('/csc2052/api/student.php', {
+        const res = await fetch('api/student.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: formData.toString()
@@ -2164,7 +2164,7 @@ window.sendSelectedAbsentEmails = async function() {
         if (smtpHost) formData.append('smtp_host', smtpHost);
         
         try {
-            const res = await fetch('/csc2052/api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
+            const res = await fetch('api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
             const data = await res.json();
             if (data.status === 'success') sent++;
         } catch (e) {}
@@ -2215,7 +2215,7 @@ window.sendSelectedAnalyticsEmails = async function() {
         if (smtpHost) formData.append('smtp_host', smtpHost);
         
         try {
-            const res = await fetch('/csc2052/api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
+            const res = await fetch('api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
             const data = await res.json();
             if (data.status === 'success') sent++;
         } catch (e) {}
@@ -2264,7 +2264,7 @@ window.sendAnalyticsBulkEmail = async function() {
         if (smtpHost) formData.append('smtp_host', smtpHost);
         
         try {
-            const res = await fetch('/csc2052/api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
+            const res = await fetch('api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
             const data = await res.json();
             if (data.status === 'success') sent++;
         } catch (e) {}
@@ -2369,7 +2369,7 @@ window.sendCustomEmails = async function() {
             if (smtpHost) formData.append('smtp_host', smtpHost);
             
             try {
-                const res = await fetch('/csc2052/api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
+                const res = await fetch('api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
                 const data = await res.json();
                 if (data.status === 'success') sent++;
             } catch (e) {}
@@ -2386,7 +2386,7 @@ window.sendCustomEmails = async function() {
         if (smtpHost) formData.append('smtp_host', smtpHost);
         
         try {
-            const res = await fetch('/csc2052/api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
+            const res = await fetch('api/student.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData.toString() });
             const data = await res.json();
             if (data.status === 'success') sent = 1;
         } catch (e) {}
@@ -2404,7 +2404,7 @@ window.loadEmailLogs = async function() {
     if (!container) return;
     
     const filter = document.getElementById('email-log-filter')?.value || 'all';
-    const url = filter !== 'all' ? `/csc2052/api/student.php?action=get_email_logs&message_type=${filter}` : '/csc2052/api/student.php?action=get_email_logs';
+    const url = filter !== 'all' ? `/api/student.php?action=get_email_logs&message_type=${filter}` : 'api/student.php?action=get_email_logs';
     
     try {
         const res = await fetch(url);
@@ -2454,7 +2454,7 @@ window.addStudentName = async function() {
     fd.append('student_no', stuNo);
     fd.append('student_name', full);
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             document.getElementById('add-name-stuno').value = '';
@@ -2476,7 +2476,7 @@ window.uploadStudentCSV = async function() {
     fd.append('csv_file', fileInput.files[0]);
     
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             alert(data.message);
@@ -2507,7 +2507,7 @@ window.triggerEnroll = async function() {
         formData.append('student_no', studentNo);
         formData.append('student_name', studentName);
         formData.append('finger_id', fId);
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             sendOtaCommand('ENROLL ' + fId);
@@ -2537,7 +2537,7 @@ window.triggerEnrollRfid = async function() {
         formData.append('student_no', studentNo);
         formData.append('student_name', studentName);
         formData.append('rfid_uid', rfidUid);
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             const displayName = studentName || studentNo;
@@ -2566,7 +2566,7 @@ window.triggerEnrollFace = async function() {
         formData.append('student_no', studentNo);
         formData.append('student_name', studentName);
         formData.append('face_id', faceId);
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             const displayName = studentName || studentNo;
@@ -2613,7 +2613,7 @@ window.updateStudentProfile = async function() {
     if (faceId) fd.append('face_id', faceId);
     
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             showToast(data.message || 'Profile updated', 'success');
@@ -2639,7 +2639,7 @@ function speakVoice(text) {
 
 window.autoFindRfid = async function(inputId) {
     try {
-        const res = await fetch('/csc2052/api/rfid_scanned.php?action=consume');
+        const res = await fetch('api/rfid_scanned.php?action=consume');
         const data = await res.json();
         if (data.status === 'success') {
             document.getElementById(inputId).value = data.uid;
@@ -2653,7 +2653,7 @@ window.autoFindRfid = async function(inputId) {
 
 window.autoFindFace = async function(inputId) {
     try {
-        const res = await fetch('/csc2052/api/face_scanned.php?action=consume');
+        const res = await fetch('api/face_scanned.php?action=consume');
         const data = await res.json();
         if (data.status === 'success') {
             document.getElementById(inputId).value = data.face_id;
@@ -2682,7 +2682,7 @@ window.triggerAdminEnroll = async function() {
         formData.append('action', 'link_admin');
         formData.append('admin_name', adminName);
         formData.append('finger_id', fId);
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             sendOtaCommand('ENROLL ' + fId);
@@ -2708,7 +2708,7 @@ window.triggerAdminEnrollRfid = async function() {
         formData.append('action', 'link_admin_rfid');
         formData.append('admin_name', adminName);
         formData.append('rfid_uid', rfidUid);
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             alert("Admin RFID mapped successfully!");
@@ -2734,7 +2734,7 @@ window.triggerAdminEnrollFace = async function() {
         formData.append('action', 'link_admin_face');
         formData.append('admin_name', adminName);
         formData.append('face_id', faceId);
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             alert("Admin Face mapped successfully!");
@@ -2760,7 +2760,7 @@ window.uploadFaceDataset = async function() {
     }
     
     try {
-        const res = await fetch('/csc2052/api/upload_faces.php', { method: 'POST', body: formData });
+        const res = await fetch('api/upload_faces.php', { method: 'POST', body: formData });
         const result = await res.json();
         if (result.status === 'success') {
             alert(`Uploaded ${result.count} images successfully.\n${result.message}`);
@@ -2778,7 +2778,7 @@ window.deleteStudentMap = async function(studentNo) {
         const formData = new FormData();
         formData.append('action', 'delete_student');
         formData.append('student_no', studentNo);
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             alert(data.message);
@@ -2794,7 +2794,7 @@ window.bulkDeleteTemplates = async function() {
     try {
         const formData = new FormData();
         formData.append('action', 'bulk_delete_students');
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: formData });
+        const res = await fetch('api/student.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.status === 'success') {
             alert(data.message);
@@ -2871,7 +2871,7 @@ async function pollRfidFill() {
     const rfidInput = document.getElementById('enroll-rfid');
     if (rfidInput && rfidInput.offsetParent !== null && !isCommandActive) { 
         try {
-            const res = await fetch('/csc2052/api/rfid_scanned.php?action=consume');
+            const res = await fetch('api/rfid_scanned.php?action=consume');
             if (!res.ok) return;
             const data = await res.json();
             if (data && data.status === 'success' && data.uid) {
@@ -2937,7 +2937,7 @@ window.sendOtaCommandRpi = async function(cmd) {
         fd.append('device', deviceName);
         fd.append('command', cmd);
         fd.append('key', 'ss_hw_api_key_2052');
-        const res = await fetch('/csc2052/api/ota.php', { method: 'POST', body: fd });
+        const res = await fetch('api/ota.php', { method: 'POST', body: fd });
         const data = await res.json();
         logToTerminalRpi('[RPi RX] ' + (data.message || data.command || 'Queued'));
     } catch(e) {
@@ -3059,7 +3059,7 @@ window.downloadSdConfigFromForm = function() {
     const ssid = document.getElementById('sd-wifi-ssid')?.value?.trim();
     if (!ssid) { alert('Enter WiFi SSID.'); return; }
     const pass = document.getElementById('sd-wifi-pass')?.value?.trim() || '';
-    const serverUrl = document.getElementById('sd-server-url')?.value?.trim() || 'http://10.0.0.5/csc2052';
+    const serverUrl = document.getElementById('sd-server-url')?.value?.trim() || 'http://10.0.0.5';
     const method = document.getElementById('sd-enc-method')?.value || 'plaintext';
     const token = document.getElementById('sd-enc-token')?.value?.trim() || '';
     if ((method === 'hmac' || method === 'aes') && !token) { alert('Enter a Secret Token for ' + method + ' mode.'); return; }
@@ -3080,7 +3080,7 @@ window.downloadSdConfig = function() {
     const ssid = prompt('Enter WiFi SSID:', 'Card ekak daganin bn');
     if (!ssid) return;
     const pass = prompt('Enter WiFi Password:', '');
-    const serverUrl = prompt('Enter Server URL (full path):', 'http://' + ip + '/csc2052');
+    const serverUrl = prompt('Enter Server URL (full path):', 'http://' + ip + '');
     if (!serverUrl) return;
     const method = prompt('Encryption Method (plaintext/hmac/aes):', 'hmac');
     if (!method) return;
@@ -3171,7 +3171,7 @@ SENTINEL SWARM - ESP32 Node Setup Guide
    c. You will be prompted for:
       - Device Name (e.g. ESP32-Lab1)
       - WiFi SSID and Password
-      - Server URL (full path like http://10.0.0.5/csc2052)
+      - Server URL (full path like http://10.0.0.5)
       - Encryption Method: plaintext, hmac, or aes
       - Secret Token (for HMAC/AES authentication)
    d. Save as config.txt on root of microSD card (FAT32)
@@ -3236,7 +3236,7 @@ window.assignCourseToDevice = async function() {
     fd.append('course_code', code);
 
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             showToast(data.message, 'success');
@@ -3256,7 +3256,7 @@ window.removeDeviceCourse = async function(device, code) {
     fd.append('course_code', code);
 
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             showToast(data.message, 'success');
@@ -3282,7 +3282,7 @@ window.addCourse = async function() {
     fd.append('course_name', name);
 
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             msg.innerHTML = '<span class="text-success">' + escapeHtml(data.message) + '</span>';
@@ -3303,7 +3303,7 @@ window.deleteCourse = async function(code) {
     fd.append('course_code', code);
 
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             showToast(data.message, 'success');
@@ -3328,7 +3328,7 @@ window.enrollStudentCourse = async function() {
     fd.append('course_code', code);
 
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             msg.innerHTML = '<span class="text-success">' + escapeHtml(data.message) + '</span>';
@@ -3359,7 +3359,7 @@ window.bulkEnrollCourseCSV = async function() {
     fd.append('csv_file', file);
 
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             log.innerHTML = '<span class="text-success"><i class="bi bi-check-circle me-1"></i>' + escapeHtml(data.message) + '</span>';
@@ -3378,7 +3378,7 @@ window.lookupStudentCourses = async function() {
 
     result.innerHTML = '<span class="text-muted"><i class="bi bi-arrow-repeat spin me-1"></i>Loading...</span>';
     try {
-        const res = await fetch('/csc2052/api/student.php?action=get_student_courses&student_no=' + encodeURIComponent(stuNo));
+        const res = await fetch('api/student.php?action=get_student_courses&student_no=' + encodeURIComponent(stuNo));
         const data = await res.json();
         if (data.status === 'success' && data.courses.length > 0) {
             let html = '<strong>Enrolled Courses for ' + escapeHtml(stuNo) + ':</strong><ul class="mb-0 mt-1">';
@@ -3405,7 +3405,7 @@ window.unenrollStudentCourse = async function(stuNo, code) {
     fd.append('course_code', code);
 
     try {
-        const res = await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+        const res = await fetch('api/student.php', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'success') {
             showToast(data.message, 'success');
@@ -3462,7 +3462,7 @@ window.triggerRpiOta = async function() {
     if (!ip) { alert('Enter Pi IP address.'); return; }
 
     try {
-        const res = await fetch('/csc2052/api/ota.php?action=poll&device=rpi');
+        const res = await fetch('api/ota.php?action=poll&device=rpi');
         const data = await res.json();
         if (data.status === 'success' && data.commands) {
             const postRes = await fetch(`http://${ip}:5000/api/ota`, {
@@ -3511,7 +3511,7 @@ window.startRpiAttendance = async function() {
                     fd.append('modality', 'rpi_face');
                     const course = window.activeWebCourse || document.getElementById('start-course-input')?.value.trim();
                     if (course) fd.append('course_code', course);
-                    await fetch('/csc2052/api/student.php', { method: 'POST', body: fd });
+                    await fetch('api/student.php', { method: 'POST', body: fd });
                 }
 
                 const mute = document.getElementById('rpi-attendance-mute')?.checked;
@@ -3607,7 +3607,7 @@ window.registerNewDevice = async function() {
         fd.append('ip', ip);
         fd.append('name', name);
         fd.append('type', type);
-        const res = await fetch('/csc2052/api/devices.php?action=register', { method: 'POST', body: fd });
+        const res = await fetch('api/devices.php?action=register', { method: 'POST', body: fd });
         const data = await res.json();
         if (data.status === 'ok') {
             showToast('Device registered!', 'success');
