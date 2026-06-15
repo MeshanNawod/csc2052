@@ -216,8 +216,8 @@ $editAvatarHtml = $profilePhoto
                 <input type="number" id="start-timer-custom" class="form-control form-control-sm mt-1" placeholder="Minutes" min="1" max="480" style="display:none;">
             </div>
             <div class="col-sm-3 d-flex align-items-end gap-1">
-                <button class="btn btn-success fw-bold w-100 py-2" id="btn-start" onclick="startLecture()"><i class="bi bi-play-fill me-1"></i>Start</button>
-                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" aria-label="End lecture" style="display:none;"><i class="bi bi-stop-fill"></i></button>
+                <button class="btn btn-success fw-bold w-100 py-2" id="btn-start" onclick="startLecture()"><i aria-hidden="true" class="bi bi-play-fill me-1"></i>Start</button>
+                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" aria-label="End lecture" style="display:none;"><i aria-hidden="true" class="bi bi-stop-fill"></i></button>
             </div>
         </div>
         <div class="form-check form-switch mt-2 justify-content-center d-flex">
@@ -397,6 +397,11 @@ $editAvatarHtml = $profilePhoto
 <script>
 const MY_COURSES = <?php echo $courseData; ?>;
 const DEVICES = <?php echo $devicesJson; ?>;
+
+function getCsrf() {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta ? meta.content : '';
+}
 
 function setAvatar(src) {
     ['profile-img','edit-photo-preview'].forEach(function(id) {
@@ -583,26 +588,6 @@ function endLecture(){
         .then(function(data){
             if(data.status==='success'){
                 msg.innerHTML = '<span class="text-success fw-bold"><i class="bi bi-check-circle me-1"></i>Ended '+esc(course)+'</span>';
-                document.getElementById('btn-start').style.display = '';
-                document.getElementById('btn-end').style.display = 'none';
-            } else msg.innerHTML = '<span class="text-danger">'+esc(data.message||'Failed')+'</span>';
-        })
-        .catch(function(){ msg.innerHTML = '<span class="text-danger">Network error.</span>'; });
-}
-
-function endLecture(){
-    var course = document.getElementById('start-course').value;
-    if (!course){ alert('Select the course to end.'); return; }
-    if (!confirm('End lecture for '+course+'?')) return;
-    var msg = document.getElementById('start-msg');
-    msg.innerHTML = '<span class="text-primary"><i class="bi bi-arrow-clockwise spin me-1"></i>Ending...</span>';
-
-    var fd = new FormData(); fd.append('action','end_course_session'); fd.append('course_code',course);
-    fetch('/csc2052/api/teacher.php',{method:'POST',body:fd})
-        .then(function(r){return r.json();})
-        .then(function(data){
-            if(data.status==='success'){
-                msg.innerHTML = '<span class="text-danger fw-bold"><i class="bi bi-stop-circle me-1"></i>Ended '+esc(course)+'</span>';
                 document.getElementById('btn-start').style.display = '';
                 document.getElementById('btn-end').style.display = 'none';
             } else msg.innerHTML = '<span class="text-danger">'+esc(data.message||'Failed')+'</span>';

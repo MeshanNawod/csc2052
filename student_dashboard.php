@@ -97,7 +97,7 @@ $avatarSrc = $profilePhoto
                 <input type="hidden" id="pw-cur" value="<?php echo htmlspecialchars($studentNo); ?>">
                 <div class="mb-2"><label class="form-label small fw-bold">New Password</label><input type="password" id="pw-new" class="form-control form-control-sm" minlength="6"></div>
                 <div class="mb-2"><label class="form-label small fw-bold">Confirm</label><input type="password" id="pw-conf" class="form-control form-control-sm" minlength="6"></div>
-                <button class="btn btn-warning btn-sm w-100 fw-bold" onclick="changePassword()"><i class="bi bi-key me-1"></i>Set Password</button>
+                <button class="btn btn-warning btn-sm w-100 fw-bold" onclick="changePassword()"><i aria-hidden="true" class="bi bi-key me-1"></i>Set Password</button>
             </div>
         </div>
     </div>
@@ -128,7 +128,7 @@ $avatarSrc = $profilePhoto
             <?php if ($faceId): ?> &bull; <i class="bi bi-person-bounding-box me-1"></i>Face Enrolled<?php endif; ?></p>
         </div>
         <div class="col-auto">
-            <button class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil me-1"></i>Edit Profile</button>
+            <button class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#editModal"><i aria-hidden="true" class="bi bi-pencil me-1"></i>Edit Profile</button>
         </div>
     </div>
 </div>
@@ -174,8 +174,8 @@ $avatarSrc = $profilePhoto
 </div>
 
 <ul class="nav nav-tabs mb-3" id="stuTabs" role="tablist">
-    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-courses"><i class="bi bi-book me-1"></i>My Courses</button></li>
-    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-history"><i class="bi bi-clock-history me-1"></i>Attendance History</button></li>
+    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-courses"><i aria-hidden="true" class="bi bi-book me-1"></i>My Courses</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-history"><i aria-hidden="true" class="bi bi-clock-history me-1"></i>Attendance History</button></li>
 </ul>
 
 <div class="tab-content">
@@ -239,7 +239,7 @@ $avatarSrc = $profilePhoto
             </div>
             <div class="modal-footer py-2">
                 <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-success btn-sm fw-semibold" onclick="saveProfile()"><i class="bi bi-check-lg me-1"></i>Save</button>
+                <button class="btn btn-success btn-sm fw-semibold" onclick="saveProfile()"><i aria-hidden="true" class="bi bi-check-lg me-1"></i>Save</button>
             </div>
         </div>
     </div>
