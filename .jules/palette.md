@@ -7,3 +7,6 @@
 ## 2024-05-28 - Missing ARIA Labels on Icon-only Buttons
 **Learning:** Found an app-wide pattern where icon-only action buttons (like Delete, Edit, Download) rely exclusively on the `title` attribute. While `title` gives a tooltip, it doesn't consistently announce to screen readers.
 **Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
+## 2024-06-03 - More Missing ARIA Labels on Icon-only Buttons
+**Learning:** Found more icon-only action buttons (like Delete, Edit, Download, Refresh, Probe) in `device.php` (both static HTML and dynamically generated JS strings) without explicit `aria-label`s.
+**Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
