@@ -7,3 +7,6 @@
 ## 2024-05-28 - Missing ARIA Labels on Icon-only Buttons
 **Learning:** Found an app-wide pattern where icon-only action buttons (like Delete, Edit, Download) rely exclusively on the `title` attribute. While `title` gives a tooltip, it doesn't consistently announce to screen readers.
 **Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
+## 2026-06-17 - Dynamic Element Accessibility
+**Learning:** JavaScript template literals generating HTML must also be scrutinized for accessibility, as static HTML analysis will miss them.
+**Action:** Always search for `<button` within JS/TS files to find dynamically generated UI elements that may be missing `aria-label` and `aria-hidden` attributes on interior icons.
