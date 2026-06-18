@@ -30,13 +30,13 @@ try {
             <div class="card-body p-0">
                 <ul class="nav nav-tabs bg-light px-3 pt-2 border-bottom" id="courseTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active fw-semibold" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses" type="button" role="tab"><i class="bi bi-book me-1"></i>Courses</button>
+                        <button class="nav-link active fw-semibold" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses" type="button" role="tab"><i class="bi bi-book me-1" aria-hidden="true"></i>Courses</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link fw-semibold" id="manager-tab" data-bs-toggle="tab" data-bs-target="#tab-manager" type="button" role="tab" onclick="loadCourseManager()"><i class="bi bi-folder2-open me-1"></i>Course Manager</button>
+                        <button class="nav-link fw-semibold" id="manager-tab" data-bs-toggle="tab" data-bs-target="#tab-manager" type="button" role="tab" onclick="loadCourseManager()"><i class="bi bi-folder2-open me-1" aria-hidden="true"></i>Course Manager</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link fw-semibold" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#tab-schedule" type="button" role="tab" onclick="loadSchedules()"><i class="bi bi-calendar-week me-1"></i>Weekly Schedule</button>
+                        <button class="nav-link fw-semibold" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#tab-schedule" type="button" role="tab" onclick="loadSchedules()"><i class="bi bi-calendar-week me-1" aria-hidden="true"></i>Weekly Schedule</button>
                     </li>
                 </ul>
                 <div class="tab-content p-3" id="courseTabsContent">
@@ -46,10 +46,10 @@ try {
                             <div class="col-md-5 border-end pe-md-4">
                                 <h6 class="text-muted fw-bold mb-2"><i class="bi bi-plus-circle me-1"></i>Add New Course</h6>
                                 <div class="input-group mb-2">
-                                    <span class="input-group-text bg-white"><i class="bi bi-tag text-primary"></i></span>
+                                    <span class="input-group-text bg-white"><i class="bi bi-tag text-primary" aria-hidden="true"></i></span>
                                     <input type="text" id="new-course-code" class="form-control" placeholder="Course Code (e.g. PHY1911)">
                                     <input type="text" id="new-course-name" class="form-control" placeholder="Course Name (Optional)">
-                                    <button class="btn btn-primary fw-semibold" onclick="addCourse()"><i class="bi bi-plus-lg me-1"></i>Add</button>
+                                    <button class="btn btn-primary fw-semibold" onclick="addCourse()"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Add</button>
                                 </div>
                                 <div id="course-add-msg" class="small mb-2 min-h-xs"></div>
 
@@ -60,7 +60,7 @@ try {
                                             <?php foreach ($courses as $c): ?>
                                             <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                                 <span><strong><?php echo htmlspecialchars($c['course_code']); ?></strong><?php if (!empty($c['course_name'])): ?> - <span class="text-muted"><?php echo htmlspecialchars($c['course_name']); ?></span><?php endif; ?></span>
-                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg"></i></button>
+                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                             </li>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -82,7 +82,7 @@ try {
                                         </select>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg"></i></button>
+                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div id="course-enroll-msg" class="small mb-2 min-h-xs"></div>
@@ -92,9 +92,9 @@ try {
                                     <div class="card-body p-2">
                                         <p class="small text-muted mb-2"><i class="bi bi-info-circle me-1"></i>Name the CSV file after the course code, e.g. <code>MAT3063.csv</code> or <code>PHY1911.csv</code>. Each row: <strong>Student No</strong>, <strong>Name</strong> (name column optional).</p>
                                         <div class="input-group input-group-sm">
-                                            <span class="input-group-text bg-white"><i class="bi bi-upload text-primary"></i></span>
+                                            <span class="input-group-text bg-white"><i class="bi bi-upload text-primary" aria-hidden="true"></i></span>
                                             <input type="file" id="course-bulk-csv" class="form-control" accept=".csv">
-                                            <button class="btn btn-primary fw-semibold" onclick="bulkEnrollCourseCSV()"><i class="bi bi-person-plus me-1"></i>Enroll All</button>
+                                            <button class="btn btn-primary fw-semibold" onclick="bulkEnrollCourseCSV()"><i class="bi bi-person-plus me-1" aria-hidden="true"></i>Enroll All</button>
                                         </div>
                                         <div id="course-bulk-log" class="small mt-2 min-h-xs"></div>
                                     </div>
@@ -112,8 +112,8 @@ try {
 
                     <div class="tab-pane fade" id="tab-manager" role="tabpanel">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="text-muted fw-bold mb-0"><i class="bi bi-folder2-open me-1"></i>Course Manager</h6>
-                            <button class="btn btn-sm btn-outline-primary fw-semibold" onclick="loadCourseManager()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+                                <h6 class="text-muted fw-bold mb-0"><i class="bi bi-folder2-open me-1" aria-hidden="true"></i>Course Manager</h6>
+                                <button class="btn btn-sm btn-outline-primary fw-semibold" onclick="loadCourseManager()"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
                         </div>
                         <div id="course-manager-container">
                             <div class="text-center py-4 text-muted"><i class="bi bi-arrow-clockwise spin me-1"></i>Loading courses...</div>
@@ -124,8 +124,8 @@ try {
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted fw-bold mb-0"><i class="bi bi-calendar-week me-1"></i>Weekly Course Schedule</h6>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-success fw-semibold" onclick="loadSchedules()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
-                                <button class="btn btn-sm btn-success fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleModal"><i class="bi bi-plus-lg me-1"></i>Add Time Slot</button>
+                                <button class="btn btn-sm btn-outline-success fw-semibold" onclick="loadSchedules()"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
+                                <button class="btn btn-sm btn-success fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleModal"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Add Time Slot</button>
                             </div>
                         </div>
                         <div id="timetable-container" class="table-responsive">
@@ -164,7 +164,7 @@ try {
                             <span class="input-group-text bg-white"><i class="bi bi-person-badge text-primary"></i></span>
                             <input type="text" id="enroll-student-no" class="form-control border-end-0" placeholder="Student No">
                             <input type="text" id="enroll-student-name" class="form-control w-50" placeholder="Student Name (Optional)">
-                            <button class="btn btn-outline-primary fw-semibold" onclick="updateStudentProfile()"><i class="bi bi-save me-1"></i>Update</button>
+                            <button class="btn btn-outline-primary fw-semibold" onclick="updateStudentProfile()"><i class="bi bi-save me-1" aria-hidden="true"></i>Update</button>
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-fingerprint text-primary"></i></span>
@@ -176,7 +176,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-credit-card text-info"></i></span>
                             <input type="text" id="enroll-rfid" class="form-control" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan" aria-label="Auto find latest RFID scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-info text-white fw-semibold" onclick="triggerEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
@@ -184,7 +184,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-person-bounding-box text-warning"></i></span>
                             <input type="text" id="enroll-face" class="form-control" placeholder="Face Profile ID">
-                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan" aria-label="Auto find latest face scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-warning text-white fw-semibold" onclick="triggerEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -236,7 +236,7 @@ try {
                                 <video id="web-enroll-video" autoplay muted playsinline class="w-100 rounded bg-dark mb-2" style="height: auto; display: block;"></video>
                                 <div id="web-enroll-status" class="small fw-bold mb-2"></div>
                                 <div class="d-flex gap-2">
-                                    <button id="btn-capture-enroll" class="btn btn-success flex-grow-1 fw-bold d-none"><i class="bi bi-camera me-1"></i>Capture Face</button>
+                                    <button id="btn-capture-enroll" class="btn btn-success flex-grow-1 fw-bold d-none"><i class="bi bi-camera me-1" aria-hidden="true"></i>Capture Face</button>
                                     <button id="btn-cancel-enroll" class="btn btn-secondary flex-grow-1 fw-bold d-none">Cancel</button>
                                 </div>
                             </div>
@@ -257,16 +257,16 @@ try {
                             </div>
                         </div>
                         <div class="input-group input-group-sm mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-person-plus text-primary"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-person-plus text-primary" aria-hidden="true"></i></span>
                             <input type="text" id="add-name-stuno" class="form-control" placeholder="Stu No">
                             <input type="text" id="add-name-full" class="form-control w-50" placeholder="Full Name">
-                            <button class="btn btn-outline-primary fw-semibold" onclick="addStudentName()"><i class="bi bi-save me-1"></i>Add</button>
+                            <button class="btn btn-outline-primary fw-semibold" onclick="addStudentName()"><i class="bi bi-save me-1" aria-hidden="true"></i>Add</button>
                         </div>
                         
                         <div class="input-group input-group-sm mb-4">
-                            <span class="input-group-text bg-white"><i class="bi bi-file-earmark-spreadsheet text-success"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-file-earmark-spreadsheet text-success" aria-hidden="true"></i></span>
                             <input type="file" id="csv-upload-file" class="form-control" accept=".csv">
-                            <button class="btn btn-outline-success fw-semibold" onclick="uploadStudentCSV()"><i class="bi bi-upload me-1"></i>Import CSV</button>
+                            <button class="btn btn-outline-success fw-semibold" onclick="uploadStudentCSV()"><i class="bi bi-upload me-1" aria-hidden="true"></i>Import CSV</button>
                         </div>
                     </div>
                 </div>
@@ -412,10 +412,10 @@ try {
                                     </td>
                                     <td class="text-end pe-3">
                                         <div class="btn-group shadow-sm">
-                                            <button onclick="editStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['student_name'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['fingerprint_id'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['rfid_uid'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['face_id'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-info" title="Edit Student Details" aria-label="Edit Student Details"><i class="bi bi-pencil-square" aria-hidden="true"></i></button>
-                                            <button onclick="pushTemplateToDevice('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>',<?php echo ($st['fingerprint_id'] ? (int)$st['fingerprint_id'] : 0); ?>)" class="btn btn-sm btn-light border text-primary" title="Push Finger to ESP" aria-label="Push Finger to ESP" <?php echo empty($st['fingerprint_id']) ? 'disabled' : ''; ?>><i class="bi bi-cloud-arrow-up" aria-hidden="true"></i></button>
-                                            <a href="download_template.php?student_no=<?php echo urlencode($st['student_no']); ?>" class="btn btn-sm btn-light border text-success" title="Download Fingerprint" aria-label="Download Fingerprint" <?php echo empty($st['fingerprint_id']) ? 'style="pointer-events: none; opacity: 0.5;"' : ''; ?>><i class="bi bi-download" aria-hidden="true"></i></a>
-                                            <button onclick="deleteStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-danger" title="Delete Match" aria-label="Delete Match"><i class="bi bi-trash" aria-hidden="true"></i></button>
+                                            <button onclick="editStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['student_name'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['fingerprint_id'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['rfid_uid'], ENT_QUOTES); ?>','<?php echo htmlspecialchars($st['face_id'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-info" title="Edit Student Details" aria-label="Edit Student Details for <?php echo htmlspecialchars($st['student_no']); ?>"><i class="bi bi-pencil-square" aria-hidden="true"></i></button>
+                                            <button onclick="pushTemplateToDevice('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>',<?php echo ($st['fingerprint_id'] ? (int)$st['fingerprint_id'] : 0); ?>)" class="btn btn-sm btn-light border text-primary" title="Push Finger to ESP" aria-label="Push Finger to ESP for <?php echo htmlspecialchars($st['student_no']); ?>" <?php echo empty($st['fingerprint_id']) ? 'disabled' : ''; ?>><i class="bi bi-cloud-arrow-up" aria-hidden="true"></i></button>
+                                            <a href="download_template.php?student_no=<?php echo urlencode($st['student_no']); ?>" class="btn btn-sm btn-light border text-success" title="Download Fingerprint" aria-label="Download Fingerprint for <?php echo htmlspecialchars($st['student_no']); ?>" <?php echo empty($st['fingerprint_id']) ? 'style="pointer-events: none; opacity: 0.5;"' : ''; ?>><i class="bi bi-download" aria-hidden="true"></i></a>
+                                            <button onclick="deleteStudentMap('<?php echo htmlspecialchars($st['student_no'], ENT_QUOTES); ?>')" class="btn btn-sm btn-light border text-danger" title="Delete Match" aria-label="Delete Match for <?php echo htmlspecialchars($st['student_no']); ?>"><i class="bi bi-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -456,7 +456,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-credit-card text-danger"></i></span>
                             <input type="text" id="enroll-admin-rfid" class="form-control border-danger-subtle" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan" aria-label="Auto find latest admin RFID scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
@@ -464,7 +464,7 @@ try {
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-person-bounding-box text-danger"></i></span>
                             <input type="text" id="enroll-admin-face" class="form-control border-danger-subtle" placeholder="Raspberry Pi Face ID (e.g. face_101)">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan" aria-label="Auto find latest admin face scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -603,7 +603,7 @@ try {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success fw-semibold" onclick="saveSchedule()"><i class="bi bi-check-lg me-1"></i>Save Schedule</button>
+                <button type="button" class="btn btn-success fw-semibold" onclick="saveSchedule()"><i class="bi bi-check-lg me-1" aria-hidden="true"></i>Save Schedule</button>
             </div>
         </div>
     </div>
@@ -695,7 +695,7 @@ function loadSchedules() {
                             '<div class="fw-bold small">' + escapeHtml(courseName) + '</div>' +
                             venue + deviceBadge + ' ' + autoBadge +
                             '<div class="mt-1">' +
-                            '<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteSchedule(' + s.id + ')" title="Delete"><i class="bi bi-x"></i></button>' +
+                            '<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteSchedule(' + s.id + ')" title="Delete" aria-label="Delete schedule slot"><i class="bi bi-x" aria-hidden="true"></i></button>' +
                             '</div>' +
                             '</td>';
                     } else {
@@ -1018,7 +1018,7 @@ function renderCourseManager() {
             course.teachers.forEach(t => {
                 html += `<span class="badge bg-info d-flex align-items-center gap-1">
                     ${escapeHtml(t.teacher_name)}
-                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove">&times;</button>
+                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove" aria-label="Remove teacher ${escapeHtml(t.teacher_name)}">&times;</button>
                 </span>`;
             });
         } else {
@@ -1084,8 +1084,8 @@ function renderCourseManager() {
                 <td>${escapeHtml(slot.venue || '—')}</td>
                 <td><span class="badge bg-light text-dark">${escapeHtml(slot.device_id || 'Web')}</span></td>
                 <td>
-                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot">
-                        <i class="bi bi-trash"></i>
+                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot" aria-label="Delete schedule slot">
+                        <i class="bi bi-trash" aria-hidden="true"></i>
                     </button>
                 </td>
             </tr>`;
