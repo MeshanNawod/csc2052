@@ -722,7 +722,7 @@ function startRecognitionLoop(video, overlay, statusText) {
                                             <span class="fw-bold text-dark" id="challenge-label">${challenge.label}</span>
                                         </div>
                                     </div>
-                                    <button id="web-face-bypass-btn-${studentNo}" class="btn btn-sm btn-outline-danger fw-bold px-2 py-1" onclick="markWebFaceAttendance('${studentNo}')" title="Bypass challenge and force mark">
+                                    <button id="web-face-bypass-btn-${studentNo}" class="btn btn-sm btn-outline-danger fw-bold px-2 py-1" onclick="markWebFaceAttendance('${studentNo}')" title="Bypass challenge and force mark" aria-label="Bypass challenge and mark attendance for ${studentName}">
                                         Bypass
                                     </button>
                                 </div>
