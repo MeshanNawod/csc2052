@@ -78,7 +78,7 @@ try {
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Refresh device list"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                             </div>
                         </div>
 
@@ -158,18 +158,18 @@ try {
                             <div class="small text-muted mb-1">LittleFS stores the offline attendance queue when the node has no internet.</div>
                         </div>
                         <div class="row g-2 mb-3">
-                            <div class="col-12"><button class="btn btn-sm btn-outline-primary w-100" onclick="sendEspOta('LISTFS')"><i class="bi bi-folder2-open me-1"></i>List Files on Flash</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-success w-100" onclick="sendEspOta('DUMP_OFFLINE')"><i class="bi bi-file-earmark-text me-1"></i>Read Offline Queue</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-info w-100" onclick="sendEspOta('SYNC_OFFLINE')"><i class="bi bi-cloud-upload me-1"></i>Force Sync Queue</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendEspOta('CLEARLOGS')"><i class="bi bi-trash me-1"></i>Wipe Offline Queue</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('FORMAT_FS')"><i class="bi bi-exclamation-triangle me-1"></i>Format LittleFS (Danger)</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-primary w-100" onclick="sendEspOta('LISTFS')"><i class="bi bi-folder2-open me-1" aria-hidden="true"></i>List Files on Flash</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-success w-100" onclick="sendEspOta('DUMP_OFFLINE')"><i class="bi bi-file-earmark-text me-1" aria-hidden="true"></i>Read Offline Queue</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-info w-100" onclick="sendEspOta('SYNC_OFFLINE')"><i class="bi bi-cloud-upload me-1" aria-hidden="true"></i>Force Sync Queue</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendEspOta('CLEARLOGS')"><i class="bi bi-trash me-1" aria-hidden="true"></i>Wipe Offline Queue</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('FORMAT_FS')"><i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i>Format LittleFS (Danger)</button></div>
                         </div>
 
                         <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-fingerprint me-1"></i>Fingerprint Templates</h6>
                         <div class="row g-2 mb-3">
-                            <div class="col-12"><button class="btn btn-sm btn-outline-dark w-100" onclick="sendEspOta('UPLOAD_FP_TEMPLATES')"><i class="bi bi-upload me-1"></i>Upload Templates to ESP</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-secondary w-100" onclick="sendEspOta('DOWNLOAD_FP_TEMPLATES')"><i class="bi bi-download me-1"></i>Download Templates from ESP</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('WIPE_FP_TEMPLATES')"><i class="bi bi-eraser me-1"></i>Wipe All FP Templates</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-dark w-100" onclick="sendEspOta('UPLOAD_FP_TEMPLATES')"><i class="bi bi-upload me-1" aria-hidden="true"></i>Upload Templates to ESP</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-secondary w-100" onclick="sendEspOta('DOWNLOAD_FP_TEMPLATES')"><i class="bi bi-download me-1" aria-hidden="true"></i>Download Templates from ESP</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('WIPE_FP_TEMPLATES')"><i class="bi bi-eraser me-1" aria-hidden="true"></i>Wipe All FP Templates</button></div>
                         </div>
                     </div>
 
@@ -318,7 +318,7 @@ try {
                             $btns = ['1','2','3','A','4','5','6','B','7','8','9','C','*','0','#','D'];
                             foreach($btns as $b) {
                                 $class = ($b == 'A') ? 'bg-danger text-white border-danger' : (($b == 'B' || $b == 'C' || $b == 'D') ? 'bg-secondary text-white border-secondary' : '');
-                                echo "<div class='col-3'><button class='keypad-btn $class' onclick=\"sendEspOta('KEYPAD $b')\">$b</button></div>";
+                                echo "<div class='col-3'><button class='keypad-btn $class' onclick=\"sendEspOta('KEYPAD $b')\" aria-label='Keypad $b'>$b</button></div>";
                             }
                             ?>
                         </div>
@@ -378,8 +378,8 @@ try {
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-hdd-network text-muted"></i></span>
                             <input type="text" id="espnow-mac-input" class="form-control font-monospace" placeholder="AA:BB:CC:DD:EE:FF">
-                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-plus-lg"></i></button>
-                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-dash-lg"></i></button>
+                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)" aria-label="Add peer MAC"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)" aria-label="Remove peer MAC"><i class="bi bi-dash-lg" aria-hidden="true"></i></button>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="espnow-broadcast-mode" checked onchange="sendEspOta('ESPNOW_BROADCAST:'+(this.checked?'1':'0'))">
@@ -414,8 +414,8 @@ try {
             <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center">
                 <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger"></i>Raspberry Pi 3B Control Center</strong>
                 <div class="d-flex align-items-center gap-2">
-                    <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1"></i>Offline</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1" aria-hidden="true"></i>Offline</span>
+                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()" aria-label="Refresh Pi status"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -612,7 +612,7 @@ try {
                                 <tr>
                                     <td class="fw-bold small"><?php echo htmlspecialchars($dev); ?></td>
                                     <td class="small"><?php foreach ($crs as $c): ?><span class="badge bg-info text-dark me-1 mb-1"><?php echo htmlspecialchars($c); ?></span><?php endforeach; ?></td>
-                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')"><i class="bi bi-x"></i></button><?php endforeach; ?></td>
+                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')" title="Remove course" aria-label="Remove course"><i class="bi bi-x" aria-hidden="true"></i></button><?php endforeach; ?></td>
                                 </tr><?php endforeach; ?>
                             </tbody>
                         </table>
@@ -1180,7 +1180,7 @@ window.refreshDeviceList = async function() {
                     const icon = dev.type === 'rpi' ? '<i class="bi bi-server text-danger me-1"></i>' : '<i class="bi bi-cpu text-primary me-1"></i>';
                     const badge = dev.online ? '<span class="badge bg-success">Online</span>' : '<span class="badge bg-secondary">Offline</span>';
                     const blockBtn = dev.blocked ? `<button class="btn btn-xs btn-outline-success py-0 px-1" onclick="deviceAction('unblock','${dev.ip}')">Unblock</button>` : `<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deviceAction('block','${dev.ip}')">Block</button>`;
-                    h += `<tr><td>${icon}<strong>${dev.name}</strong></td><td><code>${dev.ip}</code></td><td>${badge}</td><td class="d-flex gap-1">${blockBtn} <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick="renameDevice('${dev.ip}','${dev.name.replace(/'/g, "\\'")}')"><i class="bi bi-pencil"></i></button> <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick="deviceAction('forget','${dev.ip}')"><i class="bi bi-trash"></i></button></td></tr>`;
+                    h += `<tr><td>${icon}<strong>${dev.name}</strong></td><td><code>${dev.ip}</code></td><td>${badge}</td><td class="d-flex gap-1">${blockBtn} <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick="renameDevice('${dev.ip}','${dev.name.replace(/'/g, "\\'")}')" title="Rename device" aria-label="Rename device"><i class="bi bi-pencil" aria-hidden="true"></i></button> <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick="deviceAction('forget','${dev.ip}')" title="Forget device" aria-label="Forget device"><i class="bi bi-trash" aria-hidden="true"></i></button></td></tr>`;
                 });
                 h += '</tbody></table>';
                 table.innerHTML = h;
@@ -1541,11 +1541,11 @@ async function refreshAllDeviceStatus() {
             const queue = cached.queue !== undefined ? '<span class="badge ' + (cached.queue > 0 ? 'bg-warning text-dark' : 'bg-success') + '">' + cached.queue + '</span>' : '—';
             const actions = [];
             if (online) {
-                actions.push('<button class="btn btn-xs btn-outline-info py-0 px-1 me-1" onclick="probeDevice(\'' + ip + '\')" title="Probe"><i class="bi bi-search"></i></button>');
-                if (type === 'esp32') actions.push('<button class="btn btn-xs btn-outline-primary py-0 px-1 me-1" onclick="document.getElementById(\'action-target-device\').value=\'' + ip + '\';onEspTargetChange()" title="Select"><i class="bi bi-bullseye"></i></button>');
+                actions.push('<button class="btn btn-xs btn-outline-info py-0 px-1 me-1" onclick="probeDevice(\'' + ip + '\')" title="Probe" aria-label="Probe device"><i class="bi bi-search" aria-hidden="true"></i></button>');
+                if (type === 'esp32') actions.push('<button class="btn btn-xs btn-outline-primary py-0 px-1 me-1" onclick="document.getElementById(\'action-target-device\').value=\'' + ip + '\';onEspTargetChange()" title="Select" aria-label="Select device"><i class="bi bi-bullseye" aria-hidden="true"></i></button>');
             }
             if (type === 'rpi') {
-                actions.push('<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="document.getElementById(\'rpi-ip-search\').value=\'' + ip + '\';saveRpiConfig()" title="Set as Pi"><i class="bi bi-raspberry-pi"></i></button>');
+                actions.push('<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="document.getElementById(\'rpi-ip-search\').value=\'' + ip + '\';saveRpiConfig()" title="Set as Pi" aria-label="Set as Pi"><i class="bi bi-raspberry-pi" aria-hidden="true"></i></button>');
             }
             html += '<tr><td class="ps-3 fw-bold">' + typeIcon + escapeHtml(name) + '</td>';
             html += '<td class="font-monospace small">' + ip + '</td>';
