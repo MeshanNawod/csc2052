@@ -7,3 +7,6 @@
 ## 2024-05-28 - Missing ARIA Labels on Icon-only Buttons
 **Learning:** Found an app-wide pattern where icon-only action buttons (like Delete, Edit, Download) rely exclusively on the `title` attribute. While `title` gives a tooltip, it doesn't consistently announce to screen readers.
 **Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
+## 2025-01-24 - App-wide Accessibility Audit for Interactive Elements
+**Learning:** Extending accessibility improvements beyond individual pages to all dynamically generated UI components ensures a consistent experience for screen reader users across the entire application.
+**Action:** Performed a comprehensive audit and added `aria-label` and `aria-hidden="true"` to icon-only buttons in `index.php`, `students.php`, `teachers.php`, `device.php`, and `js/main.js`.
