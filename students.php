@@ -60,7 +60,7 @@ try {
                                             <?php foreach ($courses as $c): ?>
                                             <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                                 <span><strong><?php echo htmlspecialchars($c['course_code']); ?></strong><?php if (!empty($c['course_name'])): ?> - <span class="text-muted"><?php echo htmlspecialchars($c['course_name']); ?></span><?php endif; ?></span>
-                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg"></i></button>
+                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                             </li>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -82,7 +82,7 @@ try {
                                         </select>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg"></i></button>
+                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div id="course-enroll-msg" class="small mb-2 min-h-xs"></div>
@@ -103,7 +103,7 @@ try {
                                 <h6 class="text-muted fw-bold mb-2 mt-3"><i class="bi bi-people me-1"></i>Course Enrollment Lookup</h6>
                                 <div class="input-group mb-2">
                                     <input type="text" id="lookup-stu-course" class="form-control form-control-sm" placeholder="Student No to lookup">
-                                    <button class="btn btn-outline-secondary btn-sm" onclick="lookupStudentCourses()"><i class="bi bi-search me-1"></i>Lookup</button>
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="lookupStudentCourses()"><i class="bi bi-search me-1" aria-hidden="true"></i>Lookup</button>
                                 </div>
                                 <div id="lookup-courses-result" class="border rounded bg-white p-2 shadow-sm small min-h-sm"></div>
                             </div>
@@ -167,26 +167,26 @@ try {
                             <button class="btn btn-outline-primary fw-semibold" onclick="updateStudentProfile()"><i class="bi bi-save me-1"></i>Update</button>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-fingerprint text-primary"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-fingerprint text-primary" aria-hidden="true"></i></span>
                             <input type="number" id="enroll-id" class="form-control bg-light text-muted" value="<?php echo $next_id; ?>" readonly title="Auto-assigned ID">
                             <button class="btn btn-primary fw-semibold" onclick="triggerEnroll()">
-                                <i class="bi bi-plus-circle me-1"></i>Enroll Finger
+                                <i class="bi bi-plus-circle me-1" aria-hidden="true"></i>Enroll Finger
                             </button>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-credit-card text-info"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-credit-card text-info" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-rfid" class="form-control" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan" aria-label="Auto find latest scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-info text-white fw-semibold" onclick="triggerEnrollRfid()">
-                                <i class="bi bi-link me-1"></i>Link RFID
+                                <i class="bi bi-link me-1" aria-hidden="true"></i>Link RFID
                             </button>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-person-bounding-box text-warning"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-person-bounding-box text-warning" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-face" class="form-control" placeholder="Face Profile ID">
-                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan" aria-label="Auto find latest scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-warning text-white fw-semibold" onclick="triggerEnrollFace()">
-                                <i class="bi bi-link me-1"></i>Link Face
+                                <i class="bi bi-link me-1" aria-hidden="true"></i>Link Face
                             </button>
                         </div>
                         <div class="input-group mb-2 mt-3">
@@ -454,19 +454,19 @@ try {
                             </button>
                         </div>
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-credit-card text-danger"></i></span>
+                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-credit-card text-danger" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-admin-rfid" class="form-control border-danger-subtle" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan" aria-label="Auto find latest scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollRfid()">
-                                <i class="bi bi-link me-1"></i>Link RFID
+                                <i class="bi bi-link me-1" aria-hidden="true"></i>Link RFID
                             </button>
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-person-bounding-box text-danger"></i></span>
+                            <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-person-bounding-box text-danger" aria-hidden="true"></i></span>
                             <input type="text" id="enroll-admin-face" class="form-control border-danger-subtle" placeholder="Raspberry Pi Face ID (e.g. face_101)">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan" aria-label="Auto find latest scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollFace()">
-                                <i class="bi bi-link me-1"></i>Link Face
+                                <i class="bi bi-link me-1" aria-hidden="true"></i>Link Face
                             </button>
                         </div>
 
@@ -1018,7 +1018,7 @@ function renderCourseManager() {
             course.teachers.forEach(t => {
                 html += `<span class="badge bg-info d-flex align-items-center gap-1">
                     ${escapeHtml(t.teacher_name)}
-                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove">&times;</button>
+                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove" aria-label="Remove teacher">&times;</button>
                 </span>`;
             });
         } else {
@@ -1038,7 +1038,7 @@ function renderCourseManager() {
         });
         
         html += `</select>
-                        <button class="btn btn-sm btn-success" onclick="assignTeacherToCourse('${escapeHtml(course.course_code)}')"><i class="bi bi-plus-lg"></i>Assign</button>
+                        <button class="btn btn-sm btn-success" onclick="assignTeacherToCourse('${escapeHtml(course.course_code)}')" aria-label="Assign teacher"><i class="bi bi-plus-lg" aria-hidden="true"></i>Assign</button>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -1084,8 +1084,8 @@ function renderCourseManager() {
                 <td>${escapeHtml(slot.venue || '—')}</td>
                 <td><span class="badge bg-light text-dark">${escapeHtml(slot.device_id || 'Web')}</span></td>
                 <td>
-                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot">
-                        <i class="bi bi-trash"></i>
+                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot" aria-label="Delete slot">
+                        <i class="bi bi-trash" aria-hidden="true"></i>
                     </button>
                 </td>
             </tr>`;

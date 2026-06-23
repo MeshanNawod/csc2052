@@ -144,9 +144,9 @@ body { background: #f8fafc; }
                 <div class="d-flex align-items-center gap-3">
                     <div class="form-check form-switch mb-0">
                         <input class="form-check-input" type="checkbox" id="global-voice-mute">
-                        <label class="form-check-label small text-muted fw-bold" for="global-voice-mute"><i class="bi bi-volume-mute me-1"></i>Mute</label>
+                        <label class="form-check-label small text-muted fw-bold" for="global-voice-mute"><i class="bi bi-volume-mute me-1" aria-hidden="true"></i>Mute</label>
                     </div>
-                    <button class="btn btn-sm btn-outline-primary rounded-pill py-0 fw-semibold" onclick="exportLogsCsv()"><i class="bi bi-download me-1"></i>Export CSV</button>
+                    <button class="btn btn-sm btn-outline-primary rounded-pill py-0 fw-semibold" onclick="exportLogsCsv()"><i class="bi bi-download me-1" aria-hidden="true"></i>Export CSV</button>
                 </div>
             </div>
             <div class="card-body py-2 bg-light border-bottom">
@@ -191,10 +191,10 @@ body { background: #f8fafc; }
             <div class="card-body py-2">
                 <div class="mb-2 p-2 bg-light rounded shadow-sm">
                     <div class="d-flex justify-content-between align-items-center mb-1">
-                        <label class="form-label small text-muted fw-bold mb-0"><i class="bi bi-bullseye text-primary me-1"></i>Target Device</label>
+                        <label class="form-label small text-muted fw-bold mb-0"><i class="bi bi-bullseye text-primary me-1" aria-hidden="true"></i>Target Device</label>
                         <div class="d-flex gap-1">
-                            <button class="btn btn-xs btn-outline-secondary py-0 px-1 small rounded-pill" aria-label="Scan devices" onclick="refreshDeviceList(); refreshDeviceDropdown();" title="Scan"><i class="bi bi-arrow-clockwise"></i></button>
-                            <button class="btn btn-xs btn-outline-primary py-0 px-1 small rounded-pill" aria-label="Manage devices" onclick="toggleManageDevices()" title="Manage"><i class="bi bi-gear"></i></button>
+                            <button class="btn btn-xs btn-outline-secondary py-0 px-1 small rounded-pill" aria-label="Scan devices" onclick="refreshDeviceList(); refreshDeviceDropdown();" title="Scan"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
+                            <button class="btn btn-xs btn-outline-primary py-0 px-1 small rounded-pill" aria-label="Manage devices" onclick="toggleManageDevices()" title="Manage"><i class="bi bi-gear" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div class="searchable-select-wrapper position-relative">
@@ -341,10 +341,10 @@ body { background: #f8fafc; }
             <div class="card-body py-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div class="d-flex align-items-center gap-2">
-                        <span id="rpi-status-dot" class="badge bg-secondary badge-pill"><i class="bi bi-circle me-1"></i>Offline</span>
+                        <span id="rpi-status-dot" class="badge bg-secondary badge-pill"><i class="bi bi-circle me-1" aria-hidden="true"></i>Offline</span>
                         <small id="rpi-ip-display" class="text-muted">Not connected</small>
                     </div>
-                    <button class="btn btn-sm btn-outline-light rounded-pill" aria-label="Check Pi status" onclick="refreshRpiStatus()" title="Check Pi"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-sm btn-outline-light rounded-pill" aria-label="Check Pi status" onclick="refreshRpiStatus()" title="Check Pi"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
                 <div id="rpi-face-container" class="border rounded p-2 bg-light text-center shadow-sm">
                     <div class="position-relative w-100 rounded bg-dark mb-2" style="line-height:0;overflow:hidden;aspect-ratio:4/3;">
