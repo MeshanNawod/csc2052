@@ -60,7 +60,7 @@ try {
                                             <?php foreach ($courses as $c): ?>
                                             <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                                 <span><strong><?php echo htmlspecialchars($c['course_code']); ?></strong><?php if (!empty($c['course_name'])): ?> - <span class="text-muted"><?php echo htmlspecialchars($c['course_name']); ?></span><?php endif; ?></span>
-                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg"></i></button>
+                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                             </li>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -82,7 +82,7 @@ try {
                                         </select>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg"></i></button>
+                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div id="course-enroll-msg" class="small mb-2 min-h-xs"></div>
@@ -113,7 +113,7 @@ try {
                     <div class="tab-pane fade" id="tab-manager" role="tabpanel">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted fw-bold mb-0"><i class="bi bi-folder2-open me-1"></i>Course Manager</h6>
-                            <button class="btn btn-sm btn-outline-primary fw-semibold" onclick="loadCourseManager()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+                            <button class="btn btn-sm btn-outline-primary fw-semibold" onclick="loadCourseManager()"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
                         </div>
                         <div id="course-manager-container">
                             <div class="text-center py-4 text-muted"><i class="bi bi-arrow-clockwise spin me-1"></i>Loading courses...</div>
@@ -124,8 +124,8 @@ try {
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted fw-bold mb-0"><i class="bi bi-calendar-week me-1"></i>Weekly Course Schedule</h6>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-success fw-semibold" onclick="loadSchedules()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
-                                <button class="btn btn-sm btn-success fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleModal"><i class="bi bi-plus-lg me-1"></i>Add Time Slot</button>
+                                <button class="btn btn-sm btn-outline-success fw-semibold" onclick="loadSchedules()"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
+                                <button class="btn btn-sm btn-success fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleModal"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Add Time Slot</button>
                             </div>
                         </div>
                         <div id="timetable-container" class="table-responsive">
@@ -176,7 +176,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-credit-card text-info"></i></span>
                             <input type="text" id="enroll-rfid" class="form-control" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-info fw-semibold px-2" onclick="autoFindRfid('enroll-rfid')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-info text-white fw-semibold" onclick="triggerEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
@@ -184,7 +184,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-person-bounding-box text-warning"></i></span>
                             <input type="text" id="enroll-face" class="form-control" placeholder="Face Profile ID">
-                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-warning fw-semibold px-2" onclick="autoFindFace('enroll-face')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-warning text-white fw-semibold" onclick="triggerEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -456,7 +456,7 @@ try {
                         <div class="input-group mb-2">
                             <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-credit-card text-danger"></i></span>
                             <input type="text" id="enroll-admin-rfid" class="form-control border-danger-subtle" placeholder="RFID Tag UID">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindRfid('enroll-admin-rfid')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollRfid()">
                                 <i class="bi bi-link me-1"></i>Link RFID
                             </button>
@@ -464,7 +464,7 @@ try {
                         <div class="input-group mb-3">
                             <span class="input-group-text bg-white border-danger-subtle"><i class="bi bi-person-bounding-box text-danger"></i></span>
                             <input type="text" id="enroll-admin-face" class="form-control border-danger-subtle" placeholder="Raspberry Pi Face ID (e.g. face_101)">
-                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-outline-danger fw-semibold px-2" onclick="autoFindFace('enroll-admin-face')" title="Auto Find Latest Scan" aria-label="Auto Find Latest Scan"><i class="bi bi-search" aria-hidden="true"></i></button>
                             <button class="btn btn-danger text-white fw-semibold" onclick="triggerAdminEnrollFace()">
                                 <i class="bi bi-link me-1"></i>Link Face
                             </button>
@@ -1018,7 +1018,7 @@ function renderCourseManager() {
             course.teachers.forEach(t => {
                 html += `<span class="badge bg-info d-flex align-items-center gap-1">
                     ${escapeHtml(t.teacher_name)}
-                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove">&times;</button>
+                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove" aria-label="Remove teacher"><span aria-hidden="true">&times;</span></button>
                 </span>`;
             });
         } else {
@@ -1084,8 +1084,8 @@ function renderCourseManager() {
                 <td>${escapeHtml(slot.venue || '—')}</td>
                 <td><span class="badge bg-light text-dark">${escapeHtml(slot.device_id || 'Web')}</span></td>
                 <td>
-                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot">
-                        <i class="bi bi-trash"></i>
+                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot" aria-label="Delete slot">
+                        <i class="bi bi-trash" aria-hidden="true"></i>
                     </button>
                 </td>
             </tr>`;
