@@ -522,7 +522,7 @@ try {
                         </div>
                         <div class="input-group input-group-sm">
                             <input type="text" id="rpi-cmd-input" class="form-control font-monospace" placeholder="Enter command...">
-                            <button class="btn btn-sm btn-dark" onclick="sendRpiCmdFromInput()"><i class="bi bi-send"></i></button>
+                            <button class="btn btn-sm btn-dark" onclick="sendRpiCmdFromInput()" aria-label="Send command"><i class="bi bi-send" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
@@ -1180,7 +1180,7 @@ window.refreshDeviceList = async function() {
                     const icon = dev.type === 'rpi' ? '<i class="bi bi-server text-danger me-1"></i>' : '<i class="bi bi-cpu text-primary me-1"></i>';
                     const badge = dev.online ? '<span class="badge bg-success">Online</span>' : '<span class="badge bg-secondary">Offline</span>';
                     const blockBtn = dev.blocked ? `<button class="btn btn-xs btn-outline-success py-0 px-1" onclick="deviceAction('unblock','${dev.ip}')">Unblock</button>` : `<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deviceAction('block','${dev.ip}')">Block</button>`;
-                    h += `<tr><td>${icon}<strong>${dev.name}</strong></td><td><code>${dev.ip}</code></td><td>${badge}</td><td class="d-flex gap-1">${blockBtn} <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick="renameDevice('${dev.ip}','${dev.name.replace(/'/g, "\\'")}')"><i class="bi bi-pencil"></i></button> <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick="deviceAction('forget','${dev.ip}')"><i class="bi bi-trash"></i></button></td></tr>`;
+                    h += `<tr><td>${icon}<strong>${dev.name}</strong></td><td><code>${dev.ip}</code></td><td>${badge}</td><td class="d-flex gap-1">${blockBtn} <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick="renameDevice('${dev.ip}','${dev.name.replace(/'/g, "\\'")}')" aria-label="Rename device"><i class="bi bi-pencil" aria-hidden="true"></i></button> <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick="deviceAction('forget','${dev.ip}')" aria-label="Forget device"><i class="bi bi-trash" aria-hidden="true"></i></button></td></tr>`;
                 });
                 h += '</tbody></table>';
                 table.innerHTML = h;
@@ -1541,11 +1541,11 @@ async function refreshAllDeviceStatus() {
             const queue = cached.queue !== undefined ? '<span class="badge ' + (cached.queue > 0 ? 'bg-warning text-dark' : 'bg-success') + '">' + cached.queue + '</span>' : '—';
             const actions = [];
             if (online) {
-                actions.push('<button class="btn btn-xs btn-outline-info py-0 px-1 me-1" onclick="probeDevice(\'' + ip + '\')" title="Probe"><i class="bi bi-search"></i></button>');
-                if (type === 'esp32') actions.push('<button class="btn btn-xs btn-outline-primary py-0 px-1 me-1" onclick="document.getElementById(\'action-target-device\').value=\'' + ip + '\';onEspTargetChange()" title="Select"><i class="bi bi-bullseye"></i></button>');
+                actions.push('<button class="btn btn-xs btn-outline-info py-0 px-1 me-1" onclick="probeDevice(\'' + ip + '\')" title="Probe" aria-label="Probe device"><i class="bi bi-search" aria-hidden="true"></i></button>');
+                if (type === 'esp32') actions.push('<button class="btn btn-xs btn-outline-primary py-0 px-1 me-1" onclick="document.getElementById(\'action-target-device\').value=\'' + ip + '\';onEspTargetChange()" title="Select" aria-label="Select device"><i class="bi bi-bullseye" aria-hidden="true"></i></button>');
             }
             if (type === 'rpi') {
-                actions.push('<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="document.getElementById(\'rpi-ip-search\').value=\'' + ip + '\';saveRpiConfig()" title="Set as Pi"><i class="bi bi-raspberry-pi"></i></button>');
+                actions.push('<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="document.getElementById(\'rpi-ip-search\').value=\'' + ip + '\';saveRpiConfig()" title="Set as Pi" aria-label="Set as Pi"><i class="bi bi-raspberry-pi" aria-hidden="true"></i></button>');
             }
             html += '<tr><td class="ps-3 fw-bold">' + typeIcon + escapeHtml(name) + '</td>';
             html += '<td class="font-monospace small">' + ip + '</td>';
