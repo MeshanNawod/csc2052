@@ -7,3 +7,6 @@
 ## 2024-05-28 - Missing ARIA Labels on Icon-only Buttons
 **Learning:** Found an app-wide pattern where icon-only action buttons (like Delete, Edit, Download) rely exclusively on the `title` attribute. While `title` gives a tooltip, it doesn't consistently announce to screen readers.
 **Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
+## 2023-10-27 - Aria Label on Bootstrap Close Buttons
+**Learning:** Bootstrap `btn-close` buttons are essentially empty buttons with background images and need explicit `aria-label="Close"` for screen readers.
+**Action:** When encountering or adding Bootstrap components, especially icon-only utility components like `btn-close`, always double-check they have corresponding `aria-label` attributes.
