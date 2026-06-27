@@ -297,7 +297,7 @@ try {
                 <div class="modal-content">
                     <div class="modal-header bg-info text-white">
                         <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Compose Custom Email</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="custom-email-source" value="">
