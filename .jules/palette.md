@@ -7,3 +7,6 @@
 ## 2024-05-28 - Missing ARIA Labels on Icon-only Buttons
 **Learning:** Found an app-wide pattern where icon-only action buttons (like Delete, Edit, Download) rely exclusively on the `title` attribute. While `title` gives a tooltip, it doesn't consistently announce to screen readers.
 **Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
+## 2024-06-29 - Accessible Status Indicators
+**Learning:** Using purely visual emojis (like ✅ and ⚫) for status indicators in `<option>` tags or general UI text is bad for screen reader accessibility, as they are not explicitly descriptive.
+**Action:** Replace visual emoji indicators with explicit human-readable text labels (e.g., "Online", "Offline") to ensure proper semantic meaning for all users.

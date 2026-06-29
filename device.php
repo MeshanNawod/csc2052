@@ -73,7 +73,7 @@ try {
                                     <select id="action-target-device" class="form-select form-select-sm border-primary d-none" onchange="onEspTargetChange()">
                                         <option value="">Select ESP32 Node...</option>
                                         <?php foreach($discovered_devices as $dev): if($dev['type']==='esp32'): ?>
-                                        <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' ✅':' ⚫';?></option>
+                                        <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' - Online':' - Offline';?></option>
                                         <?php endif; endforeach; ?>
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
@@ -291,7 +291,7 @@ try {
                             <select id="twin-device-select" class="form-select form-select-sm border-info d-none" onchange="switchTwinDevice()">
                                 <option value="">Select a device...</option>
                                 <?php foreach($discovered_devices as $dev): ?>
-                                <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' ✅':' ⚫';?></option>
+                                <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' - Online':' - Offline';?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div id="twin-device-list" class="searchable-dropdown d-none"></div>
@@ -1194,7 +1194,7 @@ window.refreshDeviceList = async function() {
             devices.filter(d => d.type === 'esp32' && !d.blocked).forEach(dev => {
                 const o = document.createElement('option');
                 o.value = dev.ip; o.dataset.name = dev.name;
-                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' ✅' : ' ⚫'}`;
+                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' - Online' : ' - Offline'}`;
                 espSel.appendChild(o);
             });
             if (cur) espSel.value = cur;
@@ -1207,7 +1207,7 @@ window.refreshDeviceList = async function() {
             devices.filter(d => !d.blocked).forEach(dev => {
                 const o = document.createElement('option');
                 o.value = dev.ip; o.dataset.name = dev.name;
-                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' ✅' : ' ⚫'}`;
+                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' - Online' : ' - Offline'}`;
                 twinSel.appendChild(o);
             });
             if (cur) twinSel.value = cur;
@@ -1222,7 +1222,7 @@ window.refreshDeviceList = async function() {
             devices.filter(d => d.type === 'esp32' && !d.blocked).forEach(dev => {
                 const o = document.createElement('option');
                 o.value = dev.ip;
-                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' ✅' : ' ⚫'}`;
+                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' - Online' : ' - Offline'}`;
                 serialSel.appendChild(o);
             });
             if (cur) serialSel.value = cur;
