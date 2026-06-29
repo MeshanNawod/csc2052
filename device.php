@@ -31,9 +31,9 @@ try {
                 <p class="text-muted small mb-0">Discover, configure, and monitor all hardware nodes. Select a target device in each section to send OTA commands.</p>
             </div>
             <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise me-1"></i>Scan Network</button>
-                <button class="btn btn-sm btn-primary" onclick="toggleManageDevices()"><i class="bi bi-gear me-1"></i>Manage Nodes</button>
-                <a href="instructions.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-question-circle me-1"></i>Help</a>
+                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Scan Network</button>
+                <button class="btn btn-sm btn-primary" onclick="toggleManageDevices()"><i class="bi bi-gear me-1" aria-hidden="true"></i>Manage Nodes</button>
+                <a href="instructions.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-question-circle me-1" aria-hidden="true"></i>Help</a>
             </div>
         </div>
         <div id="device-list-table" class="small text-muted mt-2"><em>Click "Scan Network" to discover nodes...</em></div>
@@ -73,12 +73,12 @@ try {
                                     <select id="action-target-device" class="form-select form-select-sm border-primary d-none" onchange="onEspTargetChange()">
                                         <option value="">Select ESP32 Node...</option>
                                         <?php foreach($discovered_devices as $dev): if($dev['type']==='esp32'): ?>
-                                        <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' ✅':' ⚫';?></option>
+                                        <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' Online':' Offline';?></option>
                                         <?php endif; endforeach; ?>
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Refresh device list"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                             </div>
                         </div>
 
@@ -90,7 +90,7 @@ try {
                             <div class="d-flex justify-content-between border-bottom pb-1 mb-1"><span class="text-muted">Queue Size</span><span id="esp-queue" class="fw-bold">—</span></div>
                             <div class="d-flex justify-content-between"><span class="text-muted">Records Today</span><span id="esp-today" class="fw-bold">—</span></div>
                         </div>
-                        <button class="btn btn-sm btn-outline-info w-100 mb-2" onclick="fetchTelemetry()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh Telemetry</button>
+                        <button class="btn btn-sm btn-outline-info w-100 mb-2" onclick="fetchTelemetry()"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh Telemetry</button>
                         <div class="small text-muted"><strong>IP:</strong> <span id="esp-current-ip" class="font-monospace">Not selected</span></div>
                     </div>
 
@@ -255,10 +255,10 @@ try {
                         <option value="\r">Carriage return</option>
                     </select>
                     <button id="btn-sse-connect" class="btn btn-sm btn-success" onclick="toggleSseStream()" title="Live Stream">
-                        <i class="bi bi-play-fill me-1"></i>Connect
+                        <i class="bi bi-play-fill me-1" aria-hidden="true"></i>Connect
                     </button>
                     <span id="sse-status-dot" class="badge bg-secondary" style="font-size:0.65rem;">Idle</span>
-                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear" aria-label="Clear serial monitor"><i class="bi bi-trash" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -291,7 +291,7 @@ try {
                             <select id="twin-device-select" class="form-select form-select-sm border-info d-none" onchange="switchTwinDevice()">
                                 <option value="">Select a device...</option>
                                 <?php foreach($discovered_devices as $dev): ?>
-                                <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' ✅':' ⚫';?></option>
+                                <option value="<?php echo htmlspecialchars($dev['ip']);?>" data-name="<?php echo htmlspecialchars($dev['name']);?>"><?php echo htmlspecialchars($dev['name']);?> (<?php echo $dev['ip'];?>)<?php echo $dev['online']?' Online':' Offline';?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div id="twin-device-list" class="searchable-dropdown d-none"></div>
@@ -376,10 +376,10 @@ try {
                             Add or remove peer MAC addresses so this ESP32 can relay data from specific nodes. <strong>Broadcast Mode</strong> sends to <code>FF:FF:FF:FF:FF:FF</code> (all nearby ESP-NOW devices).
                         </div>
                         <div class="input-group input-group-sm mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-hdd-network text-muted"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-hdd-network text-muted" aria-hidden="true"></i></span>
                             <input type="text" id="espnow-mac-input" class="form-control font-monospace" placeholder="AA:BB:CC:DD:EE:FF">
-                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-plus-lg"></i></button>
-                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-dash-lg"></i></button>
+                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)" aria-label="Add ESP-NOW peer"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)" aria-label="Remove ESP-NOW peer"><i class="bi bi-dash-lg" aria-hidden="true"></i></button>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="espnow-broadcast-mode" checked onchange="sendEspOta('ESPNOW_BROADCAST:'+(this.checked?'1':'0'))">
@@ -412,10 +412,10 @@ try {
     <div class="col-12">
         <div class="card shadow-sm border-0">
             <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center">
-                <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger"></i>Raspberry Pi 3B Control Center</strong>
+                <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger" aria-hidden="true"></i>Raspberry Pi 3B Control Center</strong>
                 <div class="d-flex align-items-center gap-2">
-                    <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1"></i>Offline</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1" aria-hidden="true"></i>Offline</span>
+                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()" aria-label="Refresh Pi status"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -612,7 +612,7 @@ try {
                                 <tr>
                                     <td class="fw-bold small"><?php echo htmlspecialchars($dev); ?></td>
                                     <td class="small"><?php foreach ($crs as $c): ?><span class="badge bg-info text-dark me-1 mb-1"><?php echo htmlspecialchars($c); ?></span><?php endforeach; ?></td>
-                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')"><i class="bi bi-x"></i></button><?php endforeach; ?></td>
+                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')" aria-label="Remove course from device"><i class="bi bi-x" aria-hidden="true"></i></button><?php endforeach; ?></td>
                                 </tr><?php endforeach; ?>
                             </tbody>
                         </table>
@@ -1194,7 +1194,7 @@ window.refreshDeviceList = async function() {
             devices.filter(d => d.type === 'esp32' && !d.blocked).forEach(dev => {
                 const o = document.createElement('option');
                 o.value = dev.ip; o.dataset.name = dev.name;
-                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' ✅' : ' ⚫'}`;
+                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' Online' : ' Offline'}`;
                 espSel.appendChild(o);
             });
             if (cur) espSel.value = cur;
@@ -1207,7 +1207,7 @@ window.refreshDeviceList = async function() {
             devices.filter(d => !d.blocked).forEach(dev => {
                 const o = document.createElement('option');
                 o.value = dev.ip; o.dataset.name = dev.name;
-                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' ✅' : ' ⚫'}`;
+                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' Online' : ' Offline'}`;
                 twinSel.appendChild(o);
             });
             if (cur) twinSel.value = cur;
@@ -1222,7 +1222,7 @@ window.refreshDeviceList = async function() {
             devices.filter(d => d.type === 'esp32' && !d.blocked).forEach(dev => {
                 const o = document.createElement('option');
                 o.value = dev.ip;
-                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' ✅' : ' ⚫'}`;
+                o.textContent = `${dev.name} (${dev.ip})${dev.online ? ' Online' : ' Offline'}`;
                 serialSel.appendChild(o);
             });
             if (cur) serialSel.value = cur;

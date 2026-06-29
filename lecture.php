@@ -23,8 +23,8 @@ try {
         <!-- Email Sender Config -->
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
-                <strong><i class="bi bi-envelope-paper me-2"></i>Email Sender Configuration</strong>
-                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody" aria-label="Toggle email sender configuration"><i class="bi bi-chevron-down"></i></button>
+                <strong><i class="bi bi-envelope-paper me-2" aria-hidden="true"></i>Email Sender Configuration</strong>
+                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody" aria-label="Toggle email sender configuration"><i class="bi bi-chevron-down" aria-hidden="true"></i></button>
             </div>
             <div class="collapse show" id="emailConfigBody">
                 <div class="card-body py-2 bg-light">
@@ -37,7 +37,7 @@ try {
                             <label class="form-label small fw-bold text-muted mb-1">App Password</label>
                             <div class="input-group input-group-sm">
                                 <input type="password" id="user-sender-password" class="form-control form-control-sm" placeholder="16-char app password">
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility"><i class="bi bi-eye" id="pwd-eye-icon"></i></button>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility"><i class="bi bi-eye" id="pwd-eye-icon" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -75,7 +75,7 @@ try {
         <!-- Absent Students Report -->
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-warning text-dark py-3">
-                <strong><i class="bi bi-calendar-x me-2"></i>Absent Students Report</strong>
+                <strong><i class="bi bi-calendar-x me-2" aria-hidden="true"></i>Absent Students Report</strong>
             </div>
             <div class="card-body bg-light">
                 <p class="text-muted small mb-3">Find out who did not attend a specific course on a given day.</p>
@@ -151,7 +151,7 @@ try {
         <!-- Course Attendance Analytics -->
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-primary text-white py-3">
-                <strong><i class="bi bi-graph-up-arrow me-2"></i>Course Attendance Analytics</strong>
+                <strong><i class="bi bi-graph-up-arrow me-2" aria-hidden="true"></i>Course Attendance Analytics</strong>
             </div>
             <div class="card-body bg-light border">
                 <p class="text-muted small mb-3">Calculate the exact attendance percentage for every student enrolled in a specific course.</p>
@@ -223,7 +223,7 @@ try {
         <!-- Email Sent Logs -->
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-secondary text-white py-3 d-flex justify-content-between align-items-center">
-                <strong><i class="bi bi-clock-history me-2"></i>Email Sent Logs</strong>
+                <strong><i class="bi bi-clock-history me-2" aria-hidden="true"></i>Email Sent Logs</strong>
                 <div class="d-flex gap-2">
                     <select id="email-log-filter" class="form-select form-select-sm" style="width:140px;" onchange="loadEmailLogs()">
                         <option value="all">All Types</option>
@@ -244,7 +244,7 @@ try {
         <!-- Export Lecture Ledger -->
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-success text-white py-3">
-                <strong><i class="bi bi-file-earmark-arrow-down me-2"></i>Export Lecture Ledger (CSV)</strong>
+                <strong><i class="bi bi-file-earmark-arrow-down me-2" aria-hidden="true"></i>Export Lecture Ledger (CSV)</strong>
             </div>
             <div class="card-body bg-light border">
                 <p class="text-muted small mb-3">Filter attendance records and select which columns to include.</p>
