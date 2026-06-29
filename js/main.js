@@ -15,7 +15,7 @@ window.showToast = function(message, type = 'info') {
     const bgClass = type === 'success' ? 'bg-success' : type === 'error' || type === 'danger' ? 'bg-danger' : type === 'warning' ? 'bg-warning text-dark' : 'bg-primary';
     toast.className = `toast show ${bgClass} text-white shadow`;
     toast.style.cssText = 'border-radius:10px;padding:12px 16px;font-size:0.85rem;animation:slideIn 0.3s ease;';
-    toast.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' || type === 'danger' ? 'exclamation-triangle' : type === 'warning' ? 'exclamation-circle' : 'info-circle'} me-2"></i>${safeMessage}`;
+    toast.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' || type === 'danger' ? 'exclamation-triangle' : type === 'warning' ? 'exclamation-circle' : 'info-circle'} me-2" aria-hidden="true"></i>${safeMessage}`;
     container.appendChild(toast);
     
     setTimeout(() => {
@@ -133,8 +133,8 @@ function renderDeviceManageTable() {
             <td>${badge}${block}</td>
             <td class="d-flex gap-1">
                 ${blockBtn}
-                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})'><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})'><i class="bi bi-trash"></i></button>
+                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})' title="Rename device" aria-label="Rename device"><i class="bi bi-pencil" aria-hidden="true"></i></button>
+                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})' title="Forget device" aria-label="Forget device"><i class="bi bi-trash" aria-hidden="true"></i></button>
             </td>
         </tr>`;
     });
@@ -1552,10 +1552,10 @@ async function fetchLogs() {
             <div class="accordion-item mb-2 border rounded shadow-sm overflow-hidden">
                 <h2 class="accordion-header d-flex align-items-center" id="${hId}">
                     <button class="accordion-button flex-grow-1 ${courseIdx !== 0 ? 'collapsed' : ''} bg-light py-2" type="button" data-bs-toggle="collapse" data-bs-target="#${cId}">
-                        <i class="bi bi-collection-fill text-primary me-2"></i> <strong class="text-dark" title="${escapeHtml(courseName)}">${escapeHtml(displayCourseName)}</strong>
+                        <i class="bi bi-collection-fill text-primary me-2" aria-hidden="true"></i> <strong class="text-dark" title="${escapeHtml(courseName)}">${escapeHtml(displayCourseName)}</strong>
                         <span class="badge bg-primary rounded-pill shadow-sm ms-3">${totalEntries} Entries</span>
                     </button>
-                    <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','','')" title="Download CSV"><i class="bi bi-download"></i></button>
+                    <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','','')" title="Download CSV" aria-label="Download CSV"><i class="bi bi-download" aria-hidden="true"></i></button>
                 </h2>
                 <div id="${cId}" class="accordion-collapse collapse ${courseIdx === 0 ? 'show' : ''}" data-bs-parent="#logsAccordion">
                     <div class="accordion-body p-2">
@@ -1574,10 +1574,10 @@ async function fetchLogs() {
                 <div class="accordion-item border-0">
                     <h5 class="accordion-header d-flex align-items-center" id="${dhId}">
                         <button class="accordion-button flex-grow-1 ${dateIdx !== 0 ? 'collapsed' : ''} bg-white py-1" type="button" data-bs-toggle="collapse" data-bs-target="#${dId}" aria-expanded="${dateIdx === 0}">
-                            <i class="bi bi-calendar3 text-secondary me-2"></i> <strong class="text-dark fs-6">${formattedDate}</strong>
+                            <i class="bi bi-calendar3 text-secondary me-2" aria-hidden="true"></i> <strong class="text-dark fs-6">${formattedDate}</strong>
                             <span class="badge bg-secondary rounded-pill ms-3">${dateEntryCount}</span>
                         </button>
-                        <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','')" title="Download CSV"><i class="bi bi-download"></i></button>
+                        <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','')" title="Download CSV" aria-label="Download CSV"><i class="bi bi-download" aria-hidden="true"></i></button>
                     </h5>
                     <div id="${dId}" class="accordion-collapse collapse ${dateIdx === 0 ? 'show' : ''}" data-bs-parent="#dateAcc${courseIdx}">
                         <div class="accordion-body p-1 ps-3">
@@ -1594,10 +1594,10 @@ async function fetchLogs() {
                     <div class="accordion-item border-0">
                         <h6 class="accordion-header d-flex align-items-center" id="${tbhId}">
                             <button class="accordion-button flex-grow-1 ${tbIdx !== 0 ? 'collapsed' : ''} bg-light py-1" type="button" data-bs-toggle="collapse" data-bs-target="#${tbId}" aria-expanded="${tbIdx === 0}">
-                                <i class="bi bi-clock text-muted me-2"></i> <strong class="fs-6">${escapeHtml(tb)}</strong>
+                                <i class="bi bi-clock text-muted me-2" aria-hidden="true"></i> <strong class="fs-6">${escapeHtml(tb)}</strong>
                                 <span class="badge bg-info rounded-pill ms-3 text-dark">${tbEntries.length}</span>
                             </button>
-                            <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','${encodeURIComponent(tb)}')" title="Download CSV"><i class="bi bi-download"></i></button>
+                            <button class="btn btn-sm btn-outline-success py-1 px-2 ms-1 me-2 flex-shrink-0" onclick="window.downloadGroupCSV('${encodeURIComponent(courseName)}','${dateStr}','${encodeURIComponent(tb)}')" title="Download CSV" aria-label="Download CSV"><i class="bi bi-download" aria-hidden="true"></i></button>
                         </h6>
                         <div id="${tbId}" class="accordion-collapse collapse ${tbIdx === 0 ? 'show' : ''}" data-bs-parent="#timeAcc${courseIdx}_${dateIdx}">
                             <div class="accordion-body p-0">
@@ -1795,8 +1795,8 @@ window.calculateCourseAnalytics = async function() {
                         </div>
                     </td>
                     <td>
-                        <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAnalyticsEmail('${escapeHtml(st.student_no)}', '${escapeHtml(st.student_name)}', ${st.percentage}, '${escapeHtml(course)}')" title="Email this student">
-                            <i class="bi bi-envelope"></i>
+                        <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAnalyticsEmail('${escapeHtml(st.student_no)}', '${escapeHtml(st.student_name)}', ${st.percentage}, '${escapeHtml(course)}')" title="Email this student" aria-label="Email this student">
+                            <i class="bi bi-envelope" aria-hidden="true"></i>
                         </button>
                     </td>
                 </tr>
@@ -1866,8 +1866,8 @@ window.getAbsentStudents = async function() {
                             <td class="text-dark">${escapeHtml(s.student_name || 'Unknown')}</td>
                             <td><span class="badge bg-secondary">${escapeHtml(s.course_code)}</span></td>
                             <td>
-                                <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAbsentEmail('${escapeHtml(s.student_no)}', '${escapeHtml(s.student_name || 'Unknown')}', '${escapeHtml(s.course_code)}')" title="Email this student">
-                                    <i class="bi bi-envelope"></i>
+                                <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAbsentEmail('${escapeHtml(s.student_no)}', '${escapeHtml(s.student_name || 'Unknown')}', '${escapeHtml(s.course_code)}')" title="Email this student" aria-label="Email this student">
+                                    <i class="bi bi-envelope" aria-hidden="true"></i>
                                 </button>
                             </td>
                         </tr>

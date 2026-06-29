@@ -144,9 +144,9 @@ body { background: #f8fafc; }
                 <div class="d-flex align-items-center gap-3">
                     <div class="form-check form-switch mb-0">
                         <input class="form-check-input" type="checkbox" id="global-voice-mute">
-                        <label class="form-check-label small text-muted fw-bold" for="global-voice-mute"><i class="bi bi-volume-mute me-1"></i>Mute</label>
+                        <label class="form-check-label small text-muted fw-bold" for="global-voice-mute"><i class="bi bi-volume-mute me-1" aria-hidden="true"></i>Mute</label>
                     </div>
-                    <button class="btn btn-sm btn-outline-primary rounded-pill py-0 fw-semibold" onclick="exportLogsCsv()"><i class="bi bi-download me-1"></i>Export CSV</button>
+                    <button class="btn btn-sm btn-outline-primary rounded-pill py-0 fw-semibold" onclick="exportLogsCsv()"><i class="bi bi-download me-1" aria-hidden="true"></i>Export CSV</button>
                 </div>
             </div>
             <div class="card-body py-2 bg-light border-bottom">
@@ -191,10 +191,10 @@ body { background: #f8fafc; }
             <div class="card-body py-2">
                 <div class="mb-2 p-2 bg-light rounded shadow-sm">
                     <div class="d-flex justify-content-between align-items-center mb-1">
-                        <label class="form-label small text-muted fw-bold mb-0"><i class="bi bi-bullseye text-primary me-1"></i>Target Device</label>
+                        <label class="form-label small text-muted fw-bold mb-0"><i class="bi bi-bullseye text-primary me-1" aria-hidden="true"></i>Target Device</label>
                         <div class="d-flex gap-1">
-                            <button class="btn btn-xs btn-outline-secondary py-0 px-1 small rounded-pill" aria-label="Scan devices" onclick="refreshDeviceList(); refreshDeviceDropdown();" title="Scan"><i class="bi bi-arrow-clockwise"></i></button>
-                            <button class="btn btn-xs btn-outline-primary py-0 px-1 small rounded-pill" aria-label="Manage devices" onclick="toggleManageDevices()" title="Manage"><i class="bi bi-gear"></i></button>
+                            <button class="btn btn-xs btn-outline-secondary py-0 px-1 small rounded-pill" aria-label="Scan devices" onclick="refreshDeviceList(); refreshDeviceDropdown();" title="Scan"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
+                            <button class="btn btn-xs btn-outline-primary py-0 px-1 small rounded-pill" aria-label="Manage devices" onclick="toggleManageDevices()" title="Manage"><i class="bi bi-gear" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div class="searchable-select-wrapper position-relative">
@@ -223,8 +223,8 @@ body { background: #f8fafc; }
                         <option value="custom">Custom</option>
                     </select>
                     <input type="number" id="lecture-timer-custom" class="form-control form-control-sm border-secondary" style="width:65px;display:none;" placeholder="Min" min="1" max="480">
-                    <button class="btn btn-primary fw-semibold rounded-pill" aria-label="Start lecture" id="btn-start-course" onclick="startCourseToDevice()"><i class="bi bi-play-fill"></i></button>
-                    <button class="btn btn-outline-danger fw-semibold px-2 rounded-pill" aria-label="End lecture" id="btn-end-course" onclick="endCourseToDevice()" disabled><i class="bi bi-stop-fill"></i></button>
+                    <button class="btn btn-primary fw-semibold rounded-pill" aria-label="Start lecture" id="btn-start-course" onclick="startCourseToDevice()"><i class="bi bi-play-fill" aria-hidden="true"></i></button>
+                    <button class="btn btn-outline-danger fw-semibold px-2 rounded-pill" aria-label="End lecture" id="btn-end-course" onclick="endCourseToDevice()" disabled><i class="bi bi-stop-fill" aria-hidden="true"></i></button>
                 </div>
                 <div id="lecture-timer-display" class="d-none mb-2">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -240,7 +240,7 @@ body { background: #f8fafc; }
                         <input type="text" id="sync-courses-input" class="form-control border-secondary" placeholder="Search & add courses..." autocomplete="off" oninput="filterDropdown(this, 'sync-course-dropdown', null)" onfocus="showDropdown('sync-course-dropdown')" onkeydown="filterDropdown(this, 'sync-course-dropdown', null)">
                         <div id="sync-course-dropdown" class="searchable-dropdown d-none"></div>
                     </div>
-                    <button class="btn btn-secondary fw-semibold rounded-pill" aria-label="Sync courses to SD card" onclick="syncCoursesToScanner()"><i class="bi bi-sd-card"></i></button>
+                    <button class="btn btn-secondary fw-semibold rounded-pill" aria-label="Sync courses to SD card" onclick="syncCoursesToScanner()"><i class="bi bi-sd-card" aria-hidden="true"></i></button>
                 </div>
 
                 <h6 class="text-muted fw-bold mb-1 small">Hardware Mode</h6>
@@ -293,11 +293,11 @@ body { background: #f8fafc; }
 
         <div class="card shadow-sm border-0 mb-3 bg-white">
             <div class="card-header bg-warning text-dark py-2">
-                <strong class="small"><i class="bi bi-camera-video me-1"></i>Webcam Attendance</strong>
+                <strong class="small"><i class="bi bi-camera-video me-1" aria-hidden="true"></i>Webcam Attendance</strong>
             </div>
             <div class="card-body py-2">
                 <button id="btn-start-attendance" class="btn btn-warning w-100 fw-bold shadow-sm btn-sm rounded-pill" onclick="startWebFaceAttendance()">
-                    <i class="bi bi-play-circle me-1"></i>Start Camera Scanner
+                    <i class="bi bi-play-circle me-1" aria-hidden="true"></i>Start Camera Scanner
                 </button>
                 <div id="web-attendance-container" class="d-none border rounded p-2 mt-2 bg-light text-center shadow-sm">
                     <select id="attendance-camera-select" class="form-select form-select-sm mb-2 d-none" onchange="switchAttendanceCamera()"></select>
@@ -312,24 +312,24 @@ body { background: #f8fafc; }
                     <div class="mb-2 p-1 border rounded bg-white">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="webFaceMode" id="modeAttendance" value="attendance" checked>
-                            <label class="form-check-label fw-bold text-success small" for="modeAttendance"><i class="bi bi-person-check-fill me-1"></i>Mark</label>
+                            <label class="form-check-label fw-bold text-success small" for="modeAttendance"><i class="bi bi-person-check-fill me-1" aria-hidden="true"></i>Mark</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="webFaceMode" id="modeIdentify" value="identify">
-                            <label class="form-check-label fw-bold text-primary small" for="modeIdentify"><i class="bi bi-search me-1"></i>Identify</label>
+                            <label class="form-check-label fw-bold text-primary small" for="modeIdentify"><i class="bi bi-search me-1" aria-hidden="true"></i>Identify</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center gap-3 mb-2">
                         <div class="form-check form-switch mb-0">
                             <input class="form-check-input" type="checkbox" id="web-attendance-auto">
-                            <label class="form-check-label small text-muted fw-bold" for="web-attendance-auto"><i class="bi bi-lightning-charge me-1"></i>Auto</label>
+                            <label class="form-check-label small text-muted fw-bold" for="web-attendance-auto"><i class="bi bi-lightning-charge me-1" aria-hidden="true"></i>Auto</label>
                         </div>
                         <div class="form-check form-switch mb-0">
                             <input class="form-check-input" type="checkbox" id="web-attendance-mute">
-                            <label class="form-check-label small text-muted fw-bold" for="web-attendance-mute"><i class="bi bi-volume-mute me-1"></i>Mute</label>
+                            <label class="form-check-label small text-muted fw-bold" for="web-attendance-mute"><i class="bi bi-volume-mute me-1" aria-hidden="true"></i>Mute</label>
                         </div>
                     </div>
-                    <button id="btn-stop-attendance" class="btn btn-danger btn-sm w-100 fw-bold d-none rounded-pill"><i class="bi bi-stop-circle me-1"></i>Stop Scanner</button>
+                    <button id="btn-stop-attendance" class="btn btn-danger btn-sm w-100 fw-bold d-none rounded-pill"><i class="bi bi-stop-circle me-1" aria-hidden="true"></i>Stop Scanner</button>
                 </div>
             </div>
         </div>
@@ -341,10 +341,10 @@ body { background: #f8fafc; }
             <div class="card-body py-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <div class="d-flex align-items-center gap-2">
-                        <span id="rpi-status-dot" class="badge bg-secondary badge-pill"><i class="bi bi-circle me-1"></i>Offline</span>
+                        <span id="rpi-status-dot" class="badge bg-secondary badge-pill"><i class="bi bi-circle me-1" aria-hidden="true"></i>Offline</span>
                         <small id="rpi-ip-display" class="text-muted">Not connected</small>
                     </div>
-                    <button class="btn btn-sm btn-outline-light rounded-pill" aria-label="Check Pi status" onclick="refreshRpiStatus()" title="Check Pi"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-sm btn-outline-light rounded-pill" aria-label="Check Pi status" onclick="refreshRpiStatus()" title="Check Pi"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
                 <div id="rpi-face-container" class="border rounded p-2 bg-light text-center shadow-sm">
                     <div class="position-relative w-100 rounded bg-dark mb-2" style="line-height:0;overflow:hidden;aspect-ratio:4/3;">
@@ -358,16 +358,16 @@ body { background: #f8fafc; }
                     <div class="d-flex justify-content-center align-items-center gap-3 mb-2">
                         <div class="form-check form-switch mb-0">
                             <input class="form-check-input" type="checkbox" id="rpi-attendance-auto">
-                            <label class="form-check-label small text-muted fw-bold" for="rpi-attendance-auto"><i class="bi bi-lightning-charge me-1"></i>Auto</label>
+                            <label class="form-check-label small text-muted fw-bold" for="rpi-attendance-auto"><i class="bi bi-lightning-charge me-1" aria-hidden="true"></i>Auto</label>
                         </div>
                         <div class="form-check form-switch mb-0">
                             <input class="form-check-input" type="checkbox" id="rpi-attendance-mute" checked>
-                            <label class="form-check-label small text-muted fw-bold" for="rpi-attendance-mute"><i class="bi bi-volume-mute me-1"></i>Mute</label>
+                            <label class="form-check-label small text-muted fw-bold" for="rpi-attendance-mute"><i class="bi bi-volume-mute me-1" aria-hidden="true"></i>Mute</label>
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <button id="btn-start-rpi-attendance" class="btn btn-dark btn-sm w-100 fw-bold shadow-sm rounded-pill" onclick="startRpiAttendance()"><i class="bi bi-play-circle me-1"></i>Start Pi</button>
-                        <button id="btn-stop-rpi-attendance" class="btn btn-danger btn-sm w-100 fw-bold d-none rounded-pill" onclick="stopRpiAttendance()"><i class="bi bi-stop-circle me-1"></i>Stop</button>
+                        <button id="btn-start-rpi-attendance" class="btn btn-dark btn-sm w-100 fw-bold shadow-sm rounded-pill" onclick="startRpiAttendance()"><i class="bi bi-play-circle me-1" aria-hidden="true"></i>Start Pi</button>
+                        <button id="btn-stop-rpi-attendance" class="btn btn-danger btn-sm w-100 fw-bold d-none rounded-pill" onclick="stopRpiAttendance()"><i class="bi bi-stop-circle me-1" aria-hidden="true"></i>Stop</button>
                     </div>
                 </div>
                 <div class="mt-2">
@@ -377,8 +377,8 @@ body { background: #f8fafc; }
                         <input type="text" id="rpi-node-ip" class="form-control" placeholder="Pi IP (e.g. 192.168.1.100)">
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-outline-secondary btn-sm w-100 fw-semibold rounded-pill" onclick="saveRpiConfig()"><i class="bi bi-save me-1"></i>Save</button>
-                        <button class="btn btn-outline-dark btn-sm w-100 fw-semibold rounded-pill" onclick="triggerRpiOta()"><i class="bi bi-cloud-arrow-down me-1"></i>Pull Queue</button>
+                        <button class="btn btn-outline-secondary btn-sm w-100 fw-semibold rounded-pill" onclick="saveRpiConfig()"><i class="bi bi-save me-1" aria-hidden="true"></i>Save</button>
+                        <button class="btn btn-outline-dark btn-sm w-100 fw-semibold rounded-pill" onclick="triggerRpiOta()"><i class="bi bi-cloud-arrow-down me-1" aria-hidden="true"></i>Pull Queue</button>
                     </div>
                 </div>
             </div>
