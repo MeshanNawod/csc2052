@@ -136,12 +136,12 @@ window.startWebFaceEnrollment = async function (studentNo, studentName, captureC
     const initialDevice = cameraSelect && !cameraSelect.classList.contains('d-none') ? cameraSelect.value : null;
     await startCamera('web-enroll-video', initialDevice);
 
-    statusText.innerHTML = `<span class="text-primary"><i class="bi bi-camera-video me-1"></i>Camera Active. Please face the camera and click Capture.</span>`;
+    statusText.innerHTML = `<span class="text-primary"><i class="bi bi-camera-video me-1" aria-hidden="true"></i>Camera Active. Please face the camera and click Capture.</span>`;
     btnCapture.classList.remove('d-none');
     btnCancel.classList.remove('d-none');
 
     btnCapture.onclick = async () => {
-        statusText.innerHTML = `<span class="text-primary fw-bold"><i class="bi bi-camera-video me-1"></i>Capturing 5 angles for high accuracy. Please slowly move your head...</span>`;
+        statusText.innerHTML = `<span class="text-primary fw-bold"><i class="bi bi-camera-video me-1" aria-hidden="true"></i>Capturing 5 angles for high accuracy. Please slowly move your head...</span>`;
         btnCapture.disabled = true;
 
         const options = new faceapi.SsdMobilenetv1Options({ minConfidence: 0.3 });
@@ -159,12 +159,12 @@ window.startWebFaceEnrollment = async function (studentNo, studentName, captureC
         }
 
         if (descriptors.length === 0) {
-            statusText.innerHTML = `<span class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i>Failed to detect any faces. Please try again.</span>`;
+            statusText.innerHTML = `<span class="text-danger"><i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i>Failed to detect any faces. Please try again.</span>`;
             btnCapture.disabled = false;
             return;
         }
 
-        statusText.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle me-1"></i>Captured ${descriptors.length}/${captureCount} angles! Saving...</span>`;
+        statusText.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle me-1" aria-hidden="true"></i>Captured ${descriptors.length}/${captureCount} angles! Saving...</span>`;
 
         const fd = new FormData();
         fd.append('action', 'link_web_face');
@@ -184,7 +184,7 @@ window.startWebFaceEnrollment = async function (studentNo, studentName, captureC
             }
 
             if (data.status === 'success') {
-                statusText.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1"></i>Successfully Enrolled Web Face!</span>`;
+                statusText.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1" aria-hidden="true"></i>Successfully Enrolled Web Face!</span>`;
                 setTimeout(() => {
                     stopCamera('web-enroll-video');
                     container.classList.add('d-none');
@@ -256,7 +256,7 @@ window.enrollUploadedImage = async function (fileInput) {
         const detection = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
 
         if (!detection) {
-            statusText.innerHTML = `<span class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i>No face detected in the image. Please try a clearer photo.</span>`;
+            statusText.innerHTML = `<span class="text-danger"><i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i>No face detected in the image. Please try a clearer photo.</span>`;
             setTimeout(() => {
                 container.classList.add('d-none');
                 btnStart.classList.remove('d-none');
@@ -267,7 +267,7 @@ window.enrollUploadedImage = async function (fileInput) {
             return;
         }
 
-        statusText.innerHTML = `<span class="text-info"><i class="bi bi-hourglass-split me-1"></i>Face found! Saving to database...</span>`;
+        statusText.innerHTML = `<span class="text-info"><i class="bi bi-hourglass-split me-1" aria-hidden="true"></i>Face found! Saving to database...</span>`;
 
         const descriptorArray = Array.from(detection.descriptor);
         const fd = new FormData();
@@ -280,7 +280,7 @@ window.enrollUploadedImage = async function (fileInput) {
         const data = JSON.parse(textData);
 
         if (data.status === 'success') {
-            statusText.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1"></i>Successfully Enrolled via Image!</span>`;
+            statusText.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1" aria-hidden="true"></i>Successfully Enrolled via Image!</span>`;
             setTimeout(() => {
                 container.classList.add('d-none');
                 btnStart.classList.remove('d-none');
@@ -474,7 +474,7 @@ window.startWebFaceAttendance = async function () {
     const initialDevice = cameraSelect && !cameraSelect.classList.contains('d-none') ? cameraSelect.value : null;
     await startCamera('web-attendance-video', initialDevice);
 
-    statusText.innerHTML = `<span class="text-primary fw-bold"><i class="bi bi-camera-video-fill me-1"></i>Scanning for faces...</span>`;
+    statusText.innerHTML = `<span class="text-primary fw-bold"><i class="bi bi-camera-video-fill me-1" aria-hidden="true"></i>Scanning for faces...</span>`;
 
     startRecognitionLoop(video, overlay, statusText);
 
@@ -663,7 +663,7 @@ function startRecognitionLoop(video, overlay, statusText) {
             if (resized.length === 0) {
                 if (badge) badge.classList.add('d-none');
                 if (++noFaceCounter > 3) {
-                    statusText.innerHTML = `<span class="text-primary fw-bold"><i class="bi bi-camera-video-fill me-1"></i>Scanning for faces...</span>`;
+                    statusText.innerHTML = `<span class="text-primary fw-bold"><i class="bi bi-camera-video-fill me-1" aria-hidden="true"></i>Scanning for faces...</span>`;
                     lastStudentNo = null; challenge = null;
                 }
                 isProcessing = false; return;
@@ -766,7 +766,7 @@ function startRecognitionLoop(video, overlay, statusText) {
                                 </div>
                                 <button id="web-face-mark-btn-${studentNo}" class="btn btn-sm btn-success fw-bold px-3"
                                     onclick="markWebFaceAttendance('${studentNo}')">
-                                    <i class="bi bi-check2-circle me-1"></i>Mark Present
+                                    <i class="bi bi-check2-circle me-1" aria-hidden="true"></i>Mark Present
                                 </button>
                             </div>`;
                     }
@@ -813,7 +813,7 @@ window.markWebFaceAttendance = async function (studentNo) {
             const btn = document.getElementById(`web-face-mark-btn-${studentNo}`);
             if (btn) {
                 btn.classList.replace('btn-success', 'btn-secondary');
-                btn.innerHTML = `<i class="bi bi-check-all me-1"></i>Logged!`;
+                btn.innerHTML = `<i class="bi bi-check-all me-1" aria-hidden="true"></i>Logged!`;
                 btn.disabled = true;
             }
             
@@ -821,7 +821,7 @@ window.markWebFaceAttendance = async function (studentNo) {
             const bypassBtn = document.getElementById(`web-face-bypass-btn-${studentNo}`);
             if (bypassBtn) {
                 bypassBtn.classList.replace('btn-outline-danger', 'btn-secondary');
-                bypassBtn.innerHTML = `<i class="bi bi-check-all me-1"></i>Logged!`;
+                bypassBtn.innerHTML = `<i class="bi bi-check-all me-1" aria-hidden="true"></i>Logged!`;
                 bypassBtn.disabled = true;
             }
             
@@ -893,7 +893,7 @@ window.startAdminWebFaceEnrollment = async function (adminName, captureCount = 7
         return;
     }
 
-    statusText.innerHTML = `<span class="text-primary"><i class="bi bi-camera-video me-1"></i>Camera Active. Face the camera and click Capture.</span>`;
+    statusText.innerHTML = `<span class="text-primary"><i class="bi bi-camera-video me-1" aria-hidden="true"></i>Camera Active. Face the camera and click Capture.</span>`;
     btnCapture.classList.remove('d-none');
     btnCancel.classList.remove('d-none');
 
@@ -935,7 +935,7 @@ window.startAdminWebFaceEnrollment = async function (adminName, captureCount = 7
             try { data = JSON.parse(textData); } catch (jsonErr) { throw new Error("Server returned non-JSON response."); }
 
             if (data.status === 'success') {
-                statusText.innerHTML = `<span class="text-success fw-bold">Successfully Enrolled Admin Web Face!</span>`;
+                statusText.innerHTML = `<span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1" aria-hidden="true"></i>Successfully Enrolled Admin Web Face!</span>`;
                 setTimeout(() => {
                     stopAdminCamera();
                     container.classList.add('d-none');

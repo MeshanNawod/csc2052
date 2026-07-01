@@ -217,7 +217,7 @@ $editAvatarHtml = $profilePhoto
             </div>
             <div class="col-sm-3 d-flex align-items-end gap-1">
                 <button class="btn btn-success fw-bold w-100 py-2" id="btn-start" onclick="startLecture()"><i class="bi bi-play-fill me-1"></i>Start</button>
-                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" aria-label="End lecture" style="display:none;"><i class="bi bi-stop-fill"></i></button>
+                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" aria-label="End lecture" style="display:none;"><i class="bi bi-stop-fill" aria-hidden="true"></i></button>
             </div>
         </div>
         <div class="form-check form-switch mt-2 justify-content-center d-flex">
@@ -630,7 +630,7 @@ function loadCourses(){
                         var st = formatTime(s.start_time);
                         var et = formatTime(s.end_time);
                         var venue = s.venue ? ' @ '+esc(s.venue) : '';
-                        schedInfo += '<span class="badge bg-light text-dark badge-pill me-1 mb-1">'+esc(day)+' '+st+'–'+et+venue+'</span>';
+                        schedInfo += '<span class="badge bg-light text-dark badge-pill me-1 mb-1">'+esc(day)+' '+st+'\u2013'+et+venue+'</span>';
                     });
                 }
                 h+='<div class="col-md-6 col-lg-4"><div class="course-item p-3 h-100">'+
@@ -704,7 +704,7 @@ function loadUpcoming(){
                     '<span class="badge '+badge+' badge-pill">'+label+'</span>'+
                     '<span class="fw-bold small">'+esc(u.code)+'</span>'+
                     '<span class="text-muted small">'+esc(u.name)+'</span>'+
-                    '<span class="text-muted small ms-auto">'+esc(u.start)+'–'+esc(u.end)+(u.venue?' @ '+esc(u.venue):'')+'</span>'+
+                    '<span class="text-muted small ms-auto">'+esc(u.start)+'\u2013'+esc(u.end)+(u.venue?' @ '+esc(u.venue):'')+'</span>'+
                 '</div>';
             });
             container.innerHTML = h;
@@ -733,7 +733,7 @@ function searchEnrollStudents(){
             var h = '<table class="table table-sm mb-0 small"><thead class="table-light"><tr><th>Student No</th><th>Name</th><th>Action</th></tr></thead><tbody>';
             students.forEach(function(s){
                 h += '<tr><td>'+esc(s.student_no)+'</td><td>'+esc(s.student_name||'')+'</td>'+
-                    '<td><button class="btn btn-sm btn-outline-success py-0 px-2" onclick="enrollStudent(\''+esc(s.student_no)+'\',\''+esc(course)+'\')">Enroll</button></td></tr>';
+                    '<td><button class="btn btn-sm btn-outline-success py-0 px-2" onclick="enrollStudent(\''+esc(s.student_no)+'\',\''+esc(course)+'\')" aria-label="Enroll '+esc(s.student_no)+'">Enroll</button></td></tr>';
             });
             h += '</tbody></table>';
             container.innerHTML = h;
@@ -768,7 +768,7 @@ function loadEnrolledList(course){
             var h = '<table class="table table-sm mb-0 small"><thead class="table-light"><tr><th>Student No</th><th>Name</th><th>Action</th></tr></thead><tbody>';
             students.forEach(function(s){
                 h += '<tr><td>'+esc(s.student_no)+'</td><td>'+esc(s.student_name||'')+'</td>'+
-                    '<td><button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="unEnrollStudent(\''+esc(s.student_no)+'\',\''+esc(course)+'\')">Remove</button></td></tr>';
+                    '<td><button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="unEnrollStudent(\''+esc(s.student_no)+'\',\''+esc(course)+'\')" aria-label="Remove '+esc(s.student_no)+'">Remove</button></td></tr>';
             });
             h += '</tbody></table>';
             container.innerHTML = h;
