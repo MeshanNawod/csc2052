@@ -128,7 +128,7 @@ $avatarSrc = $profilePhoto
             <?php if ($faceId): ?> &bull; <i class="bi bi-person-bounding-box me-1"></i>Face Enrolled<?php endif; ?></p>
         </div>
         <div class="col-auto">
-            <button class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil me-1"></i>Edit Profile</button>
+            <button class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil me-1" aria-hidden="true"></i>Edit Profile</button>
         </div>
     </div>
 </div>
