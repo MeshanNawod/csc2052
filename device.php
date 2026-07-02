@@ -31,8 +31,8 @@ try {
                 <p class="text-muted small mb-0">Discover, configure, and monitor all hardware nodes. Select a target device in each section to send OTA commands.</p>
             </div>
             <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise me-1"></i>Scan Network</button>
-                <button class="btn btn-sm btn-primary" onclick="toggleManageDevices()"><i class="bi bi-gear me-1"></i>Manage Nodes</button>
+                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Scan Network"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Scan Network</button>
+                <button class="btn btn-sm btn-primary" onclick="toggleManageDevices()" aria-label="Manage Nodes"><i class="bi bi-gear me-1" aria-hidden="true"></i>Manage Nodes</button>
                 <a href="instructions.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-question-circle me-1"></i>Help</a>
             </div>
         </div>
@@ -78,7 +78,7 @@ try {
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Refresh device list"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                             </div>
                         </div>
 
@@ -90,14 +90,14 @@ try {
                             <div class="d-flex justify-content-between border-bottom pb-1 mb-1"><span class="text-muted">Queue Size</span><span id="esp-queue" class="fw-bold">—</span></div>
                             <div class="d-flex justify-content-between"><span class="text-muted">Records Today</span><span id="esp-today" class="fw-bold">—</span></div>
                         </div>
-                        <button class="btn btn-sm btn-outline-info w-100 mb-2" onclick="fetchTelemetry()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh Telemetry</button>
+                        <button class="btn btn-sm btn-outline-info w-100 mb-2" onclick="fetchTelemetry()" aria-label="Refresh telemetry"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh Telemetry</button>
                         <div class="small text-muted"><strong>IP:</strong> <span id="esp-current-ip" class="font-monospace">Not selected</span></div>
                     </div>
 
                     <!-- Mid-Left: WiFi / SD Config -->
                     <div class="col-lg-3">
                         <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-wifi me-1"></i>Wi-Fi Configuration</h6>
-                        <button id="btn-scan-wifi" class="btn btn-sm btn-primary w-100 mb-2" onclick="scanNetworksEsp()"><i class="bi bi-search me-1"></i>Scan Air</button>
+                        <button id="btn-scan-wifi" class="btn btn-sm btn-primary w-100 mb-2" onclick="scanNetworksEsp()" aria-label="Scan WiFi"><i class="bi bi-search me-1" aria-hidden="true"></i>Scan Air</button>
                         <select id="esp-ssid-select" class="form-select form-select-sm mb-2"><option value="">Scan results...</option></select>
                         <input type="password" id="esp-wifi-pass" class="form-control form-control-sm mb-2" placeholder="Password">
                         <div class="form-check form-switch mb-2">
@@ -107,7 +107,7 @@ try {
                         <div id="esp-identity-row" class="d-none mb-2">
                             <input type="text" id="esp-wifi-identity" class="form-control form-control-sm" placeholder="Enterprise Identity / Username">
                         </div>
-                        <button id="btn-save-wifi" class="btn btn-sm btn-warning w-100 fw-bold mb-2" onclick="updateWifiEsp()"><i class="bi bi-save me-1"></i>Save & Reboot</button>
+                        <button id="btn-save-wifi" class="btn btn-sm btn-warning w-100 fw-bold mb-2" onclick="updateWifiEsp()" aria-label="Save WiFi and reboot"><i class="bi bi-save me-1" aria-hidden="true"></i>Save & Reboot</button>
 
                         <h6 class="fw-bold text-muted small mb-2 mt-3"><i class="bi bi-sd-card me-1"></i>SD Card Setup File</h6>
                         <p class="small text-muted mb-2">Generate a config.txt to place on SD card root.</p>
@@ -141,13 +141,13 @@ try {
                             <small class="text-muted">Enter a shared secret key. Same value must be set in config.php HEARTBEAT_SECRET.</small>
                         </div>
                         <div class="d-grid gap-2 mb-3">
-                            <button class="btn btn-sm btn-outline-dark w-100" onclick="downloadSdConfigFromForm()"><i class="bi bi-download me-1"></i>Download SD Config File</button>
-                            <button class="btn btn-sm btn-outline-primary w-100" onclick="downloadFirmwareSource()"><i class="bi bi-code-slash me-1"></i>Download Firmware Source (.ino)</button>
-                            <button class="btn btn-sm btn-outline-success w-100" onclick="downloadSetupGuide()"><i class="bi bi-file-earmark-text me-1"></i>Download Setup Guide (.txt)</button>
+                            <button class="btn btn-sm btn-outline-dark w-100" onclick="downloadSdConfigFromForm()" aria-label="Download SD config file"><i class="bi bi-download me-1" aria-hidden="true"></i>Download SD Config File</button>
+                            <button class="btn btn-sm btn-outline-primary w-100" onclick="downloadFirmwareSource()" aria-label="Download firmware source"><i class="bi bi-code-slash me-1" aria-hidden="true"></i>Download Firmware Source (.ino)</button>
+                            <button class="btn btn-sm btn-outline-success w-100" onclick="downloadSetupGuide()" aria-label="Download setup guide"><i class="bi bi-file-earmark-text me-1" aria-hidden="true"></i>Download Setup Guide (.txt)</button>
                         </div>
 
-                        <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-bluetooth me-1"></i>Bluetooth</h6>
-                        <button class="btn btn-sm btn-info text-white w-100 mb-2" onclick="scanBluetoothEsp()"><i class="bi bi-search me-1"></i>Scan BLE</button>
+                        <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-bluetooth me-1" aria-hidden="true"></i>Bluetooth</h6>
+                        <button class="btn btn-sm btn-info text-white w-100 mb-2" onclick="scanBluetoothEsp()" aria-label="Scan Bluetooth"><i class="bi bi-search me-1" aria-hidden="true"></i>Scan BLE</button>
                         <select id="esp-bt-list" class="form-select form-select-sm"><option value="">Scan results...</option></select>
                     </div>
 
@@ -158,18 +158,18 @@ try {
                             <div class="small text-muted mb-1">LittleFS stores the offline attendance queue when the node has no internet.</div>
                         </div>
                         <div class="row g-2 mb-3">
-                            <div class="col-12"><button class="btn btn-sm btn-outline-primary w-100" onclick="sendEspOta('LISTFS')"><i class="bi bi-folder2-open me-1"></i>List Files on Flash</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-success w-100" onclick="sendEspOta('DUMP_OFFLINE')"><i class="bi bi-file-earmark-text me-1"></i>Read Offline Queue</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-info w-100" onclick="sendEspOta('SYNC_OFFLINE')"><i class="bi bi-cloud-upload me-1"></i>Force Sync Queue</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendEspOta('CLEARLOGS')"><i class="bi bi-trash me-1"></i>Wipe Offline Queue</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('FORMAT_FS')"><i class="bi bi-exclamation-triangle me-1"></i>Format LittleFS (Danger)</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-primary w-100" onclick="sendEspOta('LISTFS')" aria-label="List files on flash"><i class="bi bi-folder2-open me-1" aria-hidden="true"></i>List Files on Flash</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-success w-100" onclick="sendEspOta('DUMP_OFFLINE')" aria-label="Read offline queue"><i class="bi bi-file-earmark-text me-1" aria-hidden="true"></i>Read Offline Queue</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-info w-100" onclick="sendEspOta('SYNC_OFFLINE')" aria-label="Force sync queue"><i class="bi bi-cloud-upload me-1" aria-hidden="true"></i>Force Sync Queue</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendEspOta('CLEARLOGS')" aria-label="Wipe offline queue"><i class="bi bi-trash me-1" aria-hidden="true"></i>Wipe Offline Queue</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('FORMAT_FS')" aria-label="Format LittleFS"><i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i>Format LittleFS (Danger)</button></div>
                         </div>
 
                         <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-fingerprint me-1"></i>Fingerprint Templates</h6>
                         <div class="row g-2 mb-3">
-                            <div class="col-12"><button class="btn btn-sm btn-outline-dark w-100" onclick="sendEspOta('UPLOAD_FP_TEMPLATES')"><i class="bi bi-upload me-1"></i>Upload Templates to ESP</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-secondary w-100" onclick="sendEspOta('DOWNLOAD_FP_TEMPLATES')"><i class="bi bi-download me-1"></i>Download Templates from ESP</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('WIPE_FP_TEMPLATES')"><i class="bi bi-eraser me-1"></i>Wipe All FP Templates</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-dark w-100" onclick="sendEspOta('UPLOAD_FP_TEMPLATES')" aria-label="Upload fingerprint templates to ESP"><i class="bi bi-upload me-1" aria-hidden="true"></i>Upload Templates to ESP</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-secondary w-100" onclick="sendEspOta('DOWNLOAD_FP_TEMPLATES')" aria-label="Download fingerprint templates from ESP"><i class="bi bi-download me-1" aria-hidden="true"></i>Download Templates from ESP</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('WIPE_FP_TEMPLATES')" aria-label="Wipe all fingerprint templates"><i class="bi bi-eraser me-1" aria-hidden="true"></i>Wipe All FP Templates</button></div>
                         </div>
                     </div>
 
@@ -184,8 +184,8 @@ try {
                             <label class="form-label small text-muted mb-1">Enroll Count: <span id="esp-enroll-count-val">3</span></label>
                             <input type="range" class="form-range" min="1" max="5" id="set_enroll_fingers" oninput="document.getElementById('esp-enroll-count-val').innerText=this.value">
                             <div class="d-grid gap-2 mt-2">
-                                <button class="btn btn-sm btn-success w-100 fw-bold" onclick="saveDeviceSettingsEsp()"><i class="bi bi-save me-1"></i>Save Settings</button>
-                                <button class="btn btn-sm btn-outline-primary w-100" onclick="loadDeviceSettingsEsp()"><i class="bi bi-arrow-clockwise me-1"></i>Get Current from Device</button>
+                                <button class="btn btn-sm btn-success w-100 fw-bold" onclick="saveDeviceSettingsEsp()" aria-label="Save settings"><i class="bi bi-save me-1" aria-hidden="true"></i>Save Settings</button>
+                                <button class="btn btn-sm btn-outline-primary w-100" onclick="loadDeviceSettingsEsp()" aria-label="Get settings from device"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Get Current from Device</button>
                             </div>
                         </div>
                         <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-shield-lock me-1"></i>Security / Encryption</h6>
@@ -205,8 +205,8 @@ try {
                             <input type="password" id="esp-enc-token" class="form-control form-control-sm" placeholder="Shared secret key">
                         </div>
                         <div class="d-grid gap-2">
-                            <button id="btn-apply-security" class="btn btn-sm btn-outline-dark w-100" onclick="saveEspSecurity()"><i class="bi bi-shield-check me-1"></i>Apply Security</button>
-                            <button id="btn-get-security" class="btn btn-sm btn-outline-info w-100" onclick="getEspSecurity()"><i class="bi bi-arrow-clockwise me-1"></i>Get Current from Device</button>
+                            <button id="btn-apply-security" class="btn btn-sm btn-outline-dark w-100" onclick="saveEspSecurity()" aria-label="Apply security settings"><i class="bi bi-shield-check me-1" aria-hidden="true"></i>Apply Security</button>
+                            <button id="btn-get-security" class="btn btn-sm btn-outline-info w-100" onclick="getEspSecurity()" aria-label="Get security settings from device"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Get Current from Device</button>
                         </div>
                     </div>
                 </div>
@@ -255,10 +255,10 @@ try {
                         <option value="\r">Carriage return</option>
                     </select>
                     <button id="btn-sse-connect" class="btn btn-sm btn-success" onclick="toggleSseStream()" title="Live Stream">
-                        <i class="bi bi-play-fill me-1"></i>Connect
+                        <i class="bi bi-play-fill me-1" aria-hidden="true"></i>Connect
                     </button>
                     <span id="sse-status-dot" class="badge bg-secondary" style="font-size:0.65rem;">Idle</span>
-                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-sm btn-link text-secondary p-0" onclick="clearSerialMonitor()" title="Clear" aria-label="Clear serial monitor"><i class="bi bi-trash" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -268,7 +268,7 @@ try {
             </div>
             <div class="card-footer border-top border-secondary d-flex align-items-center gap-2 py-2 px-3" style="background:#2d2d2d;">
                 <input type="text" id="serial-cmd-input" class="form-control form-control-sm border-secondary" placeholder="Send command..." style="background:#3c3c3c;color:#d4d4d4;border-color:#555;font-family:monospace;" onkeydown="if(event.key==='Enter')sendSerialCmd()">
-                <button class="btn btn-sm btn-primary" onclick="sendSerialCmd()"><i class="bi bi-send me-1"></i>Send</button>
+                <button class="btn btn-sm btn-primary" onclick="sendSerialCmd()" aria-label="Send command"><i class="bi bi-send me-1" aria-hidden="true"></i>Send</button>
             </div>
         </div>
     </div>
@@ -306,9 +306,9 @@ try {
                         <div id="lcd3">                    </div>
                     </div>
                     <div class="d-flex gap-2 mt-2 justify-content-center">
-                        <button class="btn btn-sm btn-outline-primary" onclick="sendEspOta('GETLCD')"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
-                        <button class="btn btn-sm btn-outline-secondary" onclick="startLcdPolling()"><i class="bi bi-play me-1"></i>Auto Poll</button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="stopLcdPolling()"><i class="bi bi-stop me-1"></i>Stop</button>
+                        <button class="btn btn-sm btn-outline-primary" onclick="sendEspOta('GETLCD')" aria-label="Refresh LCD"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="startLcdPolling()" aria-label="Start auto-polling LCD"><i class="bi bi-play me-1" aria-hidden="true"></i>Auto Poll</button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="stopLcdPolling()" aria-label="Stop auto-polling LCD"><i class="bi bi-stop me-1" aria-hidden="true"></i>Stop</button>
                     </div>
 
                     <h6 class="text-muted fw-bold mb-2 mt-4 text-center">Virtual Keypad</h6>
@@ -378,8 +378,8 @@ try {
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text bg-white"><i class="bi bi-hdd-network text-muted"></i></span>
                             <input type="text" id="espnow-mac-input" class="form-control font-monospace" placeholder="AA:BB:CC:DD:EE:FF">
-                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-plus-lg"></i></button>
-                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)"><i class="bi bi-dash-lg"></i></button>
+                            <button class="btn btn-outline-primary" onclick="sendEspOta('ESPNOW_ADD_PEER:'+document.getElementById('espnow-mac-input').value)" aria-label="Add peer"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+                            <button class="btn btn-outline-danger" onclick="sendEspOta('ESPNOW_DEL_PEER:'+document.getElementById('espnow-mac-input').value)" aria-label="Delete peer"><i class="bi bi-dash-lg" aria-hidden="true"></i></button>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="espnow-broadcast-mode" checked onchange="sendEspOta('ESPNOW_BROADCAST:'+(this.checked?'1':'0'))">
@@ -389,16 +389,16 @@ try {
                     <div class="col-lg-4">
                         <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-terminal me-1"></i>Send Mesh Command</h6>
                         <div class="row g-2 mb-2">
-                            <div class="col-6"><button class="btn btn-sm btn-outline-primary w-100" onclick="sendEspOta('ESPNOW_FLUSH_QUEUE')"><i class="bi bi-cloud-upload me-1"></i>Flush Queue</button></div>
-                            <div class="col-6"><button class="btn btn-sm btn-outline-success w-100" onclick="sendEspOta('ESPNOW_PING_MESH')"><i class="bi bi-broadcast me-1"></i>Ping All</button></div>
-                            <div class="col-6"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendEspOta('ESPNOW_STATUS')"><i class="bi bi-info-circle me-1"></i>Mesh Status</button></div>
-                            <div class="col-6"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('ESPNOW_RESET_PEERS')"><i class="bi bi-x-circle me-1"></i>Reset Peers</button></div>
-                            <div class="col-12"><button class="btn btn-sm btn-outline-info w-100" onclick="sendEspOta('ESPNOW_BROADCAST:1')"><i class="bi bi-megaphone me-1"></i>Broadcast ON</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-primary w-100" onclick="sendEspOta('ESPNOW_FLUSH_QUEUE')" aria-label="Flush mesh queue"><i class="bi bi-cloud-upload me-1" aria-hidden="true"></i>Flush Queue</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-success w-100" onclick="sendEspOta('ESPNOW_PING_MESH')" aria-label="Ping all mesh nodes"><i class="bi bi-broadcast me-1" aria-hidden="true"></i>Ping All</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendEspOta('ESPNOW_STATUS')" aria-label="Get mesh status"><i class="bi bi-info-circle me-1" aria-hidden="true"></i>Mesh Status</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendEspOta('ESPNOW_RESET_PEERS')" aria-label="Reset mesh peers"><i class="bi bi-x-circle me-1" aria-hidden="true"></i>Reset Peers</button></div>
+                            <div class="col-12"><button class="btn btn-sm btn-outline-info w-100" onclick="sendEspOta('ESPNOW_BROADCAST:1')" aria-label="Turn on mesh broadcast"><i class="bi bi-megaphone me-1" aria-hidden="true"></i>Broadcast ON</button></div>
                         </div>
                         <h6 class="fw-bold text-muted small mb-1 mt-2"><i class="bi bi-pencil me-1"></i>Custom Command</h6>
                         <div class="input-group input-group-sm">
                             <input type="text" id="mesh-cmd-input" class="form-control font-monospace" placeholder="Custom command..." onkeydown="if(event.key==='Enter')sendMeshCmd()">
-                            <button class="btn btn-sm btn-outline-primary" onclick="sendMeshCmd()"><i class="bi bi-send"></i></button>
+                            <button class="btn btn-sm btn-outline-primary" onclick="sendMeshCmd()" aria-label="Send Mesh Command"><i class="bi bi-send" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
@@ -415,7 +415,7 @@ try {
                 <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger"></i>Raspberry Pi 3B Control Center</strong>
                 <div class="d-flex align-items-center gap-2">
                     <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1"></i>Offline</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()" aria-label="Refresh Pi status"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -441,20 +441,20 @@ try {
                             </div>
                         </div>
                         <div class="d-flex gap-2">
-                            <button id="btn-start-rpi-attendance" class="btn btn-sm btn-dark w-100 fw-bold" onclick="startRpiAttendance()"><i class="bi bi-play-circle me-1"></i>Start Scanner</button>
-                            <button id="btn-stop-rpi-attendance" class="btn btn-sm btn-danger w-100 fw-bold d-none" onclick="stopRpiAttendance()"><i class="bi bi-stop-circle me-1"></i>Stop</button>
+                            <button id="btn-start-rpi-attendance" class="btn btn-sm btn-dark w-100 fw-bold" onclick="startRpiAttendance()" aria-label="Start Pi scanner"><i class="bi bi-play-circle me-1" aria-hidden="true"></i>Start Scanner</button>
+                            <button id="btn-stop-rpi-attendance" class="btn btn-sm btn-danger w-100 fw-bold d-none" onclick="stopRpiAttendance()" aria-label="Stop Pi scanner"><i class="bi bi-stop-circle me-1" aria-hidden="true"></i>Stop</button>
                         </div>
 
                         <h6 class="fw-bold text-muted small mb-2 mt-3"><i class="bi bi-people me-1"></i>Face Enrollment</h6>
                         <div class="input-group input-group-sm mb-2">
-                            <span class="input-group-text bg-white"><i class="bi bi-person-badge text-muted"></i></span>
+                            <span class="input-group-text bg-white"><i class="bi bi-person-badge text-muted" aria-hidden="true"></i></span>
                             <input type="text" id="rpi-enroll-id" class="form-control" placeholder="Student No">
-                            <button class="btn btn-sm btn-danger" onclick="sendRpiCommand('ENROLL:'+document.getElementById('rpi-enroll-id').value)"><i class="bi bi-camera me-1"></i>Enroll</button>
+                            <button class="btn btn-sm btn-danger" onclick="sendRpiCommand('ENROLL:'+document.getElementById('rpi-enroll-id').value)" aria-label="Enroll face on Pi"><i class="bi bi-camera me-1" aria-hidden="true"></i>Enroll</button>
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-white"><i class="bi bi-person-x text-danger"></i></span>
                             <input type="text" id="rpi-delete-id" class="form-control" placeholder="Student No to delete">
-                            <button class="btn btn-sm btn-outline-danger" onclick="sendRpiCommand('DELETE_FACE:'+document.getElementById('rpi-delete-id').value)"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="sendRpiCommand('DELETE_FACE:'+document.getElementById('rpi-delete-id').value)" aria-label="Delete face"><i class="bi bi-trash" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -473,24 +473,24 @@ try {
                                     </select>
                                     <div id="rpi-ip-dropdown" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-danger" onclick="saveRpiConfig()"><i class="bi bi-save me-1"></i>Save</button>
+                                <button class="btn btn-sm btn-danger" onclick="saveRpiConfig()" aria-label="Save Pi config"><i class="bi bi-save me-1" aria-hidden="true"></i>Save</button>
                             </div>
                         </div>
                         <small id="rpi-ip-display" class="text-muted d-block mb-3">Not configured</small>
                         <div class="row g-2 mb-3">
-                            <div class="col-6"><button class="btn btn-sm btn-outline-success w-100" onclick="refreshRpiStatus()"><i class="bi bi-wifi me-1"></i>Test Ping</button></div>
-                            <div class="col-6"><button class="btn btn-sm btn-outline-primary w-100" onclick="triggerRpiOta()"><i class="bi bi-cloud-arrow-down me-1"></i>Pull Queue</button></div>
-                            <div class="col-6"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendRpiCommand('RESTART_SERVICE')"><i class="bi bi-arrow-repeat me-1"></i>Restart Service</button></div>
-                            <div class="col-6"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendRpiCommand('REBOOT')"><i class="bi bi-power me-1"></i>Reboot Pi</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-success w-100" onclick="refreshRpiStatus()" aria-label="Test Pi ping"><i class="bi bi-wifi me-1" aria-hidden="true"></i>Test Ping</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-primary w-100" onclick="triggerRpiOta()" aria-label="Pull Pi queue"><i class="bi bi-cloud-arrow-down me-1" aria-hidden="true"></i>Pull Queue</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-warning w-100" onclick="sendRpiCommand('RESTART_SERVICE')" aria-label="Restart Pi service"><i class="bi bi-arrow-repeat me-1" aria-hidden="true"></i>Restart Service</button></div>
+                            <div class="col-6"><button class="btn btn-sm btn-outline-danger w-100" onclick="sendRpiCommand('REBOOT')" aria-label="Reboot Pi"><i class="bi bi-power me-1" aria-hidden="true"></i>Reboot Pi</button></div>
                         </div>
                         <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-sliders me-1"></i>Recognition Settings</h6>
                         <div class="mb-2">
                             <label class="form-label small text-muted fw-bold mb-1">Match Threshold: <span id="rpi-threshold-val">55%</span></label>
                             <input type="range" class="form-range" min="40" max="90" value="55" id="rpi-threshold" oninput="document.getElementById('rpi-threshold-val').textContent=this.value+'%'">
                         </div>
-                        <button class="btn btn-sm btn-outline-dark w-100" onclick="sendRpiCommand('SETCONFIG:THRESHOLD:'+document.getElementById('rpi-threshold').value)"><i class="bi bi-check2 me-1"></i>Apply Threshold</button>
+                        <button class="btn btn-sm btn-outline-dark w-100" onclick="sendRpiCommand('SETCONFIG:THRESHOLD:'+document.getElementById('rpi-threshold').value)" aria-label="Apply Pi threshold"><i class="bi bi-check2 me-1" aria-hidden="true"></i>Apply Threshold</button>
 
-                        <h6 class="fw-bold text-muted small mb-2 mt-3"><i class="bi bi-wifi me-1"></i>Pi Wi-Fi Configuration</h6>
+                        <h6 class="fw-bold text-muted small mb-2 mt-3"><i class="bi bi-wifi me-1" aria-hidden="true"></i>Pi Wi-Fi Configuration</h6>
                         <div class="mb-2">
                             <input type="text" id="rpi-ssid-input" class="form-control form-control-sm mb-1" placeholder="SSID">
                             <input type="password" id="rpi-pass-input" class="form-control form-control-sm mb-1" placeholder="Password">
@@ -502,7 +502,7 @@ try {
                                 <input type="text" id="rpi-identity-input" class="form-control form-control-sm" placeholder="Enterprise Identity / Username">
                             </div>
                         </div>
-                        <button id="btn-update-rpi-wifi" class="btn btn-sm btn-outline-warning w-100" onclick="updateRpiWifi()"><i class="bi bi-save me-1"></i>Update Pi WiFi</button>
+                        <button id="btn-update-rpi-wifi" class="btn btn-sm btn-outline-warning w-100" onclick="updateRpiWifi()" aria-label="Update Pi WiFi"><i class="bi bi-save me-1" aria-hidden="true"></i>Update Pi WiFi</button>
                     </div>
                     <div class="col-lg-4">
                         <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-bar-chart me-1"></i>System Info</h6>
@@ -514,15 +514,15 @@ try {
                             <div class="d-flex justify-content-between border-bottom pb-1 mb-1"><span class="text-muted">Enrolled Faces</span><span id="rpi-face-count" class="fw-bold">—</span></div>
                             <div class="d-flex justify-content-between"><span class="text-muted">Service Status</span><span id="rpi-service-status" class="badge bg-secondary">—</span></div>
                         </div>
-                        <button class="btn btn-sm btn-outline-secondary w-100 mb-3" onclick="fetchRpiSysInfo()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh System Info</button>
+                        <button class="btn btn-sm btn-outline-secondary w-100 mb-3" onclick="fetchRpiSysInfo()" aria-label="Refresh Pi system info"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh System Info</button>
 
-                        <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-terminal me-1"></i>Pi Serial Monitor</h6>
+                        <h6 class="fw-bold text-muted small mb-2"><i class="bi bi-terminal me-1" aria-hidden="true"></i>Pi Serial Monitor</h6>
                         <div id="rpi-serial-output" class="terminal mb-2" style="height: 150px; overflow-y: auto;">
                             <div class="text-muted">> Pi Serial Output</div>
                         </div>
                         <div class="input-group input-group-sm">
                             <input type="text" id="rpi-cmd-input" class="form-control font-monospace" placeholder="Enter command...">
-                            <button class="btn btn-sm btn-dark" onclick="sendRpiCmdFromInput()"><i class="bi bi-send"></i></button>
+                            <button class="btn btn-sm btn-dark" onclick="sendRpiCmdFromInput()" aria-label="Send Pi command"><i class="bi bi-send" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
@@ -539,7 +539,7 @@ try {
                 <strong class="text-dark"><i class="bi bi-hdd-rack me-2 text-info"></i>Devices Overview</strong>
                 <div class="d-flex gap-2 align-items-center">
                     <span id="dev-overall-count" class="badge bg-secondary">0 devices</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshAllDeviceStatus()"><i class="bi bi-arrow-clockwise"></i> Refresh All</button>
+                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshAllDeviceStatus()" aria-label="Refresh all device status"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Refresh All</button>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -596,7 +596,7 @@ try {
                         </select>
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
-                        <button class="btn btn-sm btn-success w-100 fw-semibold" onclick="assignCourseToDevice()"><i class="bi bi-plus-lg me-1"></i>Assign</button>
+                        <button class="btn btn-sm btn-success w-100 fw-semibold" onclick="assignCourseToDevice()" aria-label="Assign course to device"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Assign</button>
                     </div>
                 </div>
                 <div id="device-assignments-list" class="border rounded bg-white p-2" style="max-height: 200px; overflow-y: auto;">
@@ -612,7 +612,7 @@ try {
                                 <tr>
                                     <td class="fw-bold small"><?php echo htmlspecialchars($dev); ?></td>
                                     <td class="small"><?php foreach ($crs as $c): ?><span class="badge bg-info text-dark me-1 mb-1"><?php echo htmlspecialchars($c); ?></span><?php endforeach; ?></td>
-                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')"><i class="bi bi-x"></i></button><?php endforeach; ?></td>
+                                    <td class="text-end"><?php foreach ($crs as $c): ?><button class="btn btn-xs btn-outline-danger py-0 px-1 mb-1" onclick="removeDeviceCourse('<?php echo htmlspecialchars($dev); ?>','<?php echo htmlspecialchars($c); ?>')" aria-label="Remove course from device"><i class="bi bi-x" aria-hidden="true"></i></button><?php endforeach; ?></td>
                                 </tr><?php endforeach; ?>
                             </tbody>
                         </table>

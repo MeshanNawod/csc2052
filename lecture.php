@@ -24,7 +24,7 @@ try {
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
                 <strong><i class="bi bi-envelope-paper me-2"></i>Email Sender Configuration</strong>
-                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody" aria-label="Toggle email sender configuration"><i class="bi bi-chevron-down"></i></button>
+                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody" aria-label="Toggle email sender configuration"><i class="bi bi-chevron-down" aria-hidden="true"></i></button>
             </div>
             <div class="collapse show" id="emailConfigBody">
                 <div class="card-body py-2 bg-light">
@@ -37,7 +37,7 @@ try {
                             <label class="form-label small fw-bold text-muted mb-1">App Password</label>
                             <div class="input-group input-group-sm">
                                 <input type="password" id="user-sender-password" class="form-control form-control-sm" placeholder="16-char app password">
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility"><i class="bi bi-eye" id="pwd-eye-icon"></i></button>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility"><i class="bi bi-eye" id="pwd-eye-icon" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -54,7 +54,7 @@ try {
                             <input type="text" id="custom-smtp-host" class="form-control form-control-sm" placeholder="smtp.example.com" value="<?php echo htmlspecialchars($emailConfigSmtp); ?>">
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-sm btn-success w-100 fw-semibold" onclick="saveEmailConfig()"><i class="bi bi-save me-1"></i>Save</button>
+                            <button class="btn btn-sm btn-success w-100 fw-semibold" onclick="saveEmailConfig()" aria-label="Save email configuration"><i class="bi bi-save me-1" aria-hidden="true"></i>Save</button>
                         </div>
                     </div>
                     <div class="row g-2 mt-2">
@@ -91,7 +91,7 @@ try {
                         <input type="date" id="absent-date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-warning w-100 fw-semibold" onclick="getAbsentStudents()"><i class="bi bi-search me-1"></i>Lookup</button>
+                        <button class="btn btn-warning w-100 fw-semibold" onclick="getAbsentStudents()" aria-label="Lookup absent students"><i class="bi bi-search me-1" aria-hidden="true"></i>Lookup</button>
                     </div>
                 </div>
                 
@@ -231,7 +231,7 @@ try {
                         <option value="attendance_alert">Attendance Alerts</option>
                         <option value="custom">Custom</option>
                     </select>
-                    <button class="btn btn-sm btn-light fw-semibold" onclick="loadEmailLogs()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+                    <button class="btn btn-sm btn-light fw-semibold" onclick="loadEmailLogs()" aria-label="Refresh email logs"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
                 </div>
             </div>
             <div class="card-body p-0">
