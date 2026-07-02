@@ -130,7 +130,7 @@ $editAvatarHtml = $profilePhoto
             <?php if ($phone): ?> &bull; <i class="bi bi-telephone me-1"></i><?php echo htmlspecialchars($phone); ?><?php endif; ?></p>
         </div>
         <div class="col-auto">
-            <button class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil me-1"></i>Edit Profile</button>
+            <button class="btn btn-sm btn-outline-light rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#editModal" aria-label="Edit Profile"><i class="bi bi-pencil me-1" aria-hidden="true"></i>Edit Profile</button>
         </div>
     </div>
 </div>
@@ -216,8 +216,8 @@ $editAvatarHtml = $profilePhoto
                 <input type="number" id="start-timer-custom" class="form-control form-control-sm mt-1" placeholder="Minutes" min="1" max="480" style="display:none;">
             </div>
             <div class="col-sm-3 d-flex align-items-end gap-1">
-                <button class="btn btn-success fw-bold w-100 py-2" id="btn-start" onclick="startLecture()"><i class="bi bi-play-fill me-1"></i>Start</button>
-                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" aria-label="End lecture" style="display:none;"><i class="bi bi-stop-fill"></i></button>
+                <button class="btn btn-success fw-bold w-100 py-2" id="btn-start" onclick="startLecture()"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>Start</button>
+                <button class="btn btn-danger fw-bold py-2 px-3" id="btn-end" onclick="endLecture()" aria-label="End lecture" style="display:none;"><i class="bi bi-stop-fill" aria-hidden="true"></i></button>
             </div>
         </div>
         <div class="form-check form-switch mt-2 justify-content-center d-flex">
@@ -229,18 +229,18 @@ $editAvatarHtml = $profilePhoto
 </div>
 
 <ul class="nav nav-tabs mb-3" id="teacherTabs" role="tablist">
-    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-logs"><i class="bi bi-clock-history me-1"></i>Attendance Logs</button></li>
-    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-absent"><i class="bi bi-person-x me-1 text-danger"></i>Absent Students</button></li>
-    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-courses"><i class="bi bi-book me-1"></i>My Courses</button></li>
-    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-enroll"><i class="bi bi-person-plus me-1"></i>Enroll Students</button></li>
-    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-attendance"><i class="bi bi-bar-chart me-1"></i>Attendance %</button></li>
+    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-logs" aria-label="Attendance logs"><i class="bi bi-clock-history me-1" aria-hidden="true"></i>Attendance Logs</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-absent" aria-label="Absent students"><i class="bi bi-person-x me-1 text-danger" aria-hidden="true"></i>Absent Students</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-courses" aria-label="My assigned courses"><i class="bi bi-book me-1" aria-hidden="true"></i>My Courses</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-enroll" aria-label="Enroll students"><i class="bi bi-person-plus me-1" aria-hidden="true"></i>Enroll Students</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-attendance" aria-label="Attendance statistics"><i class="bi bi-bar-chart me-1" aria-hidden="true"></i>Attendance %</button></li>
 </ul>
 
 <div class="row g-3 mb-4" id="upcoming-section">
     <div class="col-12">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center">
-                <strong class="small"><i class="bi bi-calendar-event me-1"></i>Today's Scheduled Courses</strong>
+                <strong class="small"><i class="bi bi-calendar-event me-1" aria-hidden="true"></i>Today's Scheduled Courses</strong>
                 <span class="badge bg-primary" id="upcoming-count">0</span>
             </div>
             <div class="card-body p-0" style="max-height:220px;overflow-y:auto;">
@@ -258,7 +258,7 @@ $editAvatarHtml = $profilePhoto
             <div class="card-header bg-white py-2">
                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <strong class="small"><i class="bi bi-funnel me-1"></i>Filters</strong>
-                    <button class="btn btn-sm btn-outline-primary" onclick="fetchLogs()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+                    <button class="btn btn-sm btn-outline-primary" onclick="fetchLogs()" aria-label="Refresh logs"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
                 </div>
             </div>
             <div class="card-body py-2">
@@ -292,10 +292,10 @@ $editAvatarHtml = $profilePhoto
                         <input type="date" id="absent-date" class="form-control form-control-sm" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-sm btn-danger w-100" onclick="checkAbsent()"><i class="bi bi-search me-1"></i>Check</button>
+                        <button class="btn btn-sm btn-danger w-100" onclick="checkAbsent()" aria-label="Check absent students"><i class="bi bi-search me-1" aria-hidden="true"></i>Check</button>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-sm btn-outline-dark w-100" onclick="emailAbsent()" id="btn-email-absent" disabled><i class="bi bi-envelope me-1"></i>Email</button>
+                        <button class="btn btn-sm btn-outline-dark w-100" onclick="emailAbsent()" id="btn-email-absent" disabled aria-label="Email absent students"><i class="bi bi-envelope me-1" aria-hidden="true"></i>Email</button>
                     </div>
                 </div>
                 <div id="absent-container">
@@ -343,7 +343,7 @@ $editAvatarHtml = $profilePhoto
                         <input type="text" id="enroll-search" class="form-control form-control-sm" placeholder="Search by student no or name..." oninput="searchEnrollStudents()">
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-sm btn-success w-100" onclick="searchEnrollStudents()"><i class="bi bi-search me-1"></i>Search</button>
+                        <button class="btn btn-sm btn-success w-100" onclick="searchEnrollStudents()" aria-label="Search students"><i class="bi bi-search me-1" aria-hidden="true"></i>Search</button>
                     </div>
                 </div>
                 <div id="enroll-search-results" class="mb-3" style="max-height:300px;overflow-y:auto;">
@@ -387,7 +387,7 @@ $editAvatarHtml = $profilePhoto
             </div>
             <div class="modal-footer py-2">
                 <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary btn-sm fw-semibold" onclick="saveProfile()"><i class="bi bi-check-lg me-1"></i>Save Changes</button>
+                <button class="btn btn-primary btn-sm fw-semibold" onclick="saveProfile()" aria-label="Save changes"><i class="bi bi-check-lg me-1" aria-hidden="true"></i>Save Changes</button>
             </div>
         </div>
     </div>
