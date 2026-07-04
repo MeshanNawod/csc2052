@@ -23,8 +23,8 @@ try {
         <!-- Email Sender Config -->
         <div class="card shadow-sm mb-4 border-0">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
-                <strong><i class="bi bi-envelope-paper me-2"></i>Email Sender Configuration</strong>
-                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody" aria-label="Toggle email sender configuration"><i class="bi bi-chevron-down"></i></button>
+                <strong><i class="bi bi-envelope-paper me-2" aria-hidden="true"></i>Email Sender Configuration</strong>
+                <button class="btn btn-sm btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#emailConfigBody" aria-label="Toggle email sender configuration"><i class="bi bi-chevron-down" aria-hidden="true"></i></button>
             </div>
             <div class="collapse show" id="emailConfigBody">
                 <div class="card-body py-2 bg-light">
@@ -126,8 +126,8 @@ try {
                         <button class="btn btn-outline-info btn-sm fw-semibold" id="btn-custom-absent-email" onclick="openCustomEmailModal('absent')" disabled>
                             <i class="bi bi-pencil-square me-1"></i>Custom
                         </button>
-                        <button class="btn btn-outline-secondary btn-sm fw-semibold" id="btn-download-absent" onclick="downloadAbsentReport()" disabled>
-                            <i class="bi bi-download me-1"></i>CSV
+                        <button class="btn btn-outline-secondary btn-sm fw-semibold" id="btn-download-absent" onclick="downloadAbsentReport()" disabled aria-label="Download absent report CSV">
+                            <i class="bi bi-download me-1" aria-hidden="true"></i>CSV
                         </button>
                     </div>
                     <div class="table-responsive bg-white border rounded shadow-sm scroll-y-md">
@@ -197,8 +197,8 @@ try {
                         <button class="btn btn-outline-info btn-sm fw-semibold" id="btn-custom-analytics-email" onclick="openCustomEmailModal('analytics')" disabled>
                             <i class="bi bi-pencil-square me-1"></i>Custom
                         </button>
-                        <button class="btn btn-outline-secondary btn-sm fw-semibold" id="btn-download-analytics" onclick="downloadAnalyticsReport()" disabled>
-                            <i class="bi bi-download me-1"></i>CSV
+                        <button class="btn btn-outline-secondary btn-sm fw-semibold" id="btn-download-analytics" onclick="downloadAnalyticsReport()" disabled aria-label="Download analytics report CSV">
+                            <i class="bi bi-download me-1" aria-hidden="true"></i>CSV
                         </button>
                     </div>
                     <div class="table-responsive bg-white border rounded shadow-sm scroll-y-lg">
@@ -282,8 +282,8 @@ try {
                         <div class="col-4"><div class="form-check"><input class="form-check-input" type="checkbox" id="csv-col-id"><label class="form-check-label small" for="csv-col-id">Log ID</label></div></div>
                     </div>
                 </div>
-                <button class="btn btn-success w-100 fw-semibold shadow-sm mb-2" onclick="exportFilteredCSV()">
-                    <i class="bi bi-download me-2"></i>Download Relevant CSV
+                <button class="btn btn-success w-100 fw-semibold shadow-sm mb-2" onclick="exportFilteredCSV()" aria-label="Download filtered ledger CSV">
+                    <i class="bi bi-download me-2" aria-hidden="true"></i>Download Relevant CSV
                 </button>
                 <a href="export_csv.php" class="btn btn-outline-success btn-sm w-100 fw-semibold">
                     Download Master Ledger (All)

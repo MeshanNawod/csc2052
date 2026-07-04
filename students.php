@@ -60,7 +60,7 @@ try {
                                             <?php foreach ($courses as $c): ?>
                                             <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                                 <span><strong><?php echo htmlspecialchars($c['course_code']); ?></strong><?php if (!empty($c['course_name'])): ?> - <span class="text-muted"><?php echo htmlspecialchars($c['course_name']); ?></span><?php endif; ?></span>
-                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg"></i></button>
+                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                             </li>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -82,7 +82,7 @@ try {
                                         </select>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg"></i></button>
+                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div id="course-enroll-msg" class="small mb-2 min-h-xs"></div>
@@ -113,7 +113,7 @@ try {
                     <div class="tab-pane fade" id="tab-manager" role="tabpanel">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted fw-bold mb-0"><i class="bi bi-folder2-open me-1"></i>Course Manager</h6>
-                            <button class="btn btn-sm btn-outline-primary fw-semibold" onclick="loadCourseManager()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+                            <button class="btn btn-sm btn-outline-primary fw-semibold" onclick="loadCourseManager()" aria-label="Refresh course manager"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
                         </div>
                         <div id="course-manager-container">
                             <div class="text-center py-4 text-muted"><i class="bi bi-arrow-clockwise spin me-1"></i>Loading courses...</div>
@@ -124,7 +124,7 @@ try {
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted fw-bold mb-0"><i class="bi bi-calendar-week me-1"></i>Weekly Course Schedule</h6>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-success fw-semibold" onclick="loadSchedules()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh</button>
+                                <button class="btn btn-sm btn-outline-success fw-semibold" onclick="loadSchedules()" aria-label="Refresh schedules"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh</button>
                                 <button class="btn btn-sm btn-success fw-semibold" data-bs-toggle="modal" data-bs-target="#scheduleModal"><i class="bi bi-plus-lg me-1"></i>Add Time Slot</button>
                             </div>
                         </div>
@@ -1084,8 +1084,8 @@ function renderCourseManager() {
                 <td>${escapeHtml(slot.venue || '—')}</td>
                 <td><span class="badge bg-light text-dark">${escapeHtml(slot.device_id || 'Web')}</span></td>
                 <td>
-                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot">
-                        <i class="bi bi-trash"></i>
+                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot" aria-label="Delete slot">
+                        <i class="bi bi-trash" aria-hidden="true"></i>
                     </button>
                 </td>
             </tr>`;
