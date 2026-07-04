@@ -31,9 +31,9 @@ try {
                 <p class="text-muted small mb-0">Discover, configure, and monitor all hardware nodes. Select a target device in each section to send OTA commands.</p>
             </div>
             <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise me-1"></i>Scan Network</button>
-                <button class="btn btn-sm btn-primary" onclick="toggleManageDevices()"><i class="bi bi-gear me-1"></i>Manage Nodes</button>
-                <a href="instructions.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-question-circle me-1"></i>Help</a>
+                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Scan network"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Scan Network</button>
+                <button class="btn btn-sm btn-primary" onclick="toggleManageDevices()" aria-label="Manage nodes"><i class="bi bi-gear me-1" aria-hidden="true"></i>Manage Nodes</button>
+                <a href="instructions.php" class="btn btn-sm btn-outline-secondary"><i class="bi bi-question-circle me-1" aria-hidden="true"></i>Help</a>
             </div>
         </div>
         <div id="device-list-table" class="small text-muted mt-2"><em>Click "Scan Network" to discover nodes...</em></div>
@@ -78,7 +78,7 @@ try {
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Refresh device list"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                             </div>
                         </div>
 
@@ -90,7 +90,7 @@ try {
                             <div class="d-flex justify-content-between border-bottom pb-1 mb-1"><span class="text-muted">Queue Size</span><span id="esp-queue" class="fw-bold">—</span></div>
                             <div class="d-flex justify-content-between"><span class="text-muted">Records Today</span><span id="esp-today" class="fw-bold">—</span></div>
                         </div>
-                        <button class="btn btn-sm btn-outline-info w-100 mb-2" onclick="fetchTelemetry()"><i class="bi bi-arrow-clockwise me-1"></i>Refresh Telemetry</button>
+                        <button class="btn btn-sm btn-outline-info w-100 mb-2" onclick="fetchTelemetry()" aria-label="Refresh telemetry"><i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Refresh Telemetry</button>
                         <div class="small text-muted"><strong>IP:</strong> <span id="esp-current-ip" class="font-monospace">Not selected</span></div>
                     </div>
 
@@ -1541,11 +1541,11 @@ async function refreshAllDeviceStatus() {
             const queue = cached.queue !== undefined ? '<span class="badge ' + (cached.queue > 0 ? 'bg-warning text-dark' : 'bg-success') + '">' + cached.queue + '</span>' : '—';
             const actions = [];
             if (online) {
-                actions.push('<button class="btn btn-xs btn-outline-info py-0 px-1 me-1" onclick="probeDevice(\'' + ip + '\')" title="Probe"><i class="bi bi-search"></i></button>');
-                if (type === 'esp32') actions.push('<button class="btn btn-xs btn-outline-primary py-0 px-1 me-1" onclick="document.getElementById(\'action-target-device\').value=\'' + ip + '\';onEspTargetChange()" title="Select"><i class="bi bi-bullseye"></i></button>');
+                actions.push('<button class="btn btn-xs btn-outline-info py-0 px-1 me-1" onclick="probeDevice(\'' + ip + '\')" title="Probe" aria-label="Probe device"><i class="bi bi-search" aria-hidden="true"></i></button>');
+                if (type === 'esp32') actions.push('<button class="btn btn-xs btn-outline-primary py-0 px-1 me-1" onclick="document.getElementById(\'action-target-device\').value=\'' + ip + '\';onEspTargetChange()" title="Select" aria-label="Select device"><i class="bi bi-bullseye" aria-hidden="true"></i></button>');
             }
             if (type === 'rpi') {
-                actions.push('<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="document.getElementById(\'rpi-ip-search\').value=\'' + ip + '\';saveRpiConfig()" title="Set as Pi"><i class="bi bi-raspberry-pi"></i></button>');
+                actions.push('<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="document.getElementById(\'rpi-ip-search\').value=\'' + ip + '\';saveRpiConfig()" title="Set as Pi" aria-label="Set as Pi"><i class="bi bi-raspberry-pi" aria-hidden="true"></i></button>');
             }
             html += '<tr><td class="ps-3 fw-bold">' + typeIcon + escapeHtml(name) + '</td>';
             html += '<td class="font-monospace small">' + ip + '</td>';
