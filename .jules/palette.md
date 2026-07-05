@@ -7,3 +7,7 @@
 ## 2024-05-28 - Missing ARIA Labels on Icon-only Buttons
 **Learning:** Found an app-wide pattern where icon-only action buttons (like Delete, Edit, Download) rely exclusively on the `title` attribute. While `title` gives a tooltip, it doesn't consistently announce to screen readers.
 **Action:** Always verify icon-only buttons have explicit `aria-label` attributes describing their action, and set `aria-hidden="true"` on the interior icon elements to prevent redundant announcements.
+
+## 2024-07-05 - Global UI Components Require Careful ARIA Implementation
+**Learning:** When adding global interactive components like the AI assistant (which appears on every page via `includes/footer.php`), it's extremely easy to miss screen reader support for icon-only buttons (like toggle, close, and send). If these aren't explicitly labeled, the entire assistant becomes inaccessible to screen reader users across the entire application.
+**Action:** Always ensure that global floating UI elements (like chat toggles or modals) have explicit `aria-label` attributes on their buttons and `aria-hidden="true"` on their interior icon elements, as these components have outsized impact due to their presence on every page.
