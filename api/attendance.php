@@ -7,32 +7,18 @@
  */
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/helpers.php';
 
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
 
-$method  = $_POST['method']  ?? $_GET['method'] ?? 'plaintext';
-$token   = $_POST['token']   ?? $_GET['token']  ?? '';
+$method = $_POST['method'] ?? $_GET['method'] ?? 'plaintext';
 
 // ─── Authentication ───────────────────────────────────────────────
-$hw_key = $_SERVER['HTTP_X_HARDWARE_KEY'] ?? ($_POST['hardware_key'] ?? '');
-
-if ($method !== 'plaintext') {
-    if ($token === '' && $hw_key === '') {
-        http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: token required for ' . $method . ' mode.']);
-        exit;
-    }
-    if ($token !== '' && !hash_equals(HEARTBEAT_SECRET, $token)) {
-        http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid token.']);
-        exit;
-    }
-    if ($hw_key !== '' && !hash_equals(HARDWARE_API_KEY, $hw_key)) {
-        http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid hardware key.']);
-        exit;
-    }
+if (!verifyHardwareSignature()) {
+    http_response_code(401);
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized: hardware verification failed.']);
+    exit;
 }
 
 // ─── Parameters ───────────────────────────────────────────────────

@@ -127,6 +127,36 @@ if (!function_exists('apiResponse')) {
 }
 
 /**
+ * Verify HMAC-SHA256 signature or legacy key for hardware API calls.
+ */
+if (!function_exists('verifyHardwareSignature')) {
+    function verifyHardwareSignature(): bool {
+        $hwKey = $_SERVER['HTTP_X_HARDWARE_KEY'] ?? ($_POST['hardware_key'] ?? ($_GET['hardware_key'] ?? ''));
+        $signature = $_SERVER['HTTP_X_SIGNATURE'] ?? '';
+        $token = $_POST['token'] ?? ($_GET['token'] ?? '');
+
+        // 1. HMAC-SHA256 Standard (Signature)
+        if (!empty($signature)) {
+            $data = file_get_contents('php://input') ?: ($_SERVER['QUERY_STRING'] ?? '');
+            $expected = hash_hmac('sha256', $data, HARDWARE_API_KEY);
+            if (hash_equals($expected, $signature)) return true;
+        }
+
+        // 2. Direct Hardware API Key (Header/POST/GET)
+        if (!empty($hwKey) && hash_equals(HARDWARE_API_KEY, $hwKey)) return true;
+
+        // 3. Legacy Heartbeat Secret (Fallback)
+        if (!empty($token) && hash_equals(HEARTBEAT_SECRET, $token)) return true;
+
+        // 4. Legacy UA-based check (Last resort fallback for old ESP32 clients)
+        $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        if (strpos($ua, 'ESP32HTTPClient') !== false) return true;
+
+        return false;
+    }
+}
+
+/**
  * Standardized API error response.
  */
 if (!function_exists('apiError')) {
