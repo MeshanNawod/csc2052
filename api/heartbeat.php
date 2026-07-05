@@ -6,26 +6,19 @@
  * Usage: GET /api/heartbeat.php?device=esp32&name=DEVICE_NAME&token=SECRET&method=plaintext|hmac|aes
  */
 require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/helpers.php';
 
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
 
 $device_type = strtolower(trim($_GET['device'] ?? 'esp32'));
 $device_name = trim($_GET['name'] ?? 'Unknown Node');
-$token       = $_GET['token']  ?? '';
 $method      = $_GET['method'] ?? 'plaintext';
 
 // ─── Authentication ───────────────────────────────────────────────
-$hw_key     = $_SERVER['HTTP_X_HARDWARE_KEY'] ?? ($_GET['hardware_key'] ?? '');
-$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-
-$valid_token  = !empty($token)  && hash_equals(HEARTBEAT_SECRET, $token);
-$valid_hwkey  = !empty($hw_key) && hash_equals(HARDWARE_API_KEY, $hw_key);
-$legacy_esp   = empty($token)   && empty($hw_key) && strpos($user_agent, 'ESP32HTTPClient') !== false;
-
-if (!$valid_token && !$valid_hwkey && !$legacy_esp) {
+if (!verifyHardwareSignature()) {
     http_response_code(401);
-    echo json_encode(['status' => 'error', 'message' => 'Unauthorized: invalid or missing token.']);
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized: hardware verification failed.']);
     exit;
 }
 
