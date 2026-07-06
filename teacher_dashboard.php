@@ -461,14 +461,11 @@ function fetchLogs(){
     // Only add date filter if explicitly set
     if (date) url += '&date=' + encodeURIComponent(date);
     if (search) url += '&search=' + encodeURIComponent(search);
-    console.log('Fetching logs from:', url);
     fetch(url)
         .then(function(r){ 
-            console.log('Response status:', r.status);
             return r.json(); 
         })
         .then(function(data) {
-            console.log('Response data:', data);
             var el = document.getElementById('log-container');
             if (!data.logs || data.logs.length === 0){
                 el.innerHTML = '<div class="text-center text-muted py-5">';
@@ -500,7 +497,7 @@ function fetchLogs(){
             el.innerHTML = h;
         })
         .catch(function(err){ 
-            console.error('Fetch error:', err);
+
             document.getElementById('log-container').innerHTML = '<div class="text-center text-danger py-4 small"><i class="bi bi-exclamation-triangle me-1"></i>Failed to load logs: ' + err + '</div>'; 
         });
 }

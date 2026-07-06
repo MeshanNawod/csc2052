@@ -15,7 +15,7 @@ window.showToast = function(message, type = 'info') {
     const bgClass = type === 'success' ? 'bg-success' : type === 'error' || type === 'danger' ? 'bg-danger' : type === 'warning' ? 'bg-warning text-dark' : 'bg-primary';
     toast.className = `toast show ${bgClass} text-white shadow`;
     toast.style.cssText = 'border-radius:10px;padding:12px 16px;font-size:0.85rem;animation:slideIn 0.3s ease;';
-    toast.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' || type === 'danger' ? 'exclamation-triangle' : type === 'warning' ? 'exclamation-circle' : 'info-circle'} me-2"></i>${safeMessage}`;
+    toast.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' || type === 'danger' ? 'exclamation-triangle' : type === 'warning' ? 'exclamation-circle' : 'info-circle'} me-2" aria-hidden="true"></i>${safeMessage}`;
     container.appendChild(toast);
     
     setTimeout(() => {
@@ -61,7 +61,7 @@ function getDeviceName() {
 async function refreshDeviceList() {
     const sel = document.getElementById('action-target-device');
     const refreshBtn = document.querySelector('[onclick="refreshDeviceList()"]');
-    if (refreshBtn) refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise spin"></i>';
+    if (refreshBtn) refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise spin" aria-hidden="true"></i>';
 
     try {
         const res = await fetch('/csc2052/api/devices.php?action=list');
@@ -70,9 +70,10 @@ async function refreshDeviceList() {
         populateDeviceSelector();
         renderDeviceManageTable();
     } catch(e) {
-        console.warn('[Devices] Could not fetch device list:', e);
+        // Log to terminal if possible, otherwise fail silently
+        logToTerminal('[Devices] Could not fetch device list: ' + e.message);
     } finally {
-        if (refreshBtn) refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i>';
+        if (refreshBtn) refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise" aria-hidden="true"></i>';
     }
 }
 
@@ -133,8 +134,8 @@ function renderDeviceManageTable() {
             <td>${badge}${block}</td>
             <td class="d-flex gap-1">
                 ${blockBtn}
-                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})'><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})'><i class="bi bi-trash"></i></button>
+                <button class="btn btn-xs btn-outline-secondary py-0 px-1" onclick='renameDevice(${ipArg}, ${nameArg})' aria-label="Rename device ${escapeHtml(dev.name)}"><i class="bi bi-pencil" aria-hidden="true"></i></button>
+                <button class="btn btn-xs btn-outline-dark py-0 px-1" onclick='deviceAction("forget", ${ipArg})' aria-label="Forget device ${escapeHtml(dev.name)}"><i class="bi bi-trash" aria-hidden="true"></i></button>
             </td>
         </tr>`;
     });
@@ -227,7 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
     restoreLectureTimer();
     // Only start polling logs if we are on a page that displays them (like index.php)
     if (document.getElementById('logs-accordion-container')) {
-        console.log('[Init] Starting logs polling...');
         fetchLogs();
         if (typeof fetchTodayAttendance === 'function') fetchTodayAttendance();
         setInterval(() => {
@@ -407,7 +407,7 @@ async function safeFetch(url, options = {}) {
         });
         return response;
     } catch (e) {
-        console.error('[Fetch Error]', url, e.message);
+
         throw e;
     }
 }
@@ -425,8 +425,6 @@ function logToTerminal(text) {
     if (terminal) {
         terminal.textContent += text + "\n";
         terminal.scrollTop = terminal.scrollHeight;
-    } else {
-        console.log(text);
     }
 }
 
@@ -512,7 +510,7 @@ async function sendOtaCommandToIp(ip, command) {
     try {
         await fetch(`http://${ip}/cmd?command=${encodeURIComponent(command)}`, { signal: AbortSignal.timeout(3000) });
     } catch (e) {
-        console.warn('[OTA] Failed to reach ' + ip + ':', e.message);
+
     }
 }
 
@@ -547,7 +545,7 @@ function renderActiveLectures() {
             <span class="fw-bold text-truncate" style="max-width:120px;">${isDash ? 'Web Dashboard' : escapeHtml(lec.deviceName || ip)}</span>
             <span class="badge bg-success mx-1">${escapeHtml(lec.course)}</span>
             <span class="text-muted small">${duration}</span>
-            <button class="btn btn-xs btn-outline-danger py-0 px-1 ms-1" onclick="endLectureByDevice('${ip}')"><i class="bi bi-x"></i></button>
+            <button class="btn btn-xs btn-outline-danger py-0 px-1 ms-1" onclick="endLectureByDevice('${ip}')" aria-label="End lecture for ${escapeHtml(lec.course)}"><i class="bi bi-x" aria-hidden="true"></i></button>
         </div>`;
     });
     container.innerHTML = html;
@@ -565,7 +563,7 @@ function refreshLectureButtons() {
         if (btnStart) {
             btnStart.disabled = true;
             btnStart.className = 'btn btn-success fw-semibold';
-            btnStart.innerHTML = `<i class="bi bi-broadcast"></i> Live: ${escapeHtml(lec.course)}`;
+            btnStart.innerHTML = `<i class="bi bi-broadcast" aria-hidden="true"></i> Live: ${escapeHtml(lec.course)}`;
         }
         if (btnEnd) btnEnd.disabled = false;
         if (searchInput) { searchInput.disabled = true; searchInput.value = lec.course; }
@@ -574,7 +572,7 @@ function refreshLectureButtons() {
         if (btnStart) {
             btnStart.disabled = false;
             btnStart.className = 'btn btn-primary fw-semibold';
-            btnStart.innerHTML = `<i class="bi bi-broadcast me-1"></i>Start`;
+            btnStart.innerHTML = `<i class="bi bi-broadcast me-1" aria-hidden="true"></i>Start`;
         }
         if (btnEnd) btnEnd.disabled = true;
         if (searchInput) searchInput.disabled = false;
@@ -1100,7 +1098,7 @@ async function fetchDeviceSettings() {
             document.getElementById('set_enroll_fingers').value = data.enroll_fingers || 3;
             document.getElementById('enrollCountVal').innerText = data.enroll_fingers || 3;
         }
-    } catch (e) { console.error(e); }
+    } catch (e) {  }
 }
 
 window.saveDeviceSettings = async function() {
@@ -1296,9 +1294,9 @@ async function loadCourseDatalist() {
 async function refreshAllCourseDropdowns() {
     try {
         const res = await fetch('/csc2052/api/student.php?action=get_all_courses');
-        if (!res.ok) { console.warn('[Courses] API returned', res.status); return; }
+        if (!res.ok) return;
         const ct = res.headers.get('content-type') || '';
-        if (!ct.includes('application/json')) { console.warn('[Courses] Non-JSON response'); return; }
+        if (!ct.includes('application/json')) return;
         const data = await res.json();
         if (data.status !== 'success' || !data.courses) return;
 
@@ -1369,7 +1367,7 @@ async function refreshAllCourseDropdowns() {
                 dd.appendChild(item);
             });
         });
-    } catch (e) { console.error('[Courses] Error:', e); }
+    } catch (e) {  }
 }
 
 async function refreshDeviceDropdown() {
@@ -1409,7 +1407,7 @@ async function fetchTodayAttendance() {
             if (countEl) countEl.innerText = data.count;
         }
     } catch (e) {
-        console.error("Failed to fetch today's attendance count", e);
+
     }
 }
 
@@ -1430,12 +1428,12 @@ async function fetchLogs() {
         clearTimeout(timeout);
         
         if (!response.ok) {
-            console.error('[Logs] HTTP ' + response.status);
+
             if (response.status === 401 || response.status === 403 || response.status === 302) {
                 container.innerHTML = '<div class="text-center text-danger py-4"><em>Session expired. Please <a href="/csc2052/login.php">login again</a>.</em></div>';
             } else if (response.status === 500) {
                 const errText = await response.text().catch(() => '');
-                console.error('[Logs] Server error:', errText);
+
                 container.innerHTML = '<div class="text-center text-danger py-4"><em>Server error. Check browser console (F12) for details.</em></div>';
             } else {
                 container.innerHTML = '<div class="text-center text-danger py-4"><em>Failed to load logs (HTTP ' + response.status + ').</em></div>';
@@ -1445,7 +1443,7 @@ async function fetchLogs() {
         const contentType = response.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             const body = await response.text().catch(() => '');
-            console.error('[Logs] Non-JSON response (', response.status, '):', body.substring(0, 300));
+
             if (body.toLowerCase().includes('login') || body.toLowerCase().includes('session') || response.redirected) {
                 container.innerHTML = '<div class="text-center text-danger py-4"><em>Session expired. Please <a href="/csc2052/login.php">login again</a>.</em></div>';
             } else {
@@ -1646,7 +1644,7 @@ async function fetchLogs() {
         container.innerHTML = html;
 
     } catch (e) {
-        console.error("[Logs] Failed to fetch logs:", e);
+
         const c = document.getElementById('logs-accordion-container');
         if (c) {
             const msg = e && e.message ? e.message : 'Unknown error';
@@ -1722,7 +1720,7 @@ window.downloadGroupCSV = async function(course, date, timeBlock) {
         document.body.removeChild(a);
         URL.revokeObjectURL(urlObj);
     } catch (e) {
-        console.error('CSV download failed:', e);
+
         alert('Failed to download CSV.');
     }
 };
@@ -1782,21 +1780,21 @@ window.calculateCourseAnalytics = async function() {
             
             html += `
                 <tr data-student-no="${escapeHtml(st.student_no)}" data-student-name="${escapeHtml(st.student_name)}" data-percentage="${st.percentage}" data-course="${escapeHtml(course)}" data-attended="${st.attended}" data-total="${data.total}">
-                    <td><input class="form-check-input analytics-row-check" type="checkbox" value="${escapeHtml(st.student_no)}" onchange="updateSelectedCount('analytics')"></td>
+                    <td><input class="form-check-input analytics-row-check" type="checkbox" value="${escapeHtml(st.student_no)}" onchange="updateSelectedCount('analytics')" aria-label="Select ${escapeHtml(st.student_name)}"></td>
                     <td class="ps-3 fw-bold text-primary">${escapeHtml(st.student_no)}</td>
                     <td class="fw-semibold text-dark">${escapeHtml(st.student_name)}</td>
                     <td class="fw-bold">${st.attended} / ${data.total}</td>
                     <td class="text-center">
                         <div class="d-flex align-items-center justify-content-center gap-2">
                             <div class="progress" style="height: 8px; width: 80px; background: #e9ecef; border-radius: 4px;">
-                                <div class="progress-bar" style="width: ${st.percentage}%; background-color: ${barColor}; border-radius: 4px;"></div>
+                                <div class="progress-bar" style="width: ${st.percentage}%; background-color: ${barColor}; border-radius: 4px;" role="progressbar" aria-label="Attendance progress" aria-valuenow="${st.percentage}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <span class="badge ${badgeClass}" style="min-width: 50px;">${st.percentage}%</span>
                         </div>
                     </td>
                     <td>
-                        <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAnalyticsEmail('${escapeHtml(st.student_no)}', '${escapeHtml(st.student_name)}', ${st.percentage}, '${escapeHtml(course)}')" title="Email this student">
-                            <i class="bi bi-envelope"></i>
+                        <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAnalyticsEmail('${escapeHtml(st.student_no)}', '${escapeHtml(st.student_name)}', ${st.percentage}, '${escapeHtml(course)}')" title="Email this student" aria-label="Email ${escapeHtml(st.student_name)}">
+                            <i class="bi bi-envelope" aria-hidden="true"></i>
                         </button>
                     </td>
                 </tr>
@@ -1859,15 +1857,16 @@ window.getAbsentStudents = async function() {
             } else {
                 let html = '';
                 data.absent_students.forEach(s => {
+                    const sName = s.student_name || 'Unknown';
                     html += `
-                        <tr data-student-no="${escapeHtml(s.student_no)}" data-student-name="${escapeHtml(s.student_name || 'Unknown')}" data-course="${escapeHtml(s.course_code)}">
-                            <td><input class="form-check-input absent-row-check" type="checkbox" value="${escapeHtml(s.student_no)}" onchange="updateSelectedCount('absent')"></td>
+                        <tr data-student-no="${escapeHtml(s.student_no)}" data-student-name="${escapeHtml(sName)}" data-course="${escapeHtml(s.course_code)}">
+                            <td><input class="form-check-input absent-row-check" type="checkbox" value="${escapeHtml(s.student_no)}" onchange="updateSelectedCount('absent')" aria-label="Select ${escapeHtml(sName)}"></td>
                             <td class="ps-3 fw-bold text-danger">${escapeHtml(s.student_no)}</td>
-                            <td class="text-dark">${escapeHtml(s.student_name || 'Unknown')}</td>
+                            <td class="text-dark">${escapeHtml(sName)}</td>
                             <td><span class="badge bg-secondary">${escapeHtml(s.course_code)}</span></td>
                             <td>
-                                <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAbsentEmail('${escapeHtml(s.student_no)}', '${escapeHtml(s.student_name || 'Unknown')}', '${escapeHtml(s.course_code)}')" title="Email this student">
-                                    <i class="bi bi-envelope"></i>
+                                <button class="btn btn-xs btn-outline-info py-0 px-2" onclick="sendSingleAbsentEmail('${escapeHtml(s.student_no)}', '${escapeHtml(sName)}', '${escapeHtml(s.course_code)}')" title="Email this student" aria-label="Email ${escapeHtml(sName)}">
+                                    <i class="bi bi-envelope" aria-hidden="true"></i>
                                 </button>
                             </td>
                         </tr>
