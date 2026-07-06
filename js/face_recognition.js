@@ -27,28 +27,23 @@ async function loadFaceModels() {
     if (isModelsLoaded) return;
     // Try local first
     try {
-        console.log("Loading Face API models from local path:", LOCAL_MODEL_URL);
         await faceapi.nets.ssdMobilenetv1.loadFromUri(LOCAL_MODEL_URL);
         await faceapi.nets.faceLandmark68Net.loadFromUri(LOCAL_MODEL_URL);
         await faceapi.nets.faceRecognitionNet.loadFromUri(LOCAL_MODEL_URL);
         isModelsLoaded = true;
-        console.log("Face API models loaded successfully (local).");
         return;
     } catch (e) {
-        console.warn("Local models failed, trying CDN fallback...", e);
+        // Fallback to CDN
     }
 
     // Then try CDN
     try {
-        console.log("Loading Face API models from CDN...", CDN_MODEL_URL);
         await faceapi.nets.ssdMobilenetv1.loadFromUri(CDN_MODEL_URL);
         await faceapi.nets.faceLandmark68Net.loadFromUri(CDN_MODEL_URL);
         await faceapi.nets.faceRecognitionNet.loadFromUri(CDN_MODEL_URL);
         isModelsLoaded = true;
-        console.log("Face API models loaded successfully (CDN).");
         return;
     } catch (e) {
-        console.error("Failed to load Face API models from CDN:", e);
         alert("Failed to load Face Recognition models. Check your internet connection.");
     }
 }
@@ -58,7 +53,7 @@ async function getCameras() {
         const devices = await navigator.mediaDevices.enumerateDevices();
         return devices.filter(device => device.kind === 'videoinput');
     } catch (e) {
-        console.error("Error getting cameras", e);
+
         return [];
     }
 }
@@ -82,7 +77,7 @@ async function startCamera(videoElementId, deviceId = null) {
             };
         });
     } catch (err) {
-        console.error("Camera error:", err);
+
         alert("Camera access denied or no camera found.");
         return null;
     }
@@ -179,7 +174,7 @@ window.startWebFaceEnrollment = async function (studentNo, studentName, captureC
             try {
                 data = JSON.parse(textData);
             } catch (jsonErr) {
-                console.error("Non-JSON Response:", textData);
+
                 throw new Error("Server returned non-JSON response. Ensure the database columns exist.");
             }
 
@@ -198,7 +193,7 @@ window.startWebFaceEnrollment = async function (studentNo, studentName, captureC
                 btnCapture.disabled = false;
             }
         } catch (e) {
-            console.error("Save Error:", e);
+
             statusText.innerHTML = `<span class="text-danger">Error: ${escapeHtml(e.message || 'Network Error during save.')}</span>`;
             btnCapture.disabled = false;
         }
@@ -292,7 +287,7 @@ window.enrollUploadedImage = async function (fileInput) {
             statusText.innerHTML = `<span class="text-danger">Failed: ${escapeHtml(data.message)}</span>`;
         }
     } catch (e) {
-        console.error("Upload Error:", e);
+
         statusText.innerHTML = `<span class="text-danger">Error: ${escapeHtml(e.message)}</span>`;
     }
 };
@@ -314,7 +309,6 @@ window.bulkEnrollFromImages = async function (fileInput) {
 
     function log(msg) {
         if (logEl) { logEl.textContent += msg + '\n'; logEl.scrollTop = logEl.scrollHeight; }
-        console.log('[BULK]', msg);
     }
 
     await loadFaceModels();
@@ -404,7 +398,7 @@ async function fetchEnrolledDescriptors() {
                         labeledDescriptors.push(new faceapi.LabeledFaceDescriptors(label, float32Arrays));
                     }
                 } catch (e) {
-                    console.error("Invalid descriptor format for", item.student_no);
+                    // Skip invalid descriptors
                 }
             }
         });
@@ -416,7 +410,7 @@ async function fetchEnrolledDescriptors() {
             return false;
         }
     } catch (e) {
-        console.error("Failed to fetch descriptors", e);
+
         return false;
     }
 }
@@ -718,19 +712,19 @@ function startRecognitionLoop(video, overlay, statusText) {
                                     <div>
                                         <div class="fw-bold">${escapeHtml(studentName)} <small class="fw-normal">(${escapeHtml(studentNo)})</small></div>
                                         <div class="d-flex align-items-center gap-2 mt-1">
-                                            <span class="fs-5">${challenge.emoji}</span>
+                                            <span class="fs-5" aria-hidden="true">${challenge.emoji}</span>
                                             <span class="fw-bold text-dark" id="challenge-label">${challenge.label}</span>
                                         </div>
                                     </div>
-                                    <button id="web-face-bypass-btn-${studentNo}" class="btn btn-sm btn-outline-danger fw-bold px-2 py-1" onclick="markWebFaceAttendance('${studentNo}')" title="Bypass challenge and force mark">
+                                    <button id="web-face-bypass-btn-${studentNo}" class="btn btn-sm btn-outline-danger fw-bold px-2 py-1" onclick="markWebFaceAttendance('${studentNo}')" title="Bypass challenge and force mark" aria-label="Bypass liveness challenge for ${escapeHtml(studentName)}">
                                         Bypass
                                     </button>
                                 </div>
                                 <div class="progress mt-2" style="height:6px">
-                                    <div class="progress-bar bg-warning" id="challenge-bar" style="width:0%"></div>
+                                    <div class="progress-bar bg-warning" id="challenge-bar" style="width:0%" role="progressbar" aria-label="Challenge progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="d-flex gap-2 mt-1 text-xs">
-                                    <span id="lbl-texture" class="text-muted">Texture: checking…</span>
+                                    <span id="lbl-texture" class="text-muted">Texture: checking\u2026</span>
                                 </div>
                             </div>`;
                     } else {
@@ -762,17 +756,17 @@ function startRecognitionLoop(video, overlay, statusText) {
                             <div class="alert alert-success py-2 mb-0 shadow-sm d-flex justify-content-between align-items-center">
                                 <div class="text-start lh-sm">
                                     <span class="fw-bold d-block">${escapeHtml(studentName)}</span>
-                                    <small>${escapeHtml(studentNo)} <span class="badge bg-success ms-1">✔ Live</span></small>
+                                    <small>${escapeHtml(studentNo)} <span class="badge bg-success ms-1"><i class="bi bi-check" aria-hidden="true"></i> Live</span></small>
                                 </div>
                                 <button id="web-face-mark-btn-${studentNo}" class="btn btn-sm btn-success fw-bold px-3"
-                                    onclick="markWebFaceAttendance('${studentNo}')">
-                                    <i class="bi bi-check2-circle me-1"></i>Mark Present
+                                    onclick="markWebFaceAttendance('${studentNo}')" aria-label="Mark ${escapeHtml(studentName)} present">
+                                    <i class="bi bi-check2-circle me-1" aria-hidden="true"></i>Mark Present
                                 </button>
                             </div>`;
                     }
                 }
             }
-        } catch (e) { console.error('Recognition error:', e); }
+        } catch (e) {  }
         finally { isProcessing = false; }
     }, 80); // Fast interval to catch the quick blink
 }
@@ -813,7 +807,7 @@ window.markWebFaceAttendance = async function (studentNo) {
             const btn = document.getElementById(`web-face-mark-btn-${studentNo}`);
             if (btn) {
                 btn.classList.replace('btn-success', 'btn-secondary');
-                btn.innerHTML = `<i class="bi bi-check-all me-1"></i>Logged!`;
+                btn.innerHTML = `<i class="bi bi-check-all me-1" aria-hidden="true"></i>Logged!`;
                 btn.disabled = true;
             }
             
@@ -821,7 +815,7 @@ window.markWebFaceAttendance = async function (studentNo) {
             const bypassBtn = document.getElementById(`web-face-bypass-btn-${studentNo}`);
             if (bypassBtn) {
                 bypassBtn.classList.replace('btn-outline-danger', 'btn-secondary');
-                bypassBtn.innerHTML = `<i class="bi bi-check-all me-1"></i>Logged!`;
+                bypassBtn.innerHTML = `<i class="bi bi-check-all me-1" aria-hidden="true"></i>Logged!`;
                 bypassBtn.disabled = true;
             }
             
@@ -834,10 +828,10 @@ window.markWebFaceAttendance = async function (studentNo) {
                 fetchTodayAttendance();
             }
         } else {
-            console.error("Attendance failed:", result.message);
+
         }
     } catch (e) {
-        console.error("Failed to mark web face attendance", e);
+
     }
 }
 
@@ -983,7 +977,7 @@ window.switchAdminEnrollCamera = async function () {
                 video: { deviceId: { exact: cameraSelect.value } }, audio: false
             });
             video.srcObject = adminFaceStream;
-        } catch (e) { console.error("Camera switch error:", e); }
+        } catch (e) {  }
     }
 };
 

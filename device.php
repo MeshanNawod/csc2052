@@ -716,7 +716,7 @@ function fetchTelemetry() {
     fetch(`http://${ip}/cmd?command=GETSTATUS`, { signal: AbortSignal.timeout(8000) })
         .then(r => r.text())
         .then(raw => parseTelemetry(raw))
-        .catch(e => console.warn('[Telemetry] Fetch error:', e));
+        .catch(e => {});
 }
 
 function sendEspOta(cmd, targetIp) {
@@ -754,7 +754,6 @@ function sendEspOta(cmd, targetIp) {
 function parseTelemetry(raw) {
     const el = (id) => document.getElementById(id);
     const d = {};
-    console.log('[Telemetry] Raw:', raw.substring(0, 200));
 
     const rawTrimmed = raw.trim();
     if (rawTrimmed.startsWith('{')) {
@@ -784,10 +783,7 @@ function parseTelemetry(raw) {
     }
 
     if (Object.keys(d).length === 0) {
-        console.warn('[Telemetry] No keys parsed. Raw:', raw);
-        appendSerial('[WARN] Telemetry response not recognized. Check console for raw data.', 'text-warning');
-    } else {
-        console.log('[Telemetry] Parsed keys:', Object.keys(d));
+        appendSerial('[WARN] Telemetry response not recognized.', 'text-warning');
     }
 
     const status = d.STATUS || '';
@@ -1066,7 +1062,7 @@ function loadDeviceSettingsEsp() {
             });
             updateDeviceSettingsBadges();
         })
-        .catch(e => console.warn('[DeviceSettings] Could not fetch config:', e.message));
+        .catch(e => {});
 }
 
 function saveDeviceSettingsEsp() {
@@ -1233,7 +1229,7 @@ window.refreshDeviceList = async function() {
             const input = document.querySelector(`[data-list="${openList.id}"]`);
             if (input) filterSearchableSelect(input);
         }
-    } catch(e) { console.warn('[Devices] Fetch failed:', e); }
+    } catch(e) {  }
     if (btn) { btn.disabled = false; btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i>'; }
 };
 
