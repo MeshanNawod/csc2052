@@ -2,8 +2,8 @@
 
 <!-- AI Assistant -->
 <div id="ai-assistant-container">
-    <button id="ai-assistant-toggle" class="btn btn-primary rounded-circle shadow-lg ai-assistant-toggle" onclick="toggleAiAssistant()" title="AI Assistant" aria-controls="ai-assistant-panel" aria-expanded="false">
-        <i class="bi bi-robot"></i>
+    <button id="ai-assistant-toggle" class="btn btn-primary rounded-circle shadow-lg ai-assistant-toggle" onclick="toggleAiAssistant()" title="AI Assistant" aria-controls="ai-assistant-panel" aria-expanded="false" aria-label="Toggle AI Assistant">
+        <i class="bi bi-robot" aria-hidden="true"></i>
     </button>
     <div id="ai-assistant-panel" class="d-none position-fixed ai-assistant-panel" role="dialog" aria-label="Sentinel AI Assistant">
         <div class="bg-primary text-white p-3 d-flex align-items-center">
@@ -12,7 +12,7 @@
                 <strong>Sentinel AI Assistant</strong>
                 <div class="small opacity-75">Ask me anything about the system</div>
             </div>
-            <button class="btn btn-sm btn-outline-light py-0 px-2" onclick="toggleAiAssistant()"><i class="bi bi-x"></i></button>
+            <button class="btn btn-sm btn-outline-light py-0 px-2" onclick="toggleAiAssistant()" aria-label="Close Assistant"><i class="bi bi-x" aria-hidden="true"></i></button>
         </div>
         <div id="ai-chat-messages" class="flex-grow-1 p-3 overflow-auto" style="max-height:340px;min-height:200px;background:#f8f9fa;">
             <div class="mb-2">
@@ -24,7 +24,7 @@
         <div class="p-2 border-top bg-white">
             <div class="input-group input-group-sm">
                 <input type="text" id="ai-chat-input" class="form-control" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendAiMessage()">
-                <button class="btn btn-primary" onclick="sendAiMessage()"><i class="bi bi-send"></i></button>
+                <button class="btn btn-primary" onclick="sendAiMessage()" aria-label="Send message"><i class="bi bi-send" aria-hidden="true"></i></button>
             </div>
             <div class="d-flex gap-1 mt-1 flex-wrap">
                 <button class="btn btn-xs btn-outline-secondary py-0 px-2" onclick="sendAiQuickQ('How do I start a lecture?')">Start lecture</button>

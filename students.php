@@ -60,7 +60,7 @@ try {
                                             <?php foreach ($courses as $c): ?>
                                             <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                                 <span><strong><?php echo htmlspecialchars($c['course_code']); ?></strong><?php if (!empty($c['course_name'])): ?> - <span class="text-muted"><?php echo htmlspecialchars($c['course_name']); ?></span><?php endif; ?></span>
-                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg"></i></button>
+                                                <button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteCourse('<?php echo htmlspecialchars($c['course_code']); ?>')" aria-label="Delete course"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
                                             </li>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -82,7 +82,7 @@ try {
                                         </select>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg"></i></button>
+                                        <button class="btn btn-success btn-sm w-100 fw-semibold" onclick="enrollStudentCourse()" aria-label="Enroll in course"><i class="bi bi-check-lg" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div id="course-enroll-msg" class="small mb-2 min-h-xs"></div>
@@ -695,7 +695,7 @@ function loadSchedules() {
                             '<div class="fw-bold small">' + escapeHtml(courseName) + '</div>' +
                             venue + deviceBadge + ' ' + autoBadge +
                             '<div class="mt-1">' +
-                            '<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteSchedule(' + s.id + ')" title="Delete"><i class="bi bi-x"></i></button>' +
+                            '<button class="btn btn-xs btn-outline-danger py-0 px-1" onclick="deleteSchedule(' + s.id + ')" title="Delete" aria-label="Delete schedule"><i class="bi bi-x" aria-hidden="true"></i></button>' +
                             '</div>' +
                             '</td>';
                     } else {
@@ -1018,7 +1018,7 @@ function renderCourseManager() {
             course.teachers.forEach(t => {
                 html += `<span class="badge bg-info d-flex align-items-center gap-1">
                     ${escapeHtml(t.teacher_name)}
-                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove">&times;</button>
+                    <button class="btn btn-sm btn-outline-light py-0 px-1 lh-1" onclick="removeTeacherFromCourse(${t.tc_id}, '${escapeHtml(course.course_code)}')" title="Remove" aria-label="Remove teacher">&times;</button>
                 </span>`;
             });
         } else {
@@ -1084,8 +1084,8 @@ function renderCourseManager() {
                 <td>${escapeHtml(slot.venue || '—')}</td>
                 <td><span class="badge bg-light text-dark">${escapeHtml(slot.device_id || 'Web')}</span></td>
                 <td>
-                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot">
-                        <i class="bi bi-trash"></i>
+                    <button class="btn btn-xs btn-outline-danger py-0 px-2" onclick="deleteSchedule(${slot.id})" title="Delete slot" aria-label="Delete slot">
+                        <i class="bi bi-trash" aria-hidden="true"></i>
                     </button>
                 </td>
             </tr>`;

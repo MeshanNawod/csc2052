@@ -78,7 +78,7 @@ try {
                                     </select>
                                     <div id="esp-target-list" class="searchable-dropdown d-none"></div>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-primary" onclick="refreshDeviceList()" aria-label="Refresh device list"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                             </div>
                         </div>
 
@@ -415,7 +415,7 @@ try {
                 <strong class="text-dark"><i class="bi bi-raspberry-pi me-2 text-danger"></i>Raspberry Pi 3B Control Center</strong>
                 <div class="d-flex align-items-center gap-2">
                     <span id="rpi-status-dot" class="badge bg-secondary"><i class="bi bi-circle me-1"></i>Offline</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshRpiStatus()" aria-label="Refresh Pi status"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -539,7 +539,7 @@ try {
                 <strong class="text-dark"><i class="bi bi-hdd-rack me-2 text-info"></i>Devices Overview</strong>
                 <div class="d-flex gap-2 align-items-center">
                     <span id="dev-overall-count" class="badge bg-secondary">0 devices</span>
-                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshAllDeviceStatus()"><i class="bi bi-arrow-clockwise"></i> Refresh All</button>
+                    <button class="btn btn-xs btn-outline-secondary" onclick="refreshAllDeviceStatus()"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Refresh All</button>
                 </div>
             </div>
             <div class="card-body p-0">
